@@ -1,0 +1,178 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>选择地址</title>
+</head>
+<body>
+
+<div class="order_page my_address_page">
+
+    <!--<div class="address_list yao_shadow">
+
+        <div class="address_select yao_alignment_middle">
+            <div class="check_address">
+                <div class="yao_alignment_center">
+                    <p><span>收货人：</span><span>葫芦娃</span></p>
+                    <p>15236984562</p>
+                </div>
+                <div>
+                    <span>收货地址：</span><span>上海市徐汇区虹桥路808号上海市徐汇区虹桥路808号虹桥路808号</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn_area yao_alignment_right">
+            <a href="../order/edit_adress.html">
+                <img src="../../images/personal_edit.png">
+                <span>修改</span>
+            </a>
+            <a class="delete_address">
+                <img src="../../images/personal_delete.png">
+                <span>删除</span>
+            </a>
+        </div>
+
+
+    </div>
+
+    <div class="address_list yao_shadow">
+
+        <div class="address_select yao_alignment_middle">
+            <div class="check_address">
+                <div class="yao_alignment_center">
+                    <p><span>收货人：</span><span>孙悟空</span></p>
+                    <p>15236984562</p>
+                </div>
+                <div>
+                    <span>收货地址：</span><span>上海市徐汇区虹桥路808号上海市徐汇区虹桥路808号虹桥路808号</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_area yao_alignment_right">
+            <a href="../order/edit_adress.html">
+                <img src="../../images/personal_edit.png">
+                <span>修改</span>
+            </a>
+            <a class="delete_address">
+                <img src="../../images/personal_delete.png">
+                <span>删除</span>
+            </a>
+        </div>
+
+
+    </div>
+
+    <div class="address_list yao_shadow">
+
+        <div class="address_select yao_alignment_middle">
+            <div class="check_address">
+                <div class="yao_alignment_center">
+                    <p><span>收货人：</span><span>葫芦娃</span></p>
+                    <p>15236984562</p>
+                </div>
+                <div>
+                    <span>收货地址：</span><span>上海市徐汇区虹桥路808号上海市徐汇区虹桥路808号虹桥路808号</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_area yao_alignment_right">
+            <a href="../order/edit_adress.html">
+                <img src="../../images/personal_edit.png">
+                <span>修改</span>
+            </a>
+            <a class="delete_address">
+                <img src="../../images/personal_delete.png">
+                <span>删除</span>
+            </a>
+        </div>
+
+
+    </div>
+
+    <div class="address_list yao_shadow">
+
+        <div class="address_select yao_alignment_middle">
+            <div class="check_address">
+                <div class="yao_alignment_center">
+                    <p><span>收货人：</span><span>葫芦娃</span></p>
+                    <p>15236984562</p>
+                </div>
+                <div>
+                    <span>收货地址：</span><span>上海市徐汇区虹桥路808号上海市徐汇区虹桥路808号虹桥路808号</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn_area yao_alignment_right">
+            <a href="../order/edit_adress.html">
+                <img src="../../images/personal_edit.png">
+                <span>修改</span>
+            </a>
+            <a class="delete_address">
+                <img src="../../images/personal_delete.png">
+                <span>删除</span>
+            </a>
+        </div>
+
+
+    </div>-->
+</div>
+
+<a class="new_address" href="../order/edit_adress.html">
+    <div class="address_bar"></div>
+    <div class="add_address">新增收货地址</div>
+</a>
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/order/choose_address.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script>
+
+//  chooseAddress();//地址选择
+
+
+</script>
+<script type="text/html" id="adrList">
+    {{if list}}
+    {{each list as value}}
+    <div class="address_list yao_shadow" >
+    	<div class="address_select yao_alignment_middle" data_def= "{{value.isDefault? 1:0}}" data_id="{{value.id}}">
+            <div class="check_address">
+                <div class="yao_alignment_center">
+                    <p><span>收货人：</span><span>{{value.cneeName}}</span></p>
+                    <p>{{value.cneeMobile}}</p>
+                </div>
+                <div>
+                    <span>收货地址：</span><span>{{value.cneeArea}}{{value.detailAddr}}</span>
+                </div>
+            </div>
+       	</div>
+        <div class="btn_area yao_alignment_right">
+            <a href="#" class="changeAd" 
+            	data_id="{{value.id}}" data_isD="{{value.isDefault? 1:0}}" data_cne="{{value.cneeArea}}"
+            	data_detail="{{value.detailAddr}}" data_phe="{{value.cneeMobile}}" data_na="{{value.cneeName}}" data_store="{{value.storeId}}">
+                <img src="../../images/personal_edit.png">
+                <span>修改</span>
+            </a>
+            <a class="delete_address" data_id="{{value.id}}" data_isD="{{value.isDefault? 1:0}}">
+                <img src="../../images/personal_delete.png">
+                <span>删除</span>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>

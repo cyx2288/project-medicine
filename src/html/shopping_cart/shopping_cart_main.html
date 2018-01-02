@@ -1,0 +1,372 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>购物车</title>
+</head>
+<body>
+
+<div class="shopping_cart_page">
+
+    <div class="shopping_cart_top yao_alignment_middle">
+
+<!--地址选择模块-->
+
+
+
+    <div class="address_choose yao_shadow yao_alignment_left" onclick="addressSelect.show({fn:
+
+function(){
+
+     shoppingCart.run({
+     api: '../../api/address.json',
+     type: 'get',
+     firstTargetDom:document.getElementById('address_info'),
+     'addressPart':true,//ture表示不分开显示地址,默认为false.表示分开显示地址
+     fn:function() {
+       addressSelect.hide();
+
+       console.log(chooseAdressId);//当前选择地址ID
+
+        $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[1]
+            },
+            success:function(info){
+                console.log(info);
+                //将storeId存cookie
+                $.cookie('storeId',info.data,{path:'/'});
+
+                //获取地址
+                var addressHtml = $('#address_info').text();
+                //存cookie
+                $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+            }
+        })
+
+     }
+
+     })
+}
+
+})">
+        <p>送至：</p>
+        <p><img src="../../images/icon_AK_address.png"><span id="address_info"></span></p>
+    </div>
+
+
+        <div class="shopping_management"><p class="shopping_edit">编辑</p></div>
+    </div>
+
+<!--购物车商品-->
+
+<div class="shopping_box yao_shadow">
+    <!--<div class="shopping_list yao_alignment_middle">
+       <label><input class="aui-radio singlecheck" type="checkbox" name="shopping"></label>
+        <a class="yao_alignment_left">
+            <div class="pro_img">
+                <img src="../../images/icon_product_referrnce.jpg">
+            </div>
+            <div>
+                <p class="pro_name">999三九感冒灵颗粒999三九感冒灵颗粒999三九感冒灵颗粒999三九感冒灵颗粒999三九感冒灵颗粒</p>
+                <p class="pro_size"><span>规格:</span><span>10gX4袋 无糖</span></p>
+
+                <div class="yao_alignment_center">
+                    <p class="price">¥9.99</p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="1" type="number" pattern="[0-9]*" class="volume_input">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    <!--无货状态添加class值out_list-->
+    <!--<div class="out_list shopping_list yao_alignment_middle">
+        <label><input class="aui-radio singlecheck" type="checkbox" name="shopping"></label>
+        <a class="yao_alignment_left">
+            <div class="pro_img">
+                <img src="../../images/icon_product_referrnce.jpg">
+            </div>
+            <div>
+                <p class="pro_name">999三九感冒灵颗粒</p>
+                <p class="pro_size"><span>规格:</span><span>10gX4袋 无糖</span></p>
+
+                <div class="yao_alignment_center">
+                    <p class="price">¥9.99</p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="1" type="number" pattern="[0-9]*" class="volume_input">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    <div class="out_list shopping_list yao_alignment_middle">
+        <label><input class="aui-radio singlecheck" type="checkbox" name="shopping"></label>
+        <a class="yao_alignment_middle">
+            <div class="pro_img">
+                <img src="../../images/icon_product_referrnce.jpg">
+            </div>
+            <div>
+                <p class="pro_name">999三九感冒灵颗粒</p>
+                <p class="pro_size"><span>规格:</span><span>10gX4袋 无糖</span></p>
+
+                <div class="yao_alignment_center">
+                    <p class="price">¥9.99</p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="1" type="number" pattern="[0-9]*" class="volume_input">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    <div class="shopping_list yao_alignment_middle">
+        <label><input class="aui-radio singlecheck" type="checkbox" name="shopping"></label>
+        <a class="yao_alignment_middle">
+            <div class="pro_img">
+                <img src="../../images/icon_product_referrnce.jpg">
+            </div>
+            <div>
+                <p class="pro_name">999三九感冒灵颗粒</p>
+                <p class="pro_size"><span>规格:</span><span>10gX4袋 无糖</span></p>
+
+                <div class="yao_alignment_center">
+                    <p class="price">¥9.99</p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="1" type="number" pattern="[0-9]*" class="volume_input">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    <div class="shopping_list yao_alignment_middle">
+        <label><input class="aui-radio singlecheck" type="checkbox" name="shopping"></label>
+        <a class="yao_alignment_middle">
+            <div class="pro_img">
+                <img src="../../images/icon_product_referrnce.jpg">
+            </div>
+            <div>
+                <p class="pro_name">999三九感冒灵颗粒</p>
+                <p class="pro_size"><span>规格:</span><span>10gX4袋 无糖</span></p>
+
+                <div class="yao_alignment_center">
+                    <p class="price">¥9.99</p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="1" type="number" pattern="[0-9]*" class="volume_input">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    <div class="shopping_list yao_alignment_middle">
+        <label><input class="aui-radio singlecheck" type="checkbox" name="shopping"></label>
+        <a class="yao_alignment_middle">
+            <div class="pro_img">
+                <img src="../../images/icon_product_referrnce.jpg">
+            </div>
+            <div>
+                <p class="pro_name">999三九感冒灵颗粒</p>
+                <p class="pro_size"><span>规格:</span><span>10gX4袋 无糖</span></p>
+
+                <div class="yao_alignment_center">
+                    <p class="price">¥9.99</p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="1" type="number" pattern="[0-9]*" class="volume_input">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>-->
+
+</div>
+
+
+
+<!--底部结算-->
+<div class="shopping_box_bottom">
+    <div class="bottom_bar"></div>
+    <div class="bottom_go_buy yao_alignment_center">
+        <label>
+            <input class="aui-radio allcheck" type="checkbox" id="checkAll">
+            <span>全选</span>
+        </label>
+
+        <div>
+            <p><span>合计：</span><span id="allMoney">0</span></p>
+
+            <!--<p><span>总额：</span><span id="all2"></span></p>-->
+        </div>
+
+        <a id="goOrder">去结算</a>
+    </div>
+
+    <div class="bottom_delete yao_alignment_center">
+
+        <label>
+            <input class="aui-radio allcheck" type="checkbox"/>
+            <span>全选</span>
+        </label>
+
+        <a class="delete_btn">删除</a>
+
+    </div>
+</div>
+
+
+</div>
+
+<footer class="bottom_tabbar">
+    <div class="tab_box"></div>
+    <div class="bottom_tabbar_contain yao_alignment_center">
+        <a href="../homepage/main.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_mian_home_green.png">
+            </div>
+            <p>首页</p>
+        </a>
+        <a href="../active/active_page.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_active_green.png">
+            </div>
+            <p>活动</p>
+        </a>
+        <a class="current_page">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_shopping_green.png">
+            </div>
+            <p>购物车</p>
+        </a>
+        <a href="../person_center/person_main_login.html">
+            <div class="tabbar_icon"><img src="../../icon/icon_main_individual_green.png">
+                <p>个人中心</p>
+            </div>
+        </a>
+    </div>
+</footer>
+
+
+<!--地址弹出框-->
+
+
+<div class="jf_pop_up" id="delivery_address">
+
+    <div class="jf_pop_up_main">
+
+        <div class="pop_top">
+
+            <div class="pop_title">请选择地址</div>
+
+            <div class="pop_cancel"></div>
+
+<!--            <div class="pop_line"></div>-->
+
+
+        </div>
+
+        <div class="pop_main">
+
+            <div class="product_prompt_address">
+
+                <div id="address_select">
+
+                    <div class="top_address jdshop_alignment_middle">
+
+                        <div>请选择</div>
+
+                        <div></div>
+<!--
+                        <div></div>
+
+                        <div></div>
+
+                        <div></div>-->
+
+                    </div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
+
+                   <!-- <div class="address"></div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>-->
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="jf_pop_up_bg">
+
+    </div>
+
+</div>
+
+
+
+
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/shopping_cart/shopping_cart_main.js"></script>
+<script type="text/html" id="cartList">
+	{{if list}}
+    {{each list as value}}
+    <div class="shopping_list yao_alignment_middle" goodId= "{{value.id}}">
+        <label><input class="aui-radio singlecheck" type="checkbox" name="" data_price="{{value.sellingPrice}}" data_num="{{value.buyCount}}" data_id="{{value.id}}"></label>
+        <a class="yao_alignment_middle">
+            <div class="pro_img">
+                <img src="{{#value.goodImg}}">
+            </div>
+            <div>
+                <p class="pro_name">{{value.goodName}}</p>
+                <p class="pro_size"><span>规格:</span><span>{{value.goodSpec}}</span></p>
+                <div class="yao_alignment_center">
+                    <p class="price">¥<span>{{value.sellingPrice}}</span></p>
+                    <div class="volume_btn">
+                        <span class="reduce">－</span>
+                        <input value="{{value.buyCount}}" type="number" pattern="[0-9]*" class="volume_input" data_id= "{{value.id}}" data_price="{{value.sellingPrice}}">
+                        <span class="add">+</span>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>修改手机号码</title>
+</head>
+<body>
+<div class="system_page yao_shadow">
+    <label class="list yao_alignment_middle">
+        <span>新手机号：</span>
+        <input type="tel" pattern="[0-9]*" placeholder="请输入原手机号码" id="nPhe">
+    </label>
+    <label class="list yao_alignment_middle">
+        <span>原手机号：</span>
+        <span id="oPhe"></span>
+
+        <div class="getMessage" id="msgInfo">获取验证码</div>
+    </label>
+    <label class="list yao_alignment_middle">
+        <span>验证码：</span>
+        <input type="tel" pattern="[0-9]*" placeholder="请输入验证码" id="valid">
+    </label>
+</div>
+
+<label class="yao_button_normal">
+
+    <button id="sub">提交</button>
+
+</label>
+
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/person_center/telphone.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script>
+    var inputFn = {
+
+        inputCheck: function () {
+
+            event.preventDefault();
+
+            if (this.className.indexOf('locked') == -1) {
+
+                var time = 60;
+
+                var thisInnerHtml = this.innerHTML;
+
+                this.innerHTML = '重新发送' + time + 's';
+
+                this.className += ' locked';
+
+                var thisSet = setInterval(function () {
+
+                    this.innerHTML = '重新发送' + (--time) + 's';
+
+                    if (time <= 0) {
+
+                        clearInterval(thisSet);
+
+                        this.className = this.className.replace('locked', '');
+
+                        this.innerHTML=thisInnerHtml;
+
+                    }
+
+                }.bind(this), 1000)
+
+            }
+        }
+
+    };
+    document.getElementsByClassName('getMessage')[0].addEventListener('click',inputFn.inputCheck,false)
+
+
+
+</script>
+</body>
+</html>

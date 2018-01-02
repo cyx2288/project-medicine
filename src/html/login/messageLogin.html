@@ -1,0 +1,119 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+
+    <title>短信验证登录</title>
+
+</head>
+<body>
+
+
+<section>
+    <!--普通输入-输入手机号-->
+    <label class="yao_input_normal">
+
+    <div class="yao_input_left">
+
+        <img src="../../images/icon_login_number.png">
+
+    </div>
+
+    <div class="yao_input_right">
+
+        <input type="tel" placeholder="请输入手机号" id="phNum">
+
+    </div>
+
+</label>
+
+    <!--验证倒计时输入-输入手机号-->
+    <label class="yao_input_normal yao_input_check">
+
+    <div class="yao_input_left">
+
+        <img src="../../images/icon_login_envelope.png">
+
+    </div>
+
+    <div class="yao_input_right">
+
+        <input type="tel" placeholder="请输入验证码" id="sendMsgNum">
+
+    </div>
+
+    <div class="yao_input_check_button" id="sendmsg">获取验证码</div>
+
+
+</label>
+
+
+
+
+
+</section>
+
+
+<label class="yao_button_normal">
+
+    <button id="verifyLogin">验证并登录</button>
+
+</label>
+
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/login/messageLogin.js"></script>
+
+<script>
+
+    var inputFn = {
+
+        inputCheck: function () {
+
+            event.preventDefault();
+
+            if (this.className.indexOf('locked') == -1) {
+
+                var time = 60;
+
+                var thisInnerHtml = this.innerHTML;
+
+                this.innerHTML = '重新发送' + time + 's';
+
+                this.className += ' locked';
+
+                var thisSet = setInterval(function () {
+
+                    this.innerHTML = '重新发送' + (--time) + 's';
+
+                    if (time <= 0) {
+
+                        clearInterval(thisSet);
+
+                        this.className = this.className.replace('locked', '');
+
+                        this.innerHTML=thisInnerHtml;
+
+                    }
+
+                }.bind(this), 1000)
+
+            }
+        }
+
+    };
+
+    document.getElementsByClassName('yao_input_check_button')[0].addEventListener('click',inputFn.inputCheck,false)
+
+
+
+
+</script>
+</body>

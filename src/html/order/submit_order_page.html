@@ -1,0 +1,310 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>提交订单</title>
+</head>
+<body>
+
+<div class="order_page">
+
+    <a class="address_select yao_alignment_middle yao_shadow address_change" href="#">
+        <div><img src="../../images/shopping_address.png"></div>
+        <div class="check_address">
+            <!--<div class="yao_alignment_center">-->
+            <!--<p><span>收货人：</span><span>葫芦娃</span></p>-->
+            <!--<p>15236984562</p>-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<span>收货地址：</span><span>上海市徐汇区虹桥路808号</span>-->
+            <!--</div>-->
+        </div>
+    </a>
+
+
+    <div class="order_main yao_shadow">
+
+        <div class="order_main_html">
+            <!--<div class="product yao_alignment_middle">-->
+                <!--<div>-->
+                    <!--<img src="../../images/icon_product_referrnce.jpg">-->
+                <!--</div>-->
+                <!--&lt;!&ndash;显示库存数量不足时，添加class值repertory，否则去掉&ndash;&gt;-->
+                <!--<div class="repertory">-->
+                    <!--<p class="name">999三九感冒灵颗粒</p>-->
+                    <!--<p class="size"><span>规格：</span><span>10gX4袋 无糖</span></p>-->
+                    <!--<p class="price yao_alignment_center"><span>¥10.50</span><span>X5</span></p>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <div class="pay_style">
+
+            <p>付款方式</p>
+
+            <div class="pay_choose">
+                <label class="yao_alignment_center">
+                    <p><img src="../../images/shopping_wechat.png"><span>微信支付</span></p>
+                    <input type="radio" class="aui-radio" name="pay" data-payid="1" checked>
+                </label>
+
+                <label class="yao_alignment_center">
+                    <p><img src="../../images/shoppin-Alipay1.png"><span>支付宝支付</span></p>
+                    <input type="radio" class="aui-radio" name="pay" data-payid="2">
+                </label>
+
+                <label class="yao_alignment_center">
+                    <p><img src="../../images/shopping_COD.png"><span>货到付款</span></p>
+                    <input type="radio" class="aui-radio" name="pay"  data-payid="3">
+                </label>
+            </div>
+
+        </div>
+
+        <div class="discount">
+
+            <label class="yao_alignment_center tickets">
+                <span>使用优惠券</span>
+                <div>
+                    <select id="tickets_select">
+                        <option id="tickets_first" data-couponId="0">不使用优惠</option>
+                        <!--<option data-voucherId="102">满50元减5元，2017/07/07前有效</option>-->
+                        <!--<option data-voucherId="103">满100元减10元，2017/07/07前有效</option>-->
+                        <!--<option data-voucherId="104">满200元减20元，2017/07/07前有效</option>-->
+                        <!--<option data-voucherId="105">满20元减5元，2017/07/07前有效</option>-->
+                    </select>
+                </div>
+
+
+            </label>
+
+            <label class="yao_alignment_center RedPackage">
+                <span>输入红包抵现</span>
+                <input type="number" pattern="[0-9]*" placeholder="">
+                <!--<p><span>余额：</span><span>¥50</span></p>-->
+
+            </label>
+
+        </div>
+
+        <div class="invoice">
+            <p>发票信息
+                <small>（发票只能开商品明细）</small>
+            </p>
+
+            <div class="yao_alignment_middle invoice_input">
+                <label>
+                    <input type="radio" class="aui-radio" name="invoice" checked  data-invoiceId="1">
+                    <span>个人</span>
+                </label>
+
+                <label>
+                    <input type="radio" class="aui-radio" name="invoice"  data-invoiceId="2">
+                    <span>公司</span>
+                </label>
+
+                <label>
+                    <input type="radio" class="aui-radio" name="invoice"  data-invoiceId="3">
+                    <span>以后统一开票</span>
+                </label>
+            </div>
+            <label class="yao_alignment_left invoice_msg">
+                <span>抬头：</span>
+                <div>
+                    <textarea type="text" placeholder="请填写姓名" rows="2"></textarea>
+                </div>
+
+            </label>
+            <!--<label class="yao_alignment_left invoice_ein">
+                <span>税号：</span>
+                <div>
+                    <textarea type="text" placeholder="请填写税号" rows="2"></textarea>
+                </div>
+
+            </label>-->
+
+        </div>
+        <div class="remark_msg">
+            <div class="yao_alignment_middle ">
+                <label class="yao_alignment_left">
+                    <span>备注：</span>
+                    <div>
+                        <textarea type="text" placeholder="请填写备注" rows="2" class="orderRemarks_html"></textarea>
+                    </div>
+
+                </label>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="order_bottom">
+        <div class="bottom_bar"></div>
+        <div class="fixed_price">
+            <span>总金额：</span>
+            <span class="orderAmount_money">¥600.00</span>
+        </div>
+        <div class="fixed_order yao_alignment_center">
+            <p><span>应付金额：</span><span class="shouldPay_money">¥550.00</span></p>
+            <a href="javascript:;" class="put_order">提交订单</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!--地址弹出框-->
+
+
+<div class="jf_pop_up" id="delivery_address">
+
+    <div class="jf_pop_up_main">
+
+        <div class="pop_top">
+
+            <div class="pop_title">请选择地址</div>
+
+            <div class="pop_cancel"></div>
+
+            <!--            <div class="pop_line"></div>-->
+
+
+        </div>
+
+        <div class="pop_main">
+
+            <div class="product_prompt_address">
+
+                <div id="address_select">
+
+                    <div class="top_address jdshop_alignment_middle">
+
+                        <div>请选择</div>
+
+                        <div></div>
+                        <!--
+                                                <div></div>
+
+                                                <div></div>
+
+                                                <div></div>-->
+
+                    </div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
+
+                    <!-- <div class="address"></div>
+
+                     <div class="address"></div>
+
+                     <div class="address"></div>-->
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="jf_pop_up_bg">
+
+    </div>
+
+</div>
+
+
+<!--地址弹窗-->
+
+
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/order/submit_order_page.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script>
+
+
+    //点穿问题
+    jfProductDetails.clickThrough('delivery_address', 'address')
+
+
+</script>
+<!--地址-->
+<script type="text/html" id="address_tem">
+    {{if list}}
+    <div class="yao_alignment_center" data-storeId="{{list.storeId}}" data-areaAllCode="{{list.areaAllCode}}">
+        <p><span>收货人：</span><span>{{list.cneeName}}</span></p>
+        <p>{{list.cneeMobile}}</p>
+    </div>
+    <div>
+        <span>收货地址：</span><span>{{list.cneeArea}}{{list.detailAddr}}</span>
+    </div>
+    {{/if}}
+</script>
+<!--商品列表-->
+<script type="text/html" id="product_html">
+    {{if list}}
+    {{each list as value index}}
+    <div class="product yao_alignment_middle" data-id={{value.id}} data-buyCount={{value.buyCount}}>
+        <div>
+            <img src="../../images/icon_product_referrnce.jpg">
+        </div>
+        <!--显示库存数量不足时，添加class值repertory，否则去掉-->
+        <div class="product_list" id="product_list{{index}}">
+            <p class="name" data-id="{{value.id}}">{{value.brandName}}{{value.goodName}}</p>
+            <p class="size"><span>规格：</span><span>{{value.goodSpec}}</span></p>
+            <p class="price yao_alignment_center" data-sellingPrice={{value.sellingPrice}}>
+                <span data-sellingPrice={{value.sellingPrice}}>¥{{value.sellingPrice}}</span><span data-buyCount="{{value.buyCount}}">X{{value.buyCount}}</span></p>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
+<!--套餐商品列表-->
+<script type="text/html" id="product_html_meal">
+    {{if list}}
+    {{each list as value index}}
+    <div class="product yao_alignment_middle" data-goodId={{value.goodId}} data-buyNum={{value.buyNum}}>
+        <div>
+            <img src="../../images/icon_product_referrnce.jpg">
+        </div>
+        <!--显示库存数量不足时，添加class值repertory，否则去掉-->
+        <div class="product_list" id="product_list_meal{{index}}">
+            <p class="name" data-id="{{value.id}}">{{value.brandName}}{{value.goodName}}</p>
+            <p class="size"><span>规格：</span><span>{{value.goodSpec}}</span></p>
+            <p class="price yao_alignment_center" data-sellingPrice={{value.sellingPrice}}>
+                <span data-sellingPrice={{value.sellingPrice}}>¥{{value.sellingPrice}}</span><span data-buyCount="{{value.buyNum}}">X{{value.buyNum}}</span></p>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
+<!--红包-->
+<script type="text/html" id="RedPackage_html">
+    {{if list}}
+    <p><span>余额：</span><span>¥{{list.redPackage}}</span></p>
+    {{/if}}
+</script>
+<!--优惠券-->
+<script type="text/html" id="tickets_option">
+    {{if list}}
+    {{each list as value}}
+    <option data-couponId="{{value.couponId}}" data-condition="{{value.condition}}" data-deduction="{{value.deduction}}" data-usableDate="{{value.usableDate}}">满{{value.condition}}元减{{value.deduction}}元，{{value.usableDate | dateFormat:'yyyy年MM月dd日'}}前有效</option>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>

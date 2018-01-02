@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>活动详情</title>
+</head>
+
+<body>
+
+
+<!--药品内容-->
+<div class="active_section active_details_page">
+    <div class="ak_pro_list hot_sale">
+        <div class="items">
+            <div id="items_details">
+                <!--<a href="../product_details_page/product_details_page.html" class="hot">
+                    <div class="pro_img"><img src="../../images/hot_product.jpg"></div>
+                    <p>云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤</p>
+                    <div class="price">
+                        <p>
+                            <span>¥29.99</span>
+                            <span>¥39.99</span>
+                        </p>
+                        <p class="gobuy"></p>
+                    </div>
+                </a>
+
+                <a href="../product_details_page/product_details_page.html" class="hot">
+                    <div class="pro_img"><img src="../../images/hot_product.jpg"></div>
+                    <p>云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤</p>
+                    <div class="price">
+                        <p>
+                            <span>¥29.99</span>
+                            <span>¥39.99</span>
+                        </p>
+                        <p class="gobuy"></p>
+                    </div>
+                </a>
+                <a href="../product_details_page/product_details_page.html" class="hot">
+                    <div class="pro_img"><img src="../../images/hot_product.jpg"></div>
+                    <p>云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤</p>
+                    <div class="price">
+                        <p>
+                            <span>¥29.99</span>
+                            <span>¥39.99</span>
+                        </p>
+                        <p class="gobuy"></p>
+                    </div>
+                </a>
+                <a href="../product_details_page/product_details_page.html" class="hot">
+                    <div class="pro_img"><img src="../../images/hot_product.jpg"></div>
+                    <p>云南白药雾剂消肿化南白药雾扭伤</p>
+                    <div class="price">
+                        <p>
+                            <span>¥29.99</span>
+                            <span>¥39.99</span>
+                        </p>
+                        <p class="gobuy"></p>
+                    </div>
+                </a>-->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/active/active_details.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script type="text/html" id="active_details">
+    {{if list}}
+    {{each list as value}}
+	<a href="../product_details_page/product_details_page.html?id{{value.id}}" class="hot">
+        <div class="pro_img"><img src="{{#value.goodImg}}"></div>
+        <p>{{value.applySymptom}}</p>
+        <div class="price">
+	        <p>
+	            <span>¥{{value.sellingPrice}}</span>
+	            <span>¥{{value.storePrice}}</span>
+	        </p>
+        <p class="gobuy"></p>
+       	</div>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>
