@@ -1,0 +1,788 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>首页</title>
+</head>
+
+<body>
+<!--顶部搜索-->
+<div class="top_search">
+    <div class="box_bar"></div>
+    <div class="main_search yao_alignment_center">
+        <div class="address" onclick="addressSelect.show({fn:
+
+function(){
+
+     shoppingCart.run({
+     api: '../../api/address.json',
+     type: 'get',
+     lastTargetDom:document.getElementById('address_info'),
+     fn:function() {
+       addressSelect.hide();
+        console.log(chooseAdressId);//当前选择地址ID
+
+        $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[1]
+            },
+            success:function(info){
+                console.log(info);
+                //将storeId存cookie
+                $.cookie('storeId',info.data,{path:'/'});
+
+                //获取地址
+                var addressHtml = $('#address_info').text();
+                //存cookie
+                $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+            }
+        })
+     }
+  })
+}
+
+})"><img src="../../images/icon_AK_address.png"></div>
+        <a class="yao_alignment_middle search" href="../search_result/search_page.html">
+            <img src="../../images/icon_search.png">
+            <span>请输入药名、品牌或症状</span>
+        </a>
+        <a class="phone" href="tel:400-8008-6523">
+            <img src="../../images/icon_AK_phone.png">
+            <p>咨询买药</p>
+        </a>
+    </div>
+</div>
+
+<!--banner轮播-->
+
+<div class="jf_homepage_autoplay">
+
+    <div class="jf_autoplay_images">
+        <a href="#">
+
+            <img src="../../images/banner1.jpg">
+        </a>
+
+        <a href="#">
+            <img src="../../images/icon_active_banner1.jpg">
+
+        </a>
+
+        <a href="#">
+            <img src="../../images/banner1.jpg">
+        </a>
+
+        <a href="#">
+            <img src="../../images/icon_active_banner2.jpg">
+        </a>
+    </div>
+    <div class="jf_pagination"></div>
+
+
+</div>
+
+
+
+<!--头条-->
+<div class="hot_news yao_shadow yao_alignment_middle">
+    <span>头条</span>
+    <span>天通苑5个门店均可凭会员免费领取3M口罩一个</span>
+</div>
+
+<!--售卖商品-->
+
+<div class="main_product">
+    <!--活动特价-->
+    <div class="product_sale">
+    <p class="product_title">— <span> 活动特价 </span> —</p>
+    <div class="sale_box">
+        <!--<a href="#" class="yao_alignment_center">-->
+           <!--<div><img src="../../images/sale_product.jpg"></div>-->
+            <!--<div>-->
+                <!--<p class="name">葵花护肝片葵花护肝片</p>-->
+                <!--<p class="sale_icon">特价</p>-->
+                <!--<p class="price">¥5000.00</p>-->
+            <!--</div>-->
+        <!--</a>-->
+        <!--<a class="yao_alignment_center">-->
+            <!--<div><img src="../../images/sale_product.jpg"></div>-->
+            <!--<div>-->
+                <!--<p class="name">葵花护肝片</p>-->
+                <!--<p class="sale_icon">特价</p>-->
+                <!--<p class="price">¥50.00</p>-->
+            <!--</div>-->
+        <!--</a>-->
+        <!--<a class="yao_alignment_center">-->
+            <!--<div><img src="../../images/sale_product.jpg"></div>-->
+            <!--<div>-->
+                <!--<p class="name">葵花护肝片</p>-->
+                <!--<p class="sale_icon">特价</p>-->
+                <!--<p class="price">¥50.00</p>-->
+            <!--</div>-->
+        <!--</a>-->
+        <!--<a class="yao_alignment_center">-->
+            <!--<div><img src="../../images/sale_product.jpg"></div>-->
+            <!--<div>-->
+                <!--<p class="name">葵花护肝片</p>-->
+                <!--<p class="sale_icon">特价</p>-->
+                <!--<p class="price">¥50.00</p>-->
+            <!--</div>-->
+        <!--</a>-->
+    </div>
+</div>
+    <!--常见套餐购买-->
+    <div class="product_normal">
+    <p class="product_title">— <span>常见购买套餐参考</span> —</p>
+    <div class="normal_box yao_alignment_middle">
+        <!--<a href="#">-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+        <!--<a>-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+
+        <!--<a>-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+
+        <!--<a>-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+        <!--<a>-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+        <!--<a>-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+        <!--<a>-->
+            <!--<div class="function yao_alignment_middle">-->
+                <!--<span>No1</span>-->
+                <!--<span>轻度感冒预防用</span>-->
+            <!--</div>-->
+
+            <!--<div class="pro_img"><img src="../../images/normal_product.jpg"></div>-->
+            <!--<div class="content">本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。本套餐为中药成分，对身体有较大好处。</div>-->
+            <!--<div class="price yao_alignment_center">-->
+                <!--<span>¥28.00</span>-->
+                <!--<span><img src="../../images/icon_AK_shop.png"></span>-->
+            <!--</div>-->
+
+            <!--<div class="gobuy">立即购买</div>-->
+        <!--</a>-->
+
+
+    </div>
+</div>
+
+    <div class="ak_pro_list">
+    <!--药品-->
+    <div class="items">
+        <div class="product_title jdshow_center_center">
+            <div>— <span>药品</span> —</div>
+            <a href="../medicine_category/category.html?categoryId=101">更多<img src="../../images/icon_AK_arrow.png"></a>
+        </div>
+
+        <div class="list yao_alignment_center category_list1">
+            <!--<a href="#">-->
+                <!--<p>感冒感冒感冒感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+        </div>
+    </div>
+    <!--医疗器械-->
+    <div class="items">
+        <div class="product_title jdshow_center_center  ">
+            <div>— <span>医疗保健器械</span> —</div>
+            <a href="../medicine_category/category.html?categoryId=102">更多<img src="../../images/icon_AK_arrow.png"></a>
+        </div>
+
+        <div class="list yao_alignment_center category_list2">
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+        </div>
+    </div>
+    <!--保健品-->
+    <div class="items">
+        <div class="product_title jdshow_center_center">
+            <div>— <span>保健品补品</span> —</div>
+            <a href="../medicine_category/category.html?categoryId=103">更多<img src="../../images/icon_AK_arrow.png"></a>
+        </div>
+
+        <div class="list yao_alignment_center category_list3">
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+        </div>
+    </div>
+    <!--计生-->
+    <div class="items">
+        <div class="product_title jdshow_center_center">
+            <div>— <span>计生用品</span> —</div>
+            <a href="../medicine_category/category.html?categoryId=104">更多<img src="../../images/icon_AK_arrow.png"></a>
+        </div>
+
+        <div class="list yao_alignment_center category_list4">
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>感冒</p>-->
+                <!--<p><img src="../../images/sale_product.jpg"></p>-->
+            <!--</a>-->
+        </div>
+    </div>
+
+
+
+</div>
+
+    <!--近期热卖-->
+
+    <div class="ak_pro_list hot_sale">
+
+    <div class="items">
+        <div class="product_title jdshow_center_center">
+            <div>— <span>近期热卖</span> —</div>
+            <a href="../active/active_page.html">更多<img src="../../images/icon_AK_arrow.png"></a>
+        </div>
+
+        <div class="hot_list">
+            <!--<a class="hot">-->
+                <!--<div class="pro_img"><img src="../../images/hot_product.jpg"></div>-->
+                <!--<p>云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤</p>-->
+                <!--<div class="price">-->
+                    <!--<p>-->
+                        <!--<span>¥29.99</span>-->
+                        <!--<span>¥39.99</span>-->
+                    <!--</p>-->
+                    <!--<p class="gobuy"></p>-->
+                <!--</div>-->
+            <!--</a>-->
+
+            <!--<a class="hot">-->
+                <!--<div class="pro_img"><img src="../../images/hot_product.jpg"></div>-->
+                <!--<p>云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤</p>-->
+                <!--<div class="price">-->
+                    <!--<p>-->
+                        <!--<span>¥29.99</span>-->
+                        <!--<span>¥39.99</span>-->
+                    <!--</p>-->
+                    <!--<p class="gobuy"></p>-->
+                <!--</div>-->
+            <!--</a>-->
+            <!--<a class="hot">-->
+                <!--<div class="pro_img"><img src="../../images/hot_product.jpg"></div>-->
+                <!--<p>云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤云南白药雾剂消肿化瘀止血跌打扭伤</p>-->
+                <!--<div class="price">-->
+                    <!--<p>-->
+                        <!--<span>¥29.99</span>-->
+                        <!--<span>¥39.99</span>-->
+                    <!--</p>-->
+                    <!--<p class="gobuy"></p>-->
+                <!--</div>-->
+            <!--</a>-->
+            <!--<a class="hot">-->
+                <!--<div class="pro_img"><img src="../../images/hot_product.jpg"></div>-->
+                <!--<p>云南白药雾剂消肿化南白药雾扭伤</p>-->
+                <!--<div class="price">-->
+                    <!--<p>-->
+                        <!--<span>¥29.99</span>-->
+                        <!--<span>¥39.99</span>-->
+                    <!--</p>-->
+                    <!--<p class="gobuy"></p>-->
+                <!--</div>-->
+            <!--</a>-->
+        </div>
+
+    </div>
+
+
+
+
+</div>
+    <!--品牌广场-->
+    <div class="ak_pro_list">
+
+    <div class="items">
+        <div class="product_title jdshow_center_center">
+            <div>— <span>品牌广场</span> —</div>
+            <a href="../brand_reccomend/all_brand.html">更多<img src="../../images/icon_AK_arrow.png"></a>
+        </div>
+
+        <div class="list yao_alignment_center list_brand">
+            <!--<a>-->
+                <!--<p>同仁堂</p>-->
+                <!--<p><img src="../../images/icon_brand.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>云南白药</p>-->
+                <!--<p><img src="../../images/icon_yuannan_baiyao.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>同仁堂</p>-->
+                <!--<p><img src="../../images/icon_brand.jpg"></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p>云南白药</p>-->
+                <!--<p><img src="../../images/icon_yuannan_baiyao.jpg"></p>-->
+            <!--</a>-->
+        </div>
+    </div>
+
+</div>
+
+
+    </div>
+
+<!--活动banner-->
+<div class="banner_active">
+    <img src="../../images/banner_active.jpg">
+</div>
+
+<!--开通门店-->
+
+<div class="main_product">
+    <div class="ak_pro_list">
+
+        <div class="items">
+            <div class="product_title jdshow_center_center store_list">
+                <div>— <span>开通门店</span> —</div>
+            </div>
+
+            <div class="store_list1">
+
+                <!--<a class="store_name"><span>上海徐汇区徐家汇店</span><span> > </span></a>-->
+
+                <!--<a class="store_name"><span>上海徐汇区徐家汇店</span><span> > </span></a>-->
+
+            </div>
+
+            <a class="store_name">(门店均是实体店和网络综合经营，欢迎到店选购)</a>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!--地址选择-->
+<div class="delivery_address" onclick="addressSelect.show({fn:
+
+function(){
+
+     shoppingCart.run({
+     api: '../../api/address.json',
+     type: 'get',
+     lastTargetDom:document.getElementById('address_info'),
+     fn:function() {
+       addressSelect.hide();
+        console.log(chooseAdressId);//当前选择地址ID
+
+        $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[1]
+            },
+            success:function(info){
+                console.log(info);
+                //将storeId存cookie
+                $.cookie('storeId',info.data,{path:'/'});
+
+                //获取地址
+                var addressHtml = $('#address_info').text();
+                //存cookie
+                $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+
+            }
+        })
+
+     }     })
+}
+
+})">
+    <span>配送至：</span>
+    <span class="address_info" id="address_info"></span>
+</div>
+
+
+
+
+
+
+<div class="jf_pop_up" id="delivery_address">
+
+    <div class="jf_pop_up_main">
+
+        <div class="pop_top">
+
+            <div class="pop_title">请选择地址</div>
+
+            <div class="pop_cancel"></div>
+
+            <!--            <div class="pop_line"></div>-->
+
+
+        </div>
+
+        <div class="pop_main">
+
+            <div class="product_prompt_address">
+
+                <div id="address_select">
+
+                    <div class="top_address jdshop_alignment_middle">
+
+                        <div>请选择</div>
+
+                        <div></div>
+                        <!--
+                                                <div></div>
+
+                                                <div></div>
+
+                                                <div></div>-->
+
+                    </div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
+
+                    <!-- <div class="address"></div>
+
+                     <div class="address"></div>
+
+                     <div class="address"></div>-->
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="jf_pop_up_bg">
+
+    </div>
+
+</div>
+
+
+<p class="certificate_tips">互联网药品交易服务资格证书：京C2016888</p>
+
+
+<!--底部导航-->
+
+<footer class="bottom_tabbar">
+    <div class="tab_box"></div>
+    <div class="bottom_tabbar_contain yao_alignment_center">
+        <a href="#" class="current_page">
+            <div class="tabbar_icon"><img src="../../icon/icon_mian_home_green.png"></div>
+            <p>首页</p>
+        </a>
+        <a href="../active/active_page.html">
+            <div class="tabbar_icon"><img src="../../icon/icon_main_active_green.png"></div>
+            <p>活动</p>
+        </a>
+        <a href="../shopping_cart/shopping_cart_main.html" class="shoppBtn">
+            <div class="tabbar_icon"><img src="../../icon/icon_main_shopping_green.png"></div>
+            <p>购物车</p>
+        </a>
+        <a href="../person_center/person_main_login.html">
+            <div class="tabbar_icon"><img src='../../icon/icon_main_individual_green.png'></div>
+            <p>个人中心</p>
+        </a>
+    </div>
+</footer>
+
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/homepage/main.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script>
+
+    jfAutoPlay.jfCarouselInit();//轮播
+
+
+    addressSelect = new jfShowPop({
+
+        'ele': 'delivery_address',
+
+        'fatherId':'delivery_address',
+
+        'scrollClassname':'address'
+    })
+
+
+
+    //点穿问题
+    jfProductDetails.clickThrough('delivery_address','address')
+
+
+
+</script>
+
+
+<script>
+
+    $.ajax()
+
+</script>
+
+<!--活动特价部分-->
+<script type="text/html" id="sale_box">
+    {{if list}}
+    {{each list as value}}
+    <a href="../product_details_page/product_details_page.html?id={{value.id}}" class="yao_alignment_center">
+        <div><img src="{{#value.goodImg}}"></div>
+        <div>
+            <p class="name">{{value.goodName}}</p>
+            <p class="sale_icon">特价</p>
+            <p class="price">¥{{value.sellingPrice}}</p>
+        </div>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--近期热卖部分-->
+<script type="text/html" id="hot_list">
+    {{if list}}
+    {{each list as value}}
+    <a class="hot" href="../product_details_page/product_details_page.html?id={{value.id}}">
+        <div class="pro_img"><img src="{{#value.goodImg}}"></div>
+        <p>{{value.brandName}}{{value.goodName}}{{value.applySymptom}}</p>
+        <div class="price">
+            <p>
+                <span>¥{{value.sellingPrice}}</span>
+                <span>¥{{value.storePrice}}</span>
+            </p>
+            <p class="gobuy"></p>
+        </div>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--品牌广场部分-->
+<script type="text/html" id="list_brand">
+    {{if list}}
+    {{each list as value}}
+    <a href="../brand_reccomend/brand.html?categoryId={{value.id}}">
+        <p>{{value.brandName}}</p>
+        <p><img src="{{#value.brandImg}}"></p>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--套餐参考部分-->
+<script type="text/html" id="normal_box">
+    {{if list}}
+    {{each list as value}}
+    <a class="normal_box_a" data-goodId="{{value.id}}">
+        <div class="function yao_alignment_middle">
+            <span>No{{value.businessIndex}}</span>
+            <span>{{value.motif}}</span>
+        </div>
+
+        <div class="pro_img"><img src="{{#value.img}}"></div>
+        <div class="content">{{value.suggest}}</div>
+        <div class="price yao_alignment_center">
+            <span>¥{{value.total}}</span>
+            <span><img src="../../images/icon_AK_shop.png"></span>
+        </div>
+
+        <div class="gobuy" data-id={{value.id}}>立即购买</div>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--药品-->
+<script type="text/html" id="category_list1">
+    {{if list}}
+    {{each list as value index}}
+    <a href="../medicine_category/category.html?cateId={{value.id}}&categoryId=102">
+        <p>{{value.cateName}}</p>
+        <p><img src="{{#value.cateImg}}"></p>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--药品-->
+<script type="text/html" id="category_list2">
+    {{if list}}
+    {{each list as value}}
+    <a href="../medicine_category/category.html?cateId={{value.id}}&categoryId=102">
+        <p>{{value.cateName}}</p>
+        <p><img src="{{#value.cateImg}}"></p>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--药品-->
+<script type="text/html" id="category_list3">
+    {{if list}}
+    {{each list as value}}
+    <a href="../medicine_category/category.html?cateId={{value.id}}&categoryId=103">
+        <p>{{value.cateName}}</p>
+        <p><img src="{{#value.cateImg}}"></p>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--药品-->
+<script type="text/html" id="category_list4">
+    {{if list}}
+    {{each list as value}}
+    <a href="../medicine_category/category.html?cateId={{value.id}}&categoryId=104">
+        <p>{{value.cateName}}</p>
+        <p><img src="{{#value.cateImg}}"></p>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--门店-->
+<script type="text/html" id="store_list_html">
+    {{if list}}
+    {{each list as value}}
+        <a class="store_name" href="../medicine_store/store.html?storeId={{value.id}}"><span>{{value.storeName}}</span><span> > </span></a>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>

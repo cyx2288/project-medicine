@@ -1,0 +1,552 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+    <title>商品详情页</title>
+</head>
+<body>
+<div class="product_page">
+
+<!--商品主图-->
+<!--主图轮播-->
+<div class="product_autoPlay">
+
+    <!--图片部分-->
+    <!--<div class="product_details_autoPlay">-->
+        <!--<div class="jdshow_center_center">-->
+            <!--<div class="jd_banner_touch"><img src="../../images/icon_product_banner.jpg"></div>-->
+        <!--</div>-->
+        <!--<div class="jdshow_center_center">-->
+            <!--<div class="jd_banner_touch"><img src="../../images/icon_product_img1.jpg"></div>-->
+        <!--</div>-->
+        <!--<div class="jdshow_center_center">-->
+            <!--<div class="jd_banner_touch"><img src="../../images/icon_product_img2.jpg"></div>-->
+        <!--</div>-->
+        <!--<div class="jdshow_center_center">-->
+            <!--<div class="jd_banner_touch"><img src="../../images/icon_product_img1.jpg"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--点点部分——自动生成-->
+
+</div>
+
+<div class="product_show_content">
+
+    <!--主体内容-->
+    <div class="img_content">
+        <!--图片-->
+        <div class="product_details_autoPlay"></div>
+    </div>
+
+    <!--遮罩层-->
+    <div class="showimg_shadow"></div>
+
+    <div class="delete_banner">X</div>
+
+</div>
+
+
+
+
+    <!--商品详情-->
+
+<div class="medicine_details yao_shadow" id="goodDesc">
+
+    <!--<div>-->
+        <!--<p class="name ">999三九感冒颗粒，主治头痛发烧鼻噻咳嗽，中药成分</p>-->
+
+        <!--<p class="price">¥40.99</p>-->
+
+        <!--<p class="original_price">-->
+            <!--<span>市场价：<span>¥99.99</span></span>-->
+            <!--<span>已省<span>50.00元</span></span>-->
+            <!--<span>库存<span>5个</span></span>-->
+        <!--</p>-->
+        <!--<p class="original_price">-->
+            <!--<span>库存<span>5个</span></span>-->
+        <!--</p>-->
+
+    <!--</div>-->
+
+
+    <!--<p class="effect yao_alignment_left">-->
+        <!--<span>功效</span>-->
+        <!--<span>主治头痛发烧鼻噻咳嗽</span>-->
+    <!--</p>-->
+
+</div>
+
+    <!--选择地址-->
+
+    <div class="address_choose yao_shadow yao_alignment_middle" onclick="addressSelect.show({fn:
+
+function(){
+
+     shoppingCart.run({
+     api: '../../api/address.json',
+     type: 'get',
+     firstTargetDom:document.getElementById('address_info'),
+     'addressPart':true,//ture表示不分开显示地址
+     fn:function() {
+       addressSelect.hide();
+
+       console.log(chooseAdressId);//当前选择地址ID
+
+        $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[1]
+            },
+            success:function(info){
+                console.log(info);
+                //将storeId存cookie
+                $.cookie('storeId',info.data,{path:'/'});
+
+                //获取地址
+                var addressHtml = $('#address_info').text();
+                //存cookie
+                $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+            }
+        })
+     }
+
+     })
+}
+
+})">
+    <p>送至：</p>
+    <p><img src="../../images/icon_AK_address1.png"><span id="address_info"></span></p>
+</div>
+
+
+
+    <!--常见套餐选择-->
+    <div class="medicine_reference yao_shadow">
+    
+    <div class="reference_title yao_alignment_center">
+        <p><img src="../../images/icon_AK_package.png">常见的购买套餐参考</p>
+
+        <p><button id="prev" style="color:#49c999;margin-right: 10px">上一个</button><button id="next" style="color:#49c999">下一个</button></p>
+    </div>
+
+    <div class="reference">
+        <div class="cloum yao_alignment_middle">
+            <!--<p>No1</p>-->
+
+            <!--<p>-->
+                <!--<span>轻度感冒预防</span>-->
+                <!--<span>本套餐为中药成分，副作用小，老人小孩皆可以使用</span>-->
+            <!--</p>-->
+        </div>
+
+        <div class="product_reference yao_alignment_middle">
+            <!--<a>-->
+                <!--<p><img src="../../images/icon_product_referrnce.jpg"></p>-->
+                <!--<p class="name">999三九感冒灵颗粒</p>-->
+                <!--<p class="text_function">主治：发烧头痛，恶心干呕，清热去火，发烧头痛，恶心干呕，清热去火</p>-->
+                <!--<p class="yao_alignment_center"><span>¥10.00</span><span>X1</span></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p><img src="../../images/icon_product_referrnce.jpg"></p>-->
+                <!--<p class="name">999三九感冒灵颗粒</p>-->
+                <!--<p class="text_function">主治：发烧头痛，恶心干呕，清热去火，发烧头痛，恶心干呕，清热去火</p>-->
+                <!--<p class="yao_alignment_center"><span>¥10.00</span><span>X1</span></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p><img src="../../images/icon_product_referrnce.jpg"></p>-->
+                <!--<p class="name">999三九感冒灵颗粒</p>-->
+                <!--<p class="text_function">主治：发烧头痛，恶心干呕，清热去火，发烧头痛，恶心干呕，清热去火</p>-->
+                <!--<p class="yao_alignment_center"><span>¥10.00</span><span>X1</span></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p><img src="../../images/icon_product_referrnce.jpg"></p>-->
+                <!--<p class="name">999三九感冒灵颗粒</p>-->
+                <!--<p class="text_function">主治：发烧头痛，恶心干呕，清热去火，发烧头痛，恶心干呕，清热去火</p>-->
+                <!--<p class="yao_alignment_center"><span>¥10.00</span><span>X1</span></p>-->
+            <!--</a>-->
+
+            <!--<a>-->
+                <!--<p><img src="../../images/icon_product_referrnce.jpg"></p>-->
+                <!--<p class="name">999三九感冒灵颗粒</p>-->
+                <!--<p class="text_function">主治：发烧头痛，恶心干呕，清热去火，发烧头痛，恶心干呕，清热去火</p>-->
+                <!--<p class="yao_alignment_center"><span>¥10.00</span><span>X1</span></p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<p><img src="../../images/icon_product_referrnce.jpg"></p>-->
+                <!--<p class="name">999三九感冒灵颗粒</p>-->
+                <!--<p class="text_function">主治：发烧头痛，恶心干呕，清热去火，发烧头痛，恶心干呕，清热去火</p>-->
+                <!--<p class="yao_alignment_center"><span>¥10.00</span><span>X1</span></p>-->
+            <!--</a>-->
+
+        </div>
+    </div>
+
+    <div class="reference_buy_btn ">
+        <a class="green meal_add_car" >加入购物车</a>
+        <a class="orange meal_add_buy" >立即购买</a>
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <div class="medicine_table">
+    <a class="douctor_phone" href="tel:400-8008-6523"><img src="../../images/icon_AK_phone1.png">药师咨询专线</a>
+    <div class="product_images_parameter">
+        <div class="parameter_table">
+            <!--<table border="1" cellspacing="0" cellpadding="0" bordercolor="#ddd">
+                <tr>
+                    <td>药品名称</td>
+                    <td>999感冒灵颗粒</td>
+                </tr>
+                <tr>
+                    <td>通用名称</td>
+                    <td>999感冒灵颗粒</td>
+                </tr>
+                <tr>
+                    <td>拼音全码</td>
+                    <td>GANMAOLINGKELI</td>
+                </tr>
+                <tr>
+                    <td>成分</td>
+                    <td>三叉苦、岗梅、金盏银盘、薄荷油、野菊花、马来酸氯苯那敏、咖啡因、对乙酰氨基酚。辅料为蔗糖粉</td>
+                </tr>
+                <tr>
+                    <td>规格</td>
+                    <td>10gX9袋</td>
+                </tr>
+
+                <tr>
+                    <td>用法用量</td>
+                    <td>开水冲服，一次1袋，一日3次。小儿减量或遵医嘱。</td>
+                </tr>
+
+                <tr>
+                    <td>不良反应</td>
+                    <td>偶见皮疹、荨麻疹、药热及粒细胞减少；可见困倦、嗜睡、口渴、虚弱感；长期大量用药会导致肝肾功能异常。</td>
+                </tr>
+
+                <tr>
+                    <td>禁忌</td>
+                    <td>严重肝肾功能不全者禁用</td>
+                </tr>
+
+            </table>-->
+        </div>
+    </div>
+
+    <div class="medicine_usage">
+        <p class="title">【用药讲究】<span>药师参考</span></p>
+        <!--<p>1、忌烟，酒及辛辣，生冷，油腻食物。</p>-->
+        <!--<p>2、不宜在服药期间同时服用滋补性中成药。</p>-->
+        <!--<p>3、 高血压、心脏病、肝病、肾病等慢性病严重者应在医师指导下服用。</p>-->
+        <!--<p>4、本品含对乙氨基酚，马来酸氨苯那敏，咖啡因。服用本品期间不得饮酒或含有酒精的饮料；不能同时服用与本品成分相似的其它抗感冒药；肝，肾功能不全者慎用；膀胱颈梗阻，甲状腺功能亢进，青光眼，高血压和前列腺肥大者慎用；孕妇及哺乳期妇女慎用；服药期间不得驾驶机，车，船，从事高空作业，机械作业及操作精密仪器。</p>-->
+        <!--<p>5、脾胃虚寒，症见腹痛，喜暖，泄泻者慎用。</p>-->
+    </div>
+</div>
+
+    <!--图片详情页-->
+    <div class="medicine_images">
+    <div class="product_images_nav">
+        <!-- 向下滑动 -->
+        <div class="slide_down">向下进入详情页</div>
+    </div>
+
+    <div class="images_info">
+        <img src="../../images/icon_product_img1.jpg">
+
+        <img src="../../images/icon_product_img2.jpg">
+
+        <img src="../../images/icon_product_img3.jpg">
+
+    </div>
+</div>
+
+<!--固定底部-->
+    <footer class="bottom_product_tabbar">
+    <div class="tab_box"></div>
+    <div class="product_tabbar_contain">
+        <a class="btn" href="../homepage/main.html">
+            <div class="tabbar_icon"><img src="../../images/icon_AK_home2.png"></div>
+            <p>商城首页</p>
+        </a>
+        <a class="btn" href="javascript:;">
+            <div class="tabbar_icon"><img src="../../images/icon_AK_shop2.png"></div>
+            <p>购物车</p>
+        </a>
+        <a class="shopping_btn orange" onclick="showProductSku.show({fn:function() {jfProductDetails.changeHideBtn('orange');}})">加入购物车</a>
+        <a class="shopping_btn red" onclick="showProductSku.show({fn:function() {jfProductDetails.changeHideBtn('red');}})">立即购买</a>
+    </div>
+
+</footer>
+</div>
+
+<!--地址弹出框-->
+
+
+<div class="jf_pop_up" id="delivery_address">
+
+    <div class="jf_pop_up_main">
+
+        <div class="pop_top">
+
+            <div class="pop_title">请选择地址</div>
+
+            <div class="pop_cancel"></div>
+
+<!--            <div class="pop_line"></div>-->
+
+
+        </div>
+
+        <div class="pop_main">
+
+            <div class="product_prompt_address">
+
+                <div id="address_select">
+
+                    <div class="top_address jdshop_alignment_middle">
+
+                        <div>请选择</div>
+
+                        <div></div>
+
+                    </div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="jf_pop_up_bg">
+
+    </div>
+
+</div>
+
+
+
+
+
+<!--立即购买以及加入购物车弹出框-->
+
+    <div class="jf_pop_up" id="product_prompt_buy">
+
+        <div class="jf_pop_up_main">
+
+            <div class="pop_top">
+
+                <div class="pop_title">请选择</div>
+
+                <div class="pop_cancel"></div>
+
+                <div class="pop_line"></div>
+
+            </div>
+
+            <div class="pop_main" id="main_sku">
+                <div class="pop_content">
+                    <!--sku 选择-->
+                    <!--<div class="sku_title">版本</div>-->
+                    <!--<div class="sku_contain">-->
+                        <!--<div class="sku_box choose_tab">家庭版</div>-->
+                        <!--<div class="sku_box">儿童版</div>-->
+                        <!--<div class="sku_box">成人版</div>-->
+                        <!--<div class="sku_box out_of_stock">老人版</div>-->
+                        <!--<div class="sku_box ">标准装</div>-->
+                    <!--</div>-->
+                    <!--sku 颜色-->
+                    <!--<div class="sku_title">包装</div>-->
+                    <!--<div class="sku_contain">-->
+                        <!--<div class="sku_box choose_tab">豪华大礼包</div>-->
+                        <!--<div class="sku_box">10gX10袋</div>-->
+                        <!--<div class="sku_box">15gX20袋</div>-->
+                        <!--<div class="sku_box">5gX5袋</div>-->
+                    <!--</div>-->
+                </div>
+                <!--数量-->
+                <div class="sku_volume_purchased yao_alignment_center">
+                    <div>数量</div>
+                    <div class="volume_btn">
+    <span class="reduce">－</span>
+    <input type="number" pattern="[0-9]*" class="volume_input" value="1">
+    <span class="add">＋</span>
+</div>
+
+
+                </div>
+                <!-- -->
+                <div class="prompt_btn">
+                    <a class="product_prompt_btn orange hidebtn" onclick=" showProductSku.hide()">
+                        <div id="addCar">加入购物车</div>
+                    </a>
+                    <a class="product_prompt_btn red ">
+                        <div id="goShopping">立即购买</div>
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="jf_pop_up_bg">
+
+        </div>
+
+    </div>
+
+
+
+<footer class="bottom_product_tabbar">
+    <div class="tab_box"></div>
+    <div class="product_tabbar_contain">
+        <a class="btn" href="../homepage/main.html">
+            <div class="tabbar_icon"><img src="../../images/icon_AK_home2.png"></div>
+            <p>商城首页</p>
+        </a>
+        <a class="btn details_shopping" href="javascript:;">
+            <div class="tabbar_icon"><img src="../../images/icon_AK_shop2.png"></div>
+            <p>购物车</p>
+        </a>
+        <a class="shopping_btn orange" onclick="showProductSku.show({fn:function() {jfProductDetails.changeHideBtn('orange');}})">加入购物车</a>
+        <a class="shopping_btn red" onclick="showProductSku.show({fn:function() {jfProductDetails.changeHideBtn('red');}})">立即购买</a>
+    </div>
+
+</footer>
+
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/product_details_page/product_details_page.js"></script>
+<script>
+
+
+
+
+
+
+
+
+
+    addressSelect = new jfShowPop({
+
+        'ele': 'delivery_address',
+
+        'fatherId':'delivery_address',
+
+        'scrollClassname':'address'
+    })
+
+
+
+
+
+    //点穿问题
+    jfProductDetails.clickThrough('delivery_address','address')
+
+
+
+    //弹出框方法
+    showProductSku = new jfShowPop({
+
+        'ele':'product_prompt_buy',//弹框id
+
+        'scrollClassname':'pop_content'//可选参数 该id下带有滚动条元素的classname
+    })
+
+
+    //sku 选择
+
+    jfProductDetails.skuBoxChange();
+
+
+    //购物车加减
+    jfProductDetails.volumeChange(true);
+
+
+
+
+</script>
+<script type="text/html" id="goodDesc_html">
+    {{if list}}
+    {{each list as value}}
+    <div>
+        <p class="name" data-goodId={{value.id}}>{{value.goodName}}&nbsp;{{value.applySymptom}}</p>
+        <p class="price" data-sellingPrice="{{value.sellingPrice}}">¥{{value.sellingPrice}}</p>
+        <p class="original_price">
+
+        </p>
+    </div>
+    <p class="effect yao_alignment_left">
+        <span>功效</span>
+        <span>{{value.applySymptom}}</span>
+    </p>
+    {{/each}}
+    {{/if}}
+</script>
+<script type="text/html" id="goodDesc_htmlstock">
+    {{if list}}
+        <span>市场价：<span data-storePrice="{{list.storePrice}}" style="margin-right: 0px">¥{{list.storePrice}}</span></span>
+        <span>已省<span id="provincePrice" style="margin-right: 0px"></span></span>
+        <span style="margin-right: 0px">库存<span>{{list.stock > 0 ? '有货' : '没货'}}</span></span>
+        <span style="margin-right: 0px;color:#49c999" class="share">分享</span>
+    {{/if}}
+</script>
+<script type="text/html" id="goodSuggest_html">
+    {{if list}}
+    {{each list as value}}
+    <p>{{value.content}}</p>
+    {{/each}}
+    {{/if}}
+</script>
+<script type="text/html" id="goodpackage_title">
+    {{if list}}
+    <p data-id="{{list.data.id}}">No{{list.data.packageIndex}}</p>
+    <p>
+        <span>{{list.data.motif}}</span>
+        <span>{{list.data.suggest}}</span>
+    </p>
+    {{/if}}
+</script>
+<script type="text/html" id="goodpackage_text">
+    {{if list}}
+    {{each list as value}}
+    <a>
+    <p><img src="../../images/icon_product_referrnce.jpg"></p>
+        <p class="name">{{value.brandName}}{{value.goodName}}</p>
+    <p class="text_function">主治：{{value.applySymptom}}</p>
+    <p class="yao_alignment_center"><span>¥{{value.sellingPrice}}</span><span>X{{value.buyNum}}</span></p>
+    </a>
+    {{/each}}
+    {{/if}}
+</script>
+<!--图片-->
+<script type="text/html" id="autoPlay_img">
+    {{if list}}
+    <div class="product_details_autoPlay">
+    {{each list as value}}
+    <div class="jdshow_center_center">
+        <div class="jd_banner_touch"><img src="{{#value.imgUrl}}"></div>
+    </div>
+    {{/each}}
+    </div>
+    {{/if}}
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>个人中心</title>
+</head>
+<body>
+<div class="personal_center_page">
+    <div class="result_page">
+        <div class="result_title">
+            <div class="show_pic">安康快药</div>
+            <div class="login_statu"><span>登录</span>/<span>注册</span></div>
+            <div class="result_round top"></div>
+            <div class="result_round bottom"></div>
+        </div>
+    </div>
+
+    <div class="buy_status yao_alignment_middle yao_shadow">
+        <a>
+            <img src="../../images/personal_obligation.png">
+            <p>待付款</p>
+            <span>2</span>
+        </a>
+        <a>
+            <img src="../../images/personal_evaluation.png">
+            <p>待评价</p>
+        </a>
+        <a>
+            <img src="../../images/personal_confirm.png">
+            <p>待收货</p>
+        </a>
+        <a>
+            <img src="../../images/personal_refund.png">
+            <p>已退款</p>
+        </a>
+        <a class="more" href="my_order.html">
+            <img src="../../images/personal_all.png">
+            <p>全部定单 ></p>
+            <span>5</span>
+        </a>
+    </div>
+
+    <div class="main_section yao_shadow">
+
+        <div class="title">
+            <img src="../../images/personal_necessary.png">
+            <span>必备</span>
+        </div>
+
+        <div class="yao_alignment_middle lists">
+            <a href="my_address.html">
+                <img src="../../images/personal_car.png">
+                <p>收货地址</p>
+            </a>
+            <a href="my_coupon.html">
+                <img src="../../images/personal_card_coupons.png">
+                <p>我的卡券包</p>
+            </a>
+            <a class="share">
+                <img src="../../images/personal_star.png">
+                <p>我的分享</p>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="main_section yao_shadow">
+
+        <div class="title">
+            <img src="../../images/personal_other.png">
+            <span>其他</span>
+        </div>
+
+        <div class="yao_alignment_middle lists">
+            <a>
+                <img src="../../images/personal_location.png">
+                <p>配送区域</p>
+            </a>
+            <a href="award.html">
+                <img src="../../images/personal_boon.png">
+                <p>实惠与奖励</p>
+            </a>
+            <a href="message.html">
+                <img src="../../images/personal_news.png">
+                <p>我的消息</p>
+            </a>
+
+            <a href="feedback.html">
+                <img src="../../images/personal_feedback.png">
+                <p>意见反馈</p>
+            </a>
+
+            <a class="ak_telphone">
+                <img src="../../images/personal_phone.png">
+                <p>400电话</p>
+            </a>
+
+            <a class="score">
+                <img src="../../images/personal_jifen.png">
+                <p>我的积分</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<footer class="bottom_tabbar">
+    <div class="tab_box"></div>
+    <div class="bottom_tabbar_contain yao_alignment_center">
+        <a href="../homepage/main.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_mian_home_green.png">
+
+            </div>
+            <p>首页</p>
+        </a>
+        <a href="../active/active_page.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_active_green.png">
+
+            </div>
+            <p>活动</p>
+        </a>
+        <a href="../shopping_cart/shopping_cart_main.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_shopping_green.png">
+            </div>
+            <p>购物车</p>
+        </a>
+        <a class="current_page">
+            <div class="tabbar_icon"><img src="../../icon/icon_main_individual_green.png">
+                <p>个人中心</p>
+            </div>
+        </a>
+    </div>
+</footer>
+
+
+<script src="../../js/ak_medicine.min.js"></script>
+<script>
+
+
+    //我的分享弹出框
+    document.getElementsByClassName('share')[0].addEventListener('click',function(){
+       jfShowTips.smallDialogShow({
+            'mainText':" ",
+            'minText':'为了让您更多的朋友、亲戚获得低价的购物和更好的服务，分享商品或订单，让更多的人了解到',
+            'noCancel':true,
+            checkFn:function(){
+                jfShowTips.dialogRemove()
+            }
+        })
+    },false)
+
+
+    //我的积分弹出框
+    document.getElementsByClassName('score')[0].addEventListener('click',function(){
+        jfShowTips.smallDialogShow({
+            'mainText':" ",
+            'minText':'您的购买历史将会自动累加积分，平台会不定期进行积分兑换、抵现相关活动',
+            'noCancel':true,
+            checkFn:function(){
+                jfShowTips.dialogRemove()
+            }
+        })
+    },false)
+
+    //400电话
+    document.getElementsByClassName('ak_telphone')[0].addEventListener('click',function(){
+        jfShowTips.smallDialogShow({
+            'mainText':" ",
+            'minText':'<p>安康快药支持电话买药，配送到家。<p>' +
+            '<p>在开通配送范围的用户建议APP在线下单，能享受优惠券等价格优惠和服务，需电话买药的用户直接拨打<span>400-800-1234</span>,说明药名或症状即可配药和配送</p>' +
+            '<p>本电话<span>24</span>小时服务。</p>',
+            'checkBtnText':'现在打电话',
+            'thisUrl':'tel:400-800-1234',
+            checkFn:function(){
+                jfShowTips.dialogRemove()
+            }
+        })
+    },false)
+
+
+
+</script>
+</body>
+</html>

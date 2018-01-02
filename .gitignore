@@ -57,3 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# 忽略.idea等文件
+.idea
+build
+dist
+.project
+.setting
+

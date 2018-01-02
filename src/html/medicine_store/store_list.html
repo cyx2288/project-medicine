@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>门店列表</title>
+</head>
+<body>
+
+<div class="order_page">
+
+    <div class="address_list">
+	</div>
+
+</div>
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/medicine_store/store_list.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script>
+
+
+
+</script>
+<script type="text/html" id="storeList">
+    {{if list}}
+    {{each list as value}}
+    <div class="address_select yao_alignment_middle " data_id="{{value.id}}">
+        <span>{{value.storeName}}</span>
+    </div>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>
