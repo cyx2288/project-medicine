@@ -76,9 +76,9 @@ $(function() {
                 //plus.storage.setItem("userId",userIds);
                 //var foo = plus.storage.getItem("userId");
                 //alert(foo);
-                // $.cookie('userId', userIds , { expires: 30 ,path: '/'});
-                console.log(plus)
-                plus.navigator.setCookie('login_system.html', 'userId=' + userIds + '; expires=60; path=/');
+                 $.cookie('userId', userIds , { expires: 30 ,path: '/'});
+               /* console.log(plus)
+                plus.navigator.setCookie('login_system.html', 'userId=' + userIds + '; expires=60; path=/');*/
                 window.location.href = "../homepage/main.html";
 
             },
