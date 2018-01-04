@@ -96,7 +96,9 @@ $(function () {
                 $.cookie('userId', userIds, {path: '/'});
                 location.href = 'registerSuccess.html';
             },
-            error: function () {
+            error: function (info) {
+
+                console.log(info)
                 alert('系统繁忙，请稍后再试');
             }
         })
@@ -107,12 +109,14 @@ $(function () {
 
     //1. 获取验证码
     function verify(urL, userSendMsg, mobileNum) {
-        $('#user_sendMs').click(function () {
+
+        document.getElementById('user_sendMs').addEventListener('click',function () {
             mobileNum = $('#user_registertel').val();
             if(mobileNum == ''){
                 alert('账号不能为空');
                 return;
             }
+
             $.ajax({
                 url: urL + userSendMsg,
                 type: 'get',
@@ -121,6 +125,8 @@ $(function () {
                 },
                 success: function (info) {
                     console.log(info);
+                    inputFn.inputCheck(60);//发送验证码
+
                     if (info.status == 200) {
                         hash = info.data.hash;
                         tamp = info.data.tamp;
@@ -130,7 +136,7 @@ $(function () {
                     alert('系统繁忙，请稍后再试');
                 }
             })
-        })
+        },false)
     }
 
     //2. 手机号正则表达式

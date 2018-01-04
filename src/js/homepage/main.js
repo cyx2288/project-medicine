@@ -1,6 +1,8 @@
 $(function(){
     var urL = url();
 
+    //图片轮播
+    var bannerUrl='/ad/banner';
     //排名商品获取
     var goodsUrl = '/rank/goods';
     //品牌排名广场
@@ -11,8 +13,10 @@ $(function(){
     var urlList = '/category/list';
     //门店
     var storeList = '/store/list';
-    //分类排名
+    //分类排名8
     var rankCategory = '/rank/category';
+    //广告--推广软文
+    var adBanner='/ad/info';
 
     $.cookie('goodIdList', '', {expires: -1});
     $.cookie('packageId', '', {expires: -1});
@@ -150,6 +154,8 @@ $(function(){
                 total:totalNum
             },
             success:function(info){
+
+                console.log(info)
                 if(info.status !== 200){
                     alert(info.msg);
                     return;
@@ -186,6 +192,45 @@ $(function(){
             }
         })
     }
+
+    //商品图片轮播图
+    $.ajax({
+        url: urL + bannerUrl,
+        data: {
+            clientType: 3
+        },
+        success: function (info) {
+            console.log(info);
+            var html = template('bannerPlay', {list: info.data});
+            $('.jf_autoplay_images').html(html);
+            jfAutoPlay.jfCarouselInit();//轮播
+
+        },
+        error: function (info) {
+            console.log(info)
+            //alert('系统繁忙，请稍后再试');
+        }
+    })
+
+
+    //广告--推广软文
+    $.ajax({
+        url: urL + adBanner,
+        data: {
+            clientType: 3,
+            sit:12,
+        },
+        success: function (info) {
+            console.log(info);
+            var html = template('adInfo', {list: info.data});
+            $('.banner_active').html(html);
+
+        },
+        error: function (info) {
+            console.log(info)
+           // alert('系统繁忙，请稍后再试');
+        }
+    })
 
 
 

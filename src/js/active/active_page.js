@@ -2,6 +2,11 @@ $(function(){
     var urL = url();
     //排名接口
     var rankGoods = '/rank/goods';
+
+    //广告
+    var adBanner='/ad/info';
+
+
     //用户门店信息
     var storeId = $.cookie('storeId') || 1001;
 	var userId = $.cookie('userId') ;
@@ -48,6 +53,26 @@ $(function(){
 			location.href = "../../html/shopping_cart/shopping_cart_main.html"
 		}
 	})
+
+
+    //广告--
+   /* $.ajax({
+        url: urL + adBanner,
+        data: {
+            clientType: 3,
+            sit:12,
+        },
+        success: function (info) {
+            console.log(info);
+            var html = template('adInfo', {list: info.data});
+            $('.active_banner1').html(html);
+
+        },
+        error: function (info) {
+            console.log(info)
+            // alert('系统繁忙，请稍后再试');
+        }
+    })*/
 
 
 
@@ -101,15 +126,18 @@ $(function(){
         function toUrl(url) {
 
 
-            if(url.indexOf('thiswebview')==-1) {
+            if(url.indexOf('thiswebview')==-1) {//打开新页面
 
-                clicked(urlString(url), 0, 0, {
-                    'titleNView': {
-                        'backgroundColor': '#49c999',
-                        'titleColor': '#fff',
-                        autoBackButton: true
-                    }
-                });
+                if(url.indexOf('tel')<-1){
+
+                    clicked(urlString(url), 0, 0, {
+                        'titleNView': {
+                            'backgroundColor': '#49c999',
+                            'titleColor': '#fff',
+                            autoBackButton: true
+                        }
+                    });
+                }
 
             }
 

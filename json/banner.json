@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "url": "www.baidu.com",
+      "imgsrc": "../../images/banner1.jpg"
+    },
+    {
+      "url": "www.baidu.com",
+      "imgsrc": "../../images/icon_active_banner1.jpg"
+    },
+
+    {
+      "url": "www.baidu.com",
+      "imgsrc": "../../images/banner1.jpg"
+    },
+    {
+      "url": "www.baidu.com",
+      "imgsrc": "../../images/icon_active_banner1.jpg"
+    }
+
+  ]
+}

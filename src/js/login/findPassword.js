@@ -46,6 +46,7 @@ $(function(){
             },
             success:function(info){
                 console.log(info);
+                inputFn.inputCheck(60);//发送验证码
                 if(info.status !==200){
                     alert(info.msg);
                     return;
@@ -92,7 +93,7 @@ $(function(){
                     alert(info.msg);
                     return;
                 };
-                alert(info.msg);
+                //alert(info.msg);
                 window.location.href = "../homepage/main.html";
             },
             error: function() {
