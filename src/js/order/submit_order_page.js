@@ -244,7 +244,7 @@ $(function () {
     $('.put_order').click(function () {
 
         //判断库存，如果不足，拦截
-        if($('.repertory')){
+        if($('.repertory')[0]){
             alert('您提交的商品中，有库存不足，请重新提交');
             return;
         };
@@ -542,7 +542,7 @@ $(function () {
             })
         } else if (goodId) {
             orderSource = 2;
-            alert(orderSource)
+           // alert(orderSource)
             $.ajax({
                 url: urL + goodDesc,
                 anysc: false,

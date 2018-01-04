@@ -202,7 +202,9 @@ $(function(){
         success: function (info) {
             console.log(info);
             var html = template('bannerPlay', {list: info.data});
+
             $('.jf_autoplay_images').html(html);
+
             jfAutoPlay.jfCarouselInit();//轮播
 
         },
