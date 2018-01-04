@@ -42,13 +42,13 @@ gulp.task('imageMinDev',devImg);
 gulp.task('devWatch',function () {
 
     //less文件修改 ，注入css
-    gulp.watch('src/**/*.less', ['changeLessDev']);
+    gulp.watch('src/**/*.css', ['changeLessDev']);
 
     //图片文件修改 ，注入css
     gulp.watch(['src/icon/*.*','src/images/**/*.*'], ['imageMinDev']);
 
     //html文件修改，重新拼接，刷新
-    gulp.watch(['src/**/*.ejs','src/**/**/*.ejs'], ['fileIncludeDev']);
+    gulp.watch('src/**/*.html', ['fileIncludeDev']);
 
     //js文件修改，重新拼接，刷新
     gulp.watch('src/**/*.js',['changeJsDev'])

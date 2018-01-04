@@ -62,6 +62,7 @@ $(function () {
         },
         success: function (info) {
             console.log(info);
+
             if (info.status !== 200) {
                 alert(info.msg);
                 return;
@@ -86,6 +87,7 @@ $(function () {
             businessId: productID
         },
         success: function (info) {
+
             console.log(info);
             var html = template('autoPlay_img', {list: info.data});
             $('.product_autoPlay').html(html);
@@ -136,6 +138,7 @@ $(function () {
             storeId: storeId
         },
         success: function (info) {
+
             console.log(info);
             if (info.status !== 200) {
                 alert(info.msg);
@@ -201,6 +204,7 @@ $(function () {
                     buyCount: buyCount,
                 },
                 success: function (info) {
+
                     if (info.status !== 200) {
                         alert(info.msg);
                         return;
@@ -337,6 +341,8 @@ $(function () {
                     $('.medicine_reference').remove();
                     return;
                 }
+
+
                 console.log(info)
                 if (info.status !== 200) {
                     //alert(info.msg);

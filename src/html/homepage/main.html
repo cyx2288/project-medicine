@@ -64,7 +64,7 @@ function(){
 <div class="jf_homepage_autoplay">
 
     <div class="jf_autoplay_images">
-        <a href="#">
+       <!-- <a href="#">
 
             <img src="../../images/banner1.jpg">
         </a>
@@ -80,7 +80,7 @@ function(){
 
         <a href="#">
             <img src="../../images/icon_active_banner2.jpg">
-        </a>
+        </a>-->
     </div>
     <div class="jf_pagination"></div>
 
@@ -470,7 +470,6 @@ function(){
 <div class="banner_active">
     <img src="../../images/banner_active.jpg">
 </div>
-
 <!--开通门店-->
 
 <div class="main_product">
@@ -551,7 +550,6 @@ function(){
 
             <div class="pop_cancel"></div>
 
-            <!--            <div class="pop_line"></div>-->
 
 
         </div>
@@ -567,12 +565,7 @@ function(){
                         <div>请选择</div>
 
                         <div></div>
-                        <!--
-                                                <div></div>
 
-                                                <div></div>
-
-                                                <div></div>-->
 
                     </div>
 
@@ -580,11 +573,6 @@ function(){
 
                     <div class="address"></div>
 
-                    <!-- <div class="address"></div>
-
-                     <div class="address"></div>
-
-                     <div class="address"></div>-->
 
                 </div>
 
@@ -638,7 +626,7 @@ function(){
 <script src="../../js/ak_medicine.min.js"></script>
 <script>
 
-    jfAutoPlay.jfCarouselInit();//轮播
+
 
 
     addressSelect = new jfShowPop({
@@ -660,10 +648,26 @@ function(){
 </script>
 
 
-<script>
+<!--banner轮播-->
+<script type="text/html" id="bannerPlay">
+    {{if list}}
+    {{each list as value}}
+      <a href="#">
+          <img src="{{#value.imgAddr}}">
+      </a>
+    {{/each}}
+    {{/if}}
+</script>
 
-    $.ajax()
-
+<!--广告展示--软文推广-->
+<script type="text/html" id="adInfo">
+    {{if list}}
+    {{each list as value}}
+    <a href="#">
+        <img src="{{#value.imgAddr}}">
+    </a>
+    {{/each}}
+    {{/if}}
 </script>
 
 <!--活动特价部分-->
@@ -736,7 +740,7 @@ function(){
 <script type="text/html" id="category_list1">
     {{if list}}
     {{each list as value index}}
-    <a href="../medicine_category/category.html?cateId={{value.id}}&categoryId=102">
+    <a href="../medicine_category/category.html?cateId={{value.id}}&categoryId=101">
         <p>{{value.cateName}}</p>
         <p><img src="{{#value.cateImg}}"></p>
     </a>

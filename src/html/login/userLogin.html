@@ -109,47 +109,7 @@
 <script src="../../js/urL.js"></script>
 <script src="../../js/login/userLogin.js"></script>
 <script>
-    var inputFn = {
-
-        inputCheck: function () {
-
-            event.preventDefault();
-
-            if (this.className.indexOf('locked') == -1) {
-
-                var time = 60;
-
-                var thisInnerHtml = this.innerHTML;
-
-                this.innerHTML = '重新发送' + time + 's';
-
-                this.className += ' locked';
-
-                var thisSet = setInterval(function () {
-
-                    this.innerHTML = '重新发送' + (--time) + 's';
-
-                    if (time <= 0) {
-
-                        clearInterval(thisSet);
-
-                        this.className = this.className.replace('locked', '');
-
-                        this.innerHTML=thisInnerHtml;
-
-                    }
-
-                }.bind(this), 1000)
-
-            }
-        }
-
-    };
-
-    document.getElementsByClassName('yao_input_check_button')[0].addEventListener('click',inputFn.inputCheck,false)
-
-
-
+    //document.getElementsByClassName('yao_input_check_button')[0].addEventListener('click',inputFn.inputCheck,false)
 
 </script>
 </body>

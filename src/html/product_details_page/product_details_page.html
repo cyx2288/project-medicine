@@ -259,7 +259,7 @@ function(){
         <div class="slide_down">向下进入详情页</div>
     </div>
 
-    <div class="images_info">
+    <div class="images_info" id="product_image_in">
         <img src="../../images/icon_product_img1.jpg">
 
         <img src="../../images/icon_product_img2.jpg">
@@ -479,7 +479,62 @@ function(){
     //购物车加减
     jfProductDetails.volumeChange(true);
 
+  /*  var allProImgEle = document.getElementById('product_image_in').getElementsByTagName('img');
 
+    for (var i = 0; i < allProImgEle.length; i++) {
+
+        allProImgEle[i].addEventListener('load', loadImg, false);
+
+    }
+
+    var thisAll = 0;
+
+    function loadImg() {
+
+        thisAll++;
+
+        if (thisAll == allProImgEle.length) {
+
+            changeImageSize();
+
+        }
+        if(allProImgEle.length == 0){
+
+            setTimeout(function () {
+
+                changeImageSize();
+
+            },50)
+
+        }
+
+    }
+
+    function changeImageSize() {
+
+        /!*内部*!/
+
+        var innerDom = document.getElementById('product_image_in');
+
+        var num = document.body.clientWidth / innerDom.scrollWidth;
+
+        changeTransform(innerDom, num);
+
+
+        function changeTransform(thisEle, sc) {
+
+            thisEle.style.transform = 'scale(' + sc + ')';
+
+            thisEle.style.webkitTransform = 'scale(' + sc + ')';
+
+            thisEle.style.transformOrigi = '0 0 0';
+
+            thisEle.style.webkitTransformOrigin = '0 0 0';
+
+        }
+    }
+
+*/
 
 
 </script>
