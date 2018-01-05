@@ -17,11 +17,11 @@
 <!--活动页面banner部分-->
 <!--活动页面banner-->
 <div class="active_banner1">
-    <img src="../../images/icon_active_banner1.jpg">
+   <!-- <img src="../../images/icon_active_banner1.jpg">-->
 </div>
 
 <div class="active_banner2">
-    <img src="../../images/icon_active_banner2.jpg">
+   <!-- <img src="../../images/icon_active_banner2.jpg">-->
 </div>
 
 <!--特价药品内容-->
@@ -147,6 +147,10 @@
 
 </div>
 
+<div class="active_banner3">
+    <!--<img src="../../images/icon_active_banner2.jpg">-->
+</div>
+
 <!--底部导航-->
 
 <footer class="bottom_tabbar">
@@ -184,7 +188,7 @@
 <script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
 <script src="../../js/libs/art-template/template.js"></script>
 <script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
-<script src="../../js/urL.js"></script>
+<script src="../../js/common.js"></script>
 <script src="../../js/active/active_page.js"></script>
 <script src="../../js/ak_medicine.min.js"></script>
 <script type="text/html" id="active_page_html">
@@ -196,7 +200,7 @@
         <div class="price">
             <p>
                 <span>¥{{value.sellingPrice}}</span>
-                <span>¥{{value.storePrice}}</span>
+
             </p>
             <p class="gobuy"></p>
         </div>
@@ -213,7 +217,6 @@
         <div class="price">
             <p>
                 <span>¥{{value.sellingPrice}}</span>
-                <span>¥{{value.storePrice}}</span>
             </p>
             <p class="gobuy"></p>
         </div>
@@ -221,5 +224,32 @@
     {{/each}}
     {{/if}}
 </script>
+
+<!--广告1-->
+<script type="text/html" id="ad_banner1">
+
+    {{if list}}
+    {{each list as value}}
+   <img src="{{#value.imgAddr}}">
+    {{/each}}
+     {{/if}}
+</script>
+<!--广告2-->
+<script type="text/html" id="ad_banner2">
+    {{if list}}
+    {{each list as value}}
+    <img src="{{#value.imgAddr}}">
+    {{/each}}
+     {{/if}}
+</script>
+<!--广告3-->
+<script type="text/html" id="ad_banner3">
+    {{if list}}
+    {{each list as value}}
+    <img src="{{#value.imgAddr}}">
+    {{/each}}
+    {{/if}}
+</script>
+
 </body>
 </html>

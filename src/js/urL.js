@@ -1,1 +1,1 @@
-document.write("<script language='javascript' src='../../js/commom.js'></script>");
+document.write("<script language='javascript' src='../../js/common.js'></script>");
