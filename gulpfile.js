@@ -59,9 +59,9 @@ gulp.task('devWatch',function () {
 gulp.task('myServer',['devWatch','connect','imageMinDev','changeLessDev','changeJsDev','fileIncludeDev']);
 
 //文件指纹
-var dist = require('./gulp/dist/dist.js');
+var dist = require('./gulp/dis/dist.js');
 
-gulp.task('dis',dist);
+gulp.task('dist',dist);
 
 /*
 
