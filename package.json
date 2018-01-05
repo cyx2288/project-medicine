@@ -7,9 +7,9 @@
     "type": "git",
     "url": ""
   },
-
   "license": "ISC",
   "devDependencies": {
+    "fd-gulp-chinese2unicode": "^0.0.1",
     "gifsicle": "^3.0.4",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
@@ -28,7 +28,10 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-notify": "^3.0.0",
     "gulp-rename": "^1.2.2",
+    "gulp-rev": "^8.1.1",
+    "gulp-rev-collector": "^1.2.3",
     "gulp-uglify": "^2.1.2",
-    "imagemin-pngquant": "^5.0.0"
+    "imagemin-pngquant": "^5.0.0",
+    "run-sequence": "^2.2.1"
   }
 }

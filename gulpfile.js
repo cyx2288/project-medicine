@@ -58,6 +58,11 @@ gulp.task('devWatch',function () {
 //开发环境
 gulp.task('myServer',['devWatch','connect','imageMinDev','changeLessDev','changeJsDev','fileIncludeDev']);
 
+//文件指纹
+var dist = require('./gulp/dis/dist.js');
+
+gulp.task('dist',dist);
+
 /*
 
 //js压缩 交付
