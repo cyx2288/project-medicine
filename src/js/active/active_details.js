@@ -28,8 +28,9 @@ $(function(){
             var html = template('active_details',{list:info.data});
             $("#items_details").html(html);
         },
-        error: function() {
-            alert('系统繁忙，请稍后再试');
+        error: function(info) {
+            console.log(info)
+            alert('系统繁忙，请稍后再试')
         }
     })
 

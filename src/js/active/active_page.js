@@ -3,7 +3,7 @@ $(function(){
     //排名接口
     var rankGoods = '/rank/goods';
 
-    //广告
+    //广告(头部)
     var adBanner='/ad/info';
 
 
@@ -54,25 +54,36 @@ $(function(){
 		}
 	})
 
+    //广告头部一
+    adInitLoad(3,21,'ad_banner1','.active_banner1');
+
+    //广告头部二
+    adInitLoad(3,22,'ad_banner2','.active_banner2');
+
+    //广告尾部部一
+    adInitLoad(3,23,'ad_banner3','.active_banner3');
 
     //广告--
-   /* $.ajax({
-        url: urL + adBanner,
-        data: {
-            clientType: 3,
-            sit:12,
-        },
-        success: function (info) {
-            console.log(info);
-            var html = template('adInfo', {list: info.data});
-            $('.active_banner1').html(html);
+    function adInitLoad(clientNum,sitNum,templateId,adClass) {
+        $.ajax({
+            url: urL + adBanner,
+            data: {
+                clientType: clientNum,
+                sit:sitNum,
+            },
+            success: function (info) {
 
-        },
-        error: function (info) {
-            console.log(info)
-            // alert('系统繁忙，请稍后再试');
-        }
-    })*/
+                console.log(info);
+                var html = template(templateId, {list: info.data});
+                $(adClass).html(html);
+
+            },
+            error: function () {
+                 alert('系统繁忙，请稍后再试');
+            }
+        })
+    }
+
 
 
 

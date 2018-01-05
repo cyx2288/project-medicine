@@ -150,7 +150,6 @@ $(function(){
             url:urL + goodsUrl,
             data:{
                 categoryId:categoryId,
-                storeId:storeId,
                 total:totalNum
             },
             success:function(info){
@@ -200,6 +199,7 @@ $(function(){
             clientType: 3
         },
         success: function (info) {
+
             console.log(info);
             var html = template('bannerPlay', {list: info.data});
 
@@ -224,6 +224,7 @@ $(function(){
         },
         success: function (info) {
             console.log(info);
+
             var html = template('adInfo', {list: info.data});
             $('.banner_active').html(html);
 

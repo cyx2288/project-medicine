@@ -621,7 +621,7 @@ function(){
 <script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
 <script src="../../js/libs/art-template/template.js"></script>
 <script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
-<script src="../../js/urL.js"></script>
+<script src="../../js/common.js"></script>
 <script src="../../js/homepage/main.js"></script>
 <script src="../../js/ak_medicine.min.js"></script>
 <script>
@@ -652,7 +652,7 @@ function(){
 <script type="text/html" id="bannerPlay">
     {{if list}}
     {{each list as value}}
-      <a href="#">
+      <a href="../active/active_details.html?id={{value.id}}">
           <img src="{{#value.imgAddr}}">
       </a>
     {{/each}}
@@ -663,7 +663,7 @@ function(){
 <script type="text/html" id="adInfo">
     {{if list}}
     {{each list as value}}
-    <a href="#">
+    <a href="../active/active_details.html?id={{value.id}}">
         <img src="{{#value.imgAddr}}">
     </a>
     {{/each}}
@@ -695,7 +695,6 @@ function(){
         <div class="price">
             <p>
                 <span>¥{{value.sellingPrice}}</span>
-                <span>¥{{value.storePrice}}</span>
             </p>
             <p class="gobuy"></p>
         </div>
