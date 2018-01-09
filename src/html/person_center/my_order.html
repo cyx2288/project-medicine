@@ -15,8 +15,8 @@
 <div class="fixed_top_bar">
     <div class="bar"></div>
     <div class="all_tab yao_shadow">
-        <p class="show allL" onclick="orderFn.tabChange(0)">全部</p>
-        <p onclick="orderFn.tabChange(1)" class="PaymentPend">待付款<span id="paySpan"></span></p>
+        <p class="show allOrder" onclick="orderFn.tabChange(0)">全部</p>
+        <p class="PaymentPend" onclick="orderFn.tabChange(1)">待付款<span id="paySpan"></span></p>
         <!--<p onclick="orderFn.tabChange(2)">待评价<span>(5)</span></p>-->
     </div>
 </div>
@@ -275,7 +275,7 @@
             <p>待付款</p>
         </div>
       	{{each value.orderGoodList as valu index}}
-        <a href="order_details.html" class="product yao_alignment_middle">
+        <a href="order_details.html?id={{value.id}}" class="product yao_alignment_middle">
             <div>
                 <img src="{{#valu.goodImg}}">
             </div>
