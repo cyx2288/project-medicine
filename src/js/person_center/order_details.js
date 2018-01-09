@@ -35,7 +35,7 @@ $(function(){
 				    success:function(res){
 				        console.log(res);
 				        if(res.status !== 200){
-				            alert(res.msg);
+				            jfShowTips.toastShow(res.msg);
 				            return;
 				        };
 				        location.href = "my_order.html"
@@ -43,7 +43,7 @@ $(function(){
 				    },
 				    error:function(res){
 				       	console.log(res);
-				       	alert("系统繁忙，请稍后再试")
+				       	jfShowTips.toastShow("系统繁忙，请稍后再试")
 				    }
 				})
             }
@@ -72,7 +72,7 @@ $(function(){
 		    success:function(res){
 		        console.log(res);
 		        if(res.status !== 200){
-		            alert(res.msg);
+		            jfShowTips.toastShow(res.msg);
 		            return;
 		        };
 		        //地址拼接
@@ -127,7 +127,7 @@ $(function(){
 		      	
 		    },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
 		})
     }
@@ -143,7 +143,7 @@ $(function(){
 		    success:function(res){
 		        console.log(res);
 		        if(res.status !== 200){
-		            alert(res.msg);
+		            jfShowTips.toastShow(res.msg);
 		            return;
 		        };
 		        
@@ -157,7 +157,7 @@ $(function(){
 		      
 		    },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
 		})
 	}
@@ -171,14 +171,14 @@ $(function(){
 		    success:function(res){
 		        console.log(res);
 		        if(res.status !== 200){
-		            alert(res.msg);
+		            jfShowTips.toastShow(res.msg);
 		            return;
 		        };
 		     	$(".yuan").text(res.data.condition + '元');
 		      	$(".ya").text(res.data.deduction + '元');	     		      
 		    },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
 		})
 	}

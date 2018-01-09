@@ -22,7 +22,7 @@ $(function(){
 	        	
 	    },
         error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
 		
 	});

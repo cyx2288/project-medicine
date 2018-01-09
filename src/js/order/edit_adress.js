@@ -53,7 +53,7 @@ $(function(){
 
 	    	//判断详细地址是否为空
 			if($('#addrDe').val() == ''){
-				alert("请您填写详细地址");
+				jfShowTips.toastShow("请您填写详细地址");
 				return;
 			}
 	    	cneeArea = $("#address_info").text();    
@@ -109,7 +109,7 @@ $(function(){
 	            location.href = "./choose_address.html"
 	        },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
 	    })
 
@@ -135,7 +135,7 @@ $(function(){
 	           
 	        },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
 	    })
 
@@ -145,7 +145,7 @@ $(function(){
 	function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            alert('手机号有误，请重新输入');
+            jfShowTips.toastShow('手机号有误，请重新输入');
             return false;
         }
     }

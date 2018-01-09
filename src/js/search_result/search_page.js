@@ -73,7 +73,7 @@ $(function(){
                                     ajax_getting = false;
                                 },
                                 error: function() {
-                                    alert('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                                 }
                             })
                         };
@@ -82,7 +82,7 @@ $(function(){
                 });
             },
             error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
         })
 
@@ -98,7 +98,7 @@ $(function(){
 
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     })

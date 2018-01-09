@@ -46,17 +46,17 @@ $(function() {
         psw = $.md5($('#pswNum').val() + 'zbkj');
         console.log(psw);
         if (mobileNum == '') {
-            alert('账号不能为空');
+            jfShowTips.toastShow('账号不能为空');
             return;
         }
         ;
         if (psw1 == '') {
-            alert('密码不能为空');
+            jfShowTips.toastShow('密码不能为空');
             return;
         }
         ;
         if (psw == '') {
-            alert('密码不能为空');
+            jfShowTips.toastShow('密码不能为空');
             return;
         }
         $.ajax({
@@ -69,13 +69,13 @@ $(function() {
             success: function (res) {
                 console.log(res);
                 if (res.status !== 200) {
-                    alert(res.msg);
+                    jfShowTips.toastShow(res.msg);
                     return;
                 }
                 userIds = res.data.id;
                 //plus.storage.setItem("userId",userIds);
                 //var foo = plus.storage.getItem("userId");
-                //alert(foo);
+                //jfShowTips.toastShow(foo);
                  $.cookie('userId', userIds , { expires: 30 ,path: '/'});
                /* console.log(plus)
                 plus.navigator.setCookie('login_system.html', 'userId=' + userIds + '; expires=60; path=/');*/
@@ -83,7 +83,7 @@ $(function() {
 
             },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         });
 
@@ -94,7 +94,7 @@ $(function() {
     function checkTel(tel) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if (!reg.test(tel)) {
-            alert('手机号有误，请重新输入');
+            jfShowTips.toastShow('手机号有误，请重新输入');
             return false;
         }
     }
@@ -103,7 +103,7 @@ $(function() {
     function checkPsw(psw) {
         var reg = /^[\w]{6,12}$/;
         if (!reg.test(psw)) {
-            alert("密码为6-16位");
+            jfShowTips.toastShow("密码为6-16位");
             return false;
         }
     }

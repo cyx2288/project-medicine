@@ -166,7 +166,7 @@ $(function () {
                         success: function (info) {
                             console.log(info);
                             if (info.status !== 200) {
-                                alert(info.msg);
+                                jfShowTips.toastShow(info.msg);
                                 return;
                             };
                             storeId = info.data.storeId;
@@ -179,7 +179,7 @@ $(function () {
 
                         },
                         error: function () {
-                            alert('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow('系统繁忙，请稍后再试');
                         }
                     })
                 } else {
@@ -191,7 +191,7 @@ $(function () {
                         success: function (info) {
                             console.log(info);
                             if (info.status !== 200) {
-                                alert(info.msg);
+                                jfShowTips.toastShow(info.msg);
                                 return;
                             };
                             storeId = info.data.storeId;
@@ -205,7 +205,7 @@ $(function () {
 
                         },
                         error: function () {
-                            alert('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow('系统繁忙，请稍后再试');
                         }
                     })
                 }
@@ -245,7 +245,7 @@ $(function () {
 
         //判断库存，如果不足，拦截
         if($('.repertory')[0]){
-            alert('您提交的商品中，有库存不足，请重新提交');
+            jfShowTips.toastShow('您提交的商品中，有库存不足，请重新提交');
             return;
         };
 
@@ -332,11 +332,11 @@ $(function () {
             success: function (info) {
                 console.log(info);
                 if (info.status !== 200) {
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     flag = false;
                     return;
                 }
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 //存订单号
                 var orderNumber = info.data;
 
@@ -346,7 +346,7 @@ $(function () {
                 location.href = 'check_order_page.html?orderNumber=' + orderNumber;
             },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     })
@@ -357,7 +357,7 @@ $(function () {
         //判断商品来源
         if (goodIdList) {
             orderSource = 1;
-            alert(orderSource)
+            jfShowTips.toastShow(orderSource)
             $.ajax({
                 url: urL + cartList,
                 anysc: false,
@@ -369,7 +369,7 @@ $(function () {
                 success: function (info) {
                     console.log(info);
                     if (info.status !== 200) {
-                        alert(info.msg);
+                        jfShowTips.toastShow(info.msg);
                         return;
                     }
                     ;
@@ -387,7 +387,7 @@ $(function () {
                         success: function (info1) {
                             console.log(info1);
                             if (info1.status !== 200) {
-                                alert(info1.msg);
+                                jfShowTips.toastShow(info1.msg);
                                 return;
                             }
                             ;
@@ -395,17 +395,17 @@ $(function () {
                             stock2();
                         },
                         error: function () {
-                            alert('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow('系统繁忙，请稍后再试');
                         }
                     })
                 },
                 error: function () {
-                    alert('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                 }
             })
         } else if (packageId) {
             orderSource = 3;
-            alert(orderSource)
+            jfShowTips.toastShow(orderSource)
             $.ajax({
                 url: urL + goodPackageDetail,
                 anysc: false,
@@ -416,7 +416,7 @@ $(function () {
                 success: function (info) {
                     console.log(info);
                     if (info.status !== 200) {
-                        alert(info.msg);
+                        jfShowTips.toastShow(info.msg);
                         return;
                     };
                     var html = template('product_html_meal', {list: info.data});
@@ -443,7 +443,7 @@ $(function () {
                         success: function (info1) {
                             console.log(info1);
                             if (info1.status !== 200) {
-                                alert(info1.msg);
+                                jfShowTips.toastShow(info1.msg);
                                 return;
                             }
                             ;
@@ -514,7 +514,7 @@ $(function () {
                                         var RedPackage = parseFloat($('.RedPackage input').val());
 
                                         if (deduction > (totalPrices - RedPackage)) {
-                                            alert('优惠券的价值超过实际价格，请重新选择优惠券');
+                                            jfShowTips.toastShow('优惠券的价值超过实际价格，请重新选择优惠券');
                                             $('#tickets_select option:eq(0)').attr('selected', true);
                                             inputValue = parseFloat($('.RedPackage input').val()) || 0;
                                             $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
@@ -527,22 +527,22 @@ $(function () {
                                     redpage();
                                 },
                                 error: function () {
-                                    alert('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                                 }
                             })
                         },
                         error: function () {
-                            alert('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow('系统繁忙，请稍后再试');
                         }
                     })
                 },
                 error: function () {
-                    alert('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                 }
             })
         } else if (goodId) {
             orderSource = 2;
-           // alert(orderSource)
+           // jfShowTips.toastShow(orderSource)
             $.ajax({
                 url: urL + goodDesc,
                 anysc: false,
@@ -553,7 +553,7 @@ $(function () {
                 success: function (info) {
                     console.log(info);
                     if (info.status !== 200) {
-                        alert(info.msg);
+                        jfShowTips.toastShow(info.msg);
                         return;
                     }
                     ;
@@ -575,7 +575,7 @@ $(function () {
                         success: function (info1) {
                             console.log(info1);
                             /*if (info1.status !== 200) {
-                                alert(info1.msg);
+                                jfShowTips.toastShow(info1.msg);
                                 return;
                             };*/
                             objdata2 = info1.data;
@@ -645,7 +645,7 @@ $(function () {
                                         var RedPackage = parseFloat($('.RedPackage input').val());
 
                                         if (deduction > (totalPrices - RedPackage)) {
-                                            alert('优惠券的价值超过实际价格，请重新选择优惠券');
+                                            jfShowTips.toastShow('优惠券的价值超过实际价格，请重新选择优惠券');
                                             $('#tickets_select option:eq(0)').attr('selected', true);
                                             inputValue = parseFloat($('.RedPackage input').val()) || 0;
                                             $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
@@ -658,7 +658,7 @@ $(function () {
                                     redpage();
                                 },
                                 error: function () {
-                                    alert('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                                 }
                             })
                         }
@@ -666,7 +666,7 @@ $(function () {
 
                 },
                 error: function () {
-                    alert('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                 }
             })
         }
@@ -747,7 +747,7 @@ $(function () {
                     var RedPackage = parseFloat($('.RedPackage input').val());
 
                     if (deduction > (totalPrices - RedPackage)) {
-                        alert('优惠券的价值超过实际价格，请重新选择优惠券');
+                        jfShowTips.toastShow('优惠券的价值超过实际价格，请重新选择优惠券');
                         $('#tickets_select option:eq(0)').attr('selected', true);
                         inputValue = parseFloat($('.RedPackage input').val()) || 0;
                         $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
@@ -760,7 +760,7 @@ $(function () {
                 redpage();
             },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }
@@ -791,7 +791,7 @@ $(function () {
                     //输入的红包金额
                     var inputValue = parseFloat($('.RedPackage input').val());
                     if ((inputValue + deduction) > RedPackageNum) {
-                        alert('您的金额超了哦，请重新输入');
+                        jfShowTips.toastShow('您的金额超了哦，请重新输入');
                         //置空
                         $('.RedPackage input').val('');
                         deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
@@ -803,8 +803,8 @@ $(function () {
                     console.log(typeof(deduction));
                     console.log((inputValue + deduction));
                     if ((inputValue + deduction) > totalPrices) {
-                        //plus.ui.alert('您的红包抵扣金额大于订单金额，请重新输入！');
-                        alert('您的红包抵扣金额大于订单金额，请重新输入！');
+                        //plus.ui.jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
+                        jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
                         //置空
                         $('.RedPackage input').val('');
                         deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
@@ -819,7 +819,7 @@ $(function () {
                 })
             },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }
@@ -970,7 +970,7 @@ $(function () {
     /*获取url上的参数值的方法*/
     function getParam(name) {
         var search = document.location.search;
-        //alert(search);
+        //jfShowTips.toastShow(search);
         var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
         var matcher = pattern.exec(search);
         var items = null;
@@ -1001,7 +1001,7 @@ $(function () {
     /*获取url上的参数值的方法*/
     function getParam(name) {
         var search = document.location.search;
-        //alert(search);
+        //jfShowTips.toastShow(search);
         var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
         var matcher = pattern.exec(search);
         var items = null;
@@ -1018,5 +1018,23 @@ $(function () {
         }
         return items;
     };
+    
+    
+    
+    //判断当前在浏览器还是app中打开
+
+    judgeBrowser();
+    
+    function judgeBrowser(){
+
+        var zfbPay=document.getElementsByClassName('zfb_pay')[0];//微信浏览器中，支付宝付款方式隐藏
+
+        if(browser.supplier.weixin){
+
+            zfbPay.style.display="none";
+
+        }
+        
+    }
 
 })

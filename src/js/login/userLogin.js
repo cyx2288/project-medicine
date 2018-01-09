@@ -58,15 +58,15 @@ $(function () {
         userRegisterpws = $.md5($('#user_registerpws').val() + 'zbkj');
         var referrerPhone = $('#recommend_tel').val();
         if (mobileNum == '') {
-            alert('账号不能为空');
+            jfShowTips.toastShow('账号不能为空');
             return;
         };
         if (userRegisterpws1 == '') {
-            alert('登录密码不能为空');
+            jfShowTips.toastShow('登录密码不能为空');
             return;
         };
         if (msgNum == '') {
-            alert('验证码不能为空');
+            jfShowTips.toastShow('验证码不能为空');
             return;
         };
         $.ajax({
@@ -83,10 +83,10 @@ $(function () {
             success: function (info) {
                 console.log(info)
                 if (info.status !== 200) {
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 }
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
 
                 //plus.storage.setItem('storeId', 1); //默认门店id，初始化使用。
                 userIds = info.data.id;
@@ -99,7 +99,7 @@ $(function () {
             error: function (info) {
 
                 console.log(info)
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     })
@@ -113,7 +113,7 @@ $(function () {
         document.getElementById('user_sendMs').addEventListener('click',function () {
             mobileNum = $('#user_registertel').val();
             if(mobileNum == ''){
-                alert('账号不能为空');
+                jfShowTips.toastShow('账号不能为空');
                 return;
             }
 
@@ -133,7 +133,7 @@ $(function () {
                     }
                 },
                 error: function () {
-                    alert('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                 }
             })
         },false)
@@ -143,7 +143,7 @@ $(function () {
     function checkTel(tel) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if (!reg.test(tel)) {
-            alert('手机号有误，请重新输入');
+            jfShowTips.toastShow('手机号有误，请重新输入');
             return false;
         }
     }
@@ -152,7 +152,7 @@ $(function () {
     function checkPsw(psw) {
         var reg = /^[\w]{6,12}$/;
         if (!reg.test(psw)) {
-            alert("密码为6-16位");
+            jfShowTips.toastShow("密码为6-16位");
             return false;
         }
     }

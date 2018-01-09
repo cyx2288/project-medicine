@@ -38,7 +38,7 @@ $(function(){
         checkPsw(newPswWord);
         return;
         if(newPswWords!=newPswWord){
-        	alert("两次密码输入不一致,请重新输入")
+        	jfShowTips.toastShow("两次密码输入不一致,请重新输入")
         };
         return;
     })
@@ -47,7 +47,7 @@ $(function(){
 		oldPswWord = $.md5($('#oldPsw').val() + 'zbkj');
         newPswWord = $.md5($('#newPsw').val() + 'zbkj');
 		if(oldPswWord == undefined || newPswWord == undefined || newPswWords == undefined){
-			alert("请输入密码");
+			jfShowTips.toastShow("请输入密码");
 		}
 	
         $.ajax({
@@ -61,13 +61,13 @@ $(function(){
             success:function(info){
                 console.log(info)
                 if(info.status !==200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 }
                 location.href = 'system.html';
             },
             error:function(){
-            alert("系统繁忙，请稍后再试")
+            jfShowTips.toastShow("系统繁忙，请稍后再试")
             }
         })
     })
@@ -78,7 +78,7 @@ $(function(){
     function checkPsw(psw){
         var reg = /^[\w]{6,12}$/;
         if(!reg.test(psw)){
-            alert("密码为6-16位");
+            jfShowTips.toastShow("密码为6-16位");
             return false;
         }
     }

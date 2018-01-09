@@ -31,12 +31,12 @@ $(function(){
 	        success:function(res){
 	        	console.log(res);
 	        	if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	           	};
 	    		hash = res.data.hash;
 	    		tamp = res.data.tamp;
-	    		alert(hash);
+	    		jfShowTips.toastShow(hash);
 	        },
 	         error:function(res) {
 		    	console.log(res);
@@ -63,7 +63,7 @@ $(function(){
 		    success:function(res){	    	
 		    	console.log(res)
 		    	if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	            };
 		    },
@@ -77,7 +77,7 @@ $(function(){
     function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            alert('手机号有误，请重新输入');
+            jfShowTips.toastShow('手机号有误，请重新输入');
             return false;
         }
     }  
