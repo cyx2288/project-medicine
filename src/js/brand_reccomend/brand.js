@@ -1,7 +1,8 @@
 $(function(){
 	
 	var urL = url();
-	var goodList = '/good/list';
+	var goodList = '/good/brand/goodsList';
+	//var goodList='/good/list'
 	var	brandIds = getBrandid(window.location.search);
 	
 //	初始化

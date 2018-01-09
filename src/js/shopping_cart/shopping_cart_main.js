@@ -235,6 +235,7 @@ $(function () {
     var urL = url();
     var cartList = '/cart/list';
     var cartUpdate = '/cart/update';
+    var cartDelete='/cart/delete'
     var userId = $.cookie('userId');
     var sum = 0;
     var allSum = 0;
@@ -296,7 +297,7 @@ $(function () {
 //      							 删除商品
                                         $.ajax({
                                             type: 'POST',
-                                            url: 'http://192.168.1.109:8080/cart/delete',
+                                            url: urL+cartDelete,
                                             data: {
                                                 _method: "delete",
                                                 userId: userId,

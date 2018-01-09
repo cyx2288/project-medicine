@@ -13,7 +13,6 @@ $(function(){
             url: urL + goodsUrl,
             data:{
                 categoryId: "22",
-                storeId:"1001",
                 total: "5"
             },
             success:function(info){

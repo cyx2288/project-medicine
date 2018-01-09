@@ -5,20 +5,31 @@ $(function(){
 	var userId = $.cookie("userId");
 //	var userId = "1001";
 	var str = location.search;
+
 	var stat = getStaOrder(str);
+
 	
-	//判断是全部订单还是代付款订单
+	//判断是全部订单还是代付款订单//初始查询
 	if(stat == 1){
 		orderFn.tabChange(1)
 		payList(userId,stat); 
 	}else{
-		allList(userId)
+
+		allList(userId);
+
+        //payList(userId,1);
 	}
+
+	//代付款
 	$(".PaymentPend").click(function(){
+        orderFn.tabChange(1)
 			stat = 1;
 			payList(userId,stat);
 	})
-	$(".allL").click(function(){
+	//全部
+	$(".allOrder").click(function(){
+        orderFn.tabChange(0);
+        str=""
 		allList(userId)
 	})
 	// 获取url上的参数值
@@ -42,7 +53,8 @@ $(function(){
 		    success:function(res){
 		        console.log(res);
 		        if(res.status !== 200){
-		            alert(res.msg);
+		        	alert('暂无订单');
+		           // alert(res.msg);
 		            return;
 		        };
 		       	
@@ -102,7 +114,7 @@ $(function(){
 						nums++
 					}
 				}
-				$("#paySpan").text('('+ nums + ')')
+				//$("#paySpan").text('('+ nums + ')')
 
 
 		    },

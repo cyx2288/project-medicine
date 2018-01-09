@@ -149,6 +149,8 @@ $(function(){
 
     //获取url传过来的值
     var cateId = getParam('cateId');
+
+
     var categoryId = getParam('categoryId');
 
     var page = 1;
@@ -167,8 +169,10 @@ $(function(){
                 return;
             };
             var html = template('yao_shadow_html',{list:info.data});
-            $('.yao_shadow').html(html);
+            $('.category_tab').html(html);
+
             var dom =$("span[data-shadow='"+cateId+"']");
+
             dom.addClass('choosed').siblings().removeClass('choosed')
             //获取对应小分类商品数据
             goodsList(cateId);
@@ -179,7 +183,7 @@ $(function(){
     $('.category_tab').on('click',function(e){
         //获取当前按钮对应的id
         var cateId = parseInt($(e.target).attr('data-shadow'));
-        console.log(cateId)
+
         goodsList(cateId);
     })
 
@@ -217,14 +221,18 @@ $(function(){
             success:function(info){
                 if(info.status !== 200){
                     alert(info.msg);
+                    console.log(info)
                     return;
                 };
-                console.log(info)
+
                 var html = template('search_result_list_html',{list:info.data})
                 $('.search_result_list').html(html);
                 //加懒加载
                 var ajax_getting = false;
                 $(window).scroll(function() {
+
+                    var timer2;
+
                     clearTimeout(timer2);
                     timer2 = setTimeout(function() {
                         var scrollTop = $(document.body).scrollTop();
