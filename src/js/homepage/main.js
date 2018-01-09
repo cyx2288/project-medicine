@@ -47,14 +47,14 @@ $(function(){
         success:function(info){
             console.log(info);
             if(info.status !== 200){
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             };
             var html = template('list_brand',{list:info.data});
             $('.list_brand').html(html);
         },
         error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
     //4. 套餐参考部分（初始化）
@@ -67,7 +67,7 @@ $(function(){
         success:function(info){
             console.log(info);
             if(info.status !== 200){
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             };
             var html = template('normal_box',{list:info.data});
@@ -77,7 +77,7 @@ $(function(){
 
             //套餐立即购买
             $('.normal_box').on('click','.gobuy',function(){
-                alert(1)
+                jfShowTips.toastShow(1)
                 var packageId = $('.gobuy').attr('data-id');
                 //$.cookie('packageId',packageId);
                 //console.log($.cookie('packageId'));
@@ -87,12 +87,12 @@ $(function(){
 
             })
             $('.normal_box_a').click(function(){
-                //alert(1)
+                //jfShowTips.toastShow(1)
 
             })
         },
         error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
     //5. 分类部分
@@ -117,14 +117,14 @@ $(function(){
         success:function(info){
             console.log(info);
             if(info.status !== 200){
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             };
             var html = template('store_list_html',{list:info.data});
             $('.store_list1').html(html);
         },
         error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
     
@@ -156,7 +156,7 @@ $(function(){
 
                 console.log(info)
                 if(info.status !== 200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 };
                 console.log(info)
@@ -164,7 +164,7 @@ $(function(){
                 dom.html(html);
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }
@@ -180,14 +180,14 @@ $(function(){
             success:function(info){
                 console.log(info);
                 if(info.status !== 200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 };
                 var html = template(temId,{list:info.data});
                 dom.html(html);
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }
@@ -210,7 +210,7 @@ $(function(){
         },
         error: function (info) {
             console.log(info)
-            //alert('系统繁忙，请稍后再试');
+            //jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -231,7 +231,7 @@ $(function(){
         },
         error: function (info) {
             console.log(info)
-           // alert('系统繁忙，请稍后再试');
+           // jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 

@@ -15,7 +15,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	            };
 	            var html = template('uesInfo',{list:res.data});
@@ -25,7 +25,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	alert("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
 	        }
 	    })
 	
@@ -41,7 +41,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	            };
 	            var html = template('uesInfo',{list:res.data});
@@ -51,7 +51,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res); 
-	        	alert("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
 	        }
 	    })
 		$(".verNum").html('v'+ version);

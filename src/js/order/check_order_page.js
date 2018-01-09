@@ -47,7 +47,7 @@ $(function(){
                         $('.couponMsg').html('暂无优惠')
 
                         console.log(info1.mag)
-                        //alert(info1.mag);
+                        //jfShowTips.toastShow(info1.mag);
                         return;
                     }
                     console.log(info1);
@@ -79,7 +79,7 @@ $(function(){
             $('.payMode').click(function(){
                 if( info.data.payMode == '1'){
 
-                    function onBridgeReady(){
+                   /* function onBridgeReady(){
                         WeixinJSBridge.invoke(
                             'getBrandWCPayRequest', {
                                 "appId":"wxa65cb239c6a0b470",     //公众号名称，由商户传入
@@ -103,11 +103,11 @@ $(function(){
                         }
                     }else{
                         onBridgeReady();
-                    }
+                    }*/
 
 
                     //微信
-                   // location.href = '../../html/order/shopping_order_pay.html';
+                    location.href = '../../html/order/shopping_order_pay.html';
                 }else if(info.data.payMode == '2'){
                     //支付宝
                     location.href = '../../html/order/shopping_order_pay.html';
@@ -120,7 +120,7 @@ $(function(){
 
         },
         error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -136,7 +136,7 @@ $(function(){
             $('.productMsg').html(html);
         },
         error: function() {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 

@@ -23,12 +23,12 @@ $(function(){
 	$("#sub").click(function(){
 		loginName = $("#inNa").val();
 		if(loginName == ''){
-			alert('请输入用户名');
+			jfShowTips.toastShow('请输入用户名');
 			return;
 		}
 		var reg = /^[0-9a-zA-Z_]{4,25}$/;
         if(!reg.test(loginName)){
-            alert('用户名有误,请重新填写');
+            jfShowTips.toastShow('用户名有误,请重新填写');
             return false;
         };
 		$.ajax({
@@ -42,12 +42,12 @@ $(function(){
 		    success:function(res){
 		    	console.log(res)
 		    	if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	            };
 		    },
 		    error:function(){
-		    	alert("系统繁忙，请稍后再试")
+		    	jfShowTips.toastShow("系统繁忙，请稍后再试")
 		    } 
 		})
 	})
@@ -55,7 +55,7 @@ $(function(){
 	function userNa(na){
         var reg = /^[0-9a-zA-Z_]{4,25}$/;
         if(!reg.test(na)){
-            alert('用户名有误,请重新填写');
+            jfShowTips.toastShow('用户名有误,请重新填写');
             return false;
         }
     }	   

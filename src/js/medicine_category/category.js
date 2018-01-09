@@ -24,7 +24,7 @@ $(function(){
         },
         success:function(info){
             if(info.status !== 200){
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             };
             var html = template('yao_shadow_html',{list:info.data});
@@ -50,7 +50,7 @@ $(function(){
     /!*获取url上的参数值的方法*!/
     function getParam(name) {
         var search = document.location.search;
-        //alert(search);
+        //jfShowTips.toastShow(search);
         var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
         var matcher = pattern.exec(search);
         var items = null;
@@ -77,7 +77,7 @@ $(function(){
             },
             success:function(info){
                 if(info.status !== 200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 };
                 console.log(info)
@@ -129,7 +129,7 @@ $(function(){
                 });
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }
@@ -165,7 +165,7 @@ $(function(){
         },
         success:function(info){
             if(info.status !== 200){
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             };
             var html = template('yao_shadow_html',{list:info.data});
@@ -193,7 +193,7 @@ $(function(){
     /*获取url上的参数值的方法*/
     function getParam(name) {
         var search = document.location.search;
-        //alert(search);
+        //jfShowTips.toastShow(search);
         var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
         var matcher = pattern.exec(search);
         var items = null;
@@ -220,7 +220,7 @@ $(function(){
             },
             success:function(info){
                 if(info.status !== 200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     console.log(info)
                     return;
                 };
@@ -276,7 +276,7 @@ $(function(){
                 });
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }

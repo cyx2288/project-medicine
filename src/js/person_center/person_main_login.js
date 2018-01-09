@@ -27,7 +27,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	            };
 	            $(".login_name").html(res.data.loginName);
@@ -35,7 +35,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	alert("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
 	        }
 	    })
 		//订单数量
@@ -49,7 +49,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                alert(res.msg);
+	                jfShowTips.toastShow(res.msg);
 	                return;
 	            };
 	            $("#ordNumAll").show();
@@ -60,7 +60,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	alert("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
 	        }
 	    })
 		 

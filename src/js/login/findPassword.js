@@ -35,7 +35,7 @@ $(function(){
     $('#user_updateget').click(function(){
         mobileNum = $('#user_updatetel').val();
         if(mobileNum == ''){
-            alert('账号不能为空');
+            jfShowTips.toastShow('账号不能为空');
             return;
         };
         $.ajax({
@@ -48,14 +48,14 @@ $(function(){
                 console.log(info);
                 inputFn.inputCheck(60);//发送验证码
                 if(info.status !==200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 }
                 hash = info.data.hash;
                 tamp = info.data.tamp;
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     })
@@ -66,15 +66,15 @@ $(function(){
         userUpdatepsw = $.md5($('#user_updatenew').val() + 'zbkj');
         user_updateverify = $('#user_updateverify').val();
         if(mobileNum == ''){
-            alert('账号不能为空');
+            jfShowTips.toastShow('账号不能为空');
             return;
         };
         if(userUpdatepsw == ''){
-            alert('账号不能为空');
+            jfShowTips.toastShow('账号不能为空');
             return;
         };
         if(user_updateverify == ''){
-            alert('账号不能为空');
+            jfShowTips.toastShow('账号不能为空');
             return;
         };
         $.ajax({
@@ -90,14 +90,14 @@ $(function(){
             success:function(info){
                 console.log(info);
                 if(info.status !== 200){
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                     return;
                 };
-                //alert(info.msg);
+                //jfShowTips.toastShow(info.msg);
                 window.location.href = "../homepage/main.html";
             },
             error: function() {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     })
@@ -109,7 +109,7 @@ $(function(){
     function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            alert('手机号有误，请重新输入');
+            jfShowTips.toastShow('手机号有误，请重新输入');
             return false;
         }
     }
@@ -118,7 +118,7 @@ $(function(){
     function checkPsw(psw){
         var reg = /^[\w]{6,12}$/;
         if(!reg.test(psw)){
-            alert("密码为6-16位");
+            jfShowTips.toastShow("密码为6-16位");
             return false;
         }
     }

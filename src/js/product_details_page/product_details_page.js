@@ -64,7 +64,7 @@ $(function () {
             console.log(info);
 
             if (info.status !== 200) {
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             }
             ;
@@ -75,7 +75,7 @@ $(function () {
             $('.parameter_table').html('<p>' + info.data[0].goodDesc + '</p>');
         },
         error: function () {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -110,7 +110,7 @@ $(function () {
             });
         },
         error: function () {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -126,7 +126,7 @@ $(function () {
             $('.images_info').html(info.data[0].goodDetails)
         },
         error: function () {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -141,7 +141,7 @@ $(function () {
 
             console.log(info);
             if (info.status !== 200) {
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             }
             ;
@@ -157,7 +157,7 @@ $(function () {
             }
         },
         error: function () {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -170,7 +170,7 @@ $(function () {
         success: function (info) {
             console.log(info);
             if (info.status !== 200) {
-                alert(info.msg);
+                jfShowTips.toastShow(info.msg);
                 return;
             }
             ;
@@ -178,7 +178,7 @@ $(function () {
             $('.medicine_usage').append(html);
         },
         error: function () {
-            alert('系统繁忙，请稍后再试');
+            jfShowTips.toastShow('系统繁忙，请稍后再试');
         }
     })
 
@@ -206,15 +206,15 @@ $(function () {
                 success: function (info) {
 
                     if (info.status !== 200) {
-                        alert(info.msg);
+                        jfShowTips.toastShow(info.msg);
                         return;
                     }
                     ;
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
 
                 },
                 error: function () {
-                    alert('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                 }
             })
         }
@@ -261,14 +261,14 @@ $(function () {
                 },
                 success: function (info) {
                     if (info.status !== 200) {
-                        alert(info.msg);
+                        jfShowTips.toastShow(info.msg);
                         return;
                     }
                     ;
-                    alert(info.msg);
+                    jfShowTips.toastShow(info.msg);
                 },
                 error: function () {
-                    alert('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow('系统繁忙，请稍后再试');
                 }
             })
         }
@@ -345,7 +345,7 @@ $(function () {
 
                 console.log(info)
                 if (info.status !== 200) {
-                    //alert(info.msg);
+                    //jfShowTips.toastShow(info.msg);
                     return;
                 }
                 ;
@@ -363,14 +363,14 @@ $(function () {
 
 
                 if (!info.data.nextPackage) {
-                    //alert('已经是最后一个套餐了');
+                    //jfShowTips.toastShow('已经是最后一个套餐了');
                     packageIndex--;
                     $('#next').attr("disabled", true);
                     $("#prev").attr("disabled", false);
                     packageIndex += 1;
                 }
                 if (info.data.packageIndex == 1) {
-                    //alert('这是第一个套餐');
+                    //jfShowTips.toastShow('这是第一个套餐');
                     packageIndex = 1;
                     $('#prev').attr("disabled", true);
                     $('#next').attr("disabled", false);
@@ -378,7 +378,7 @@ $(function () {
                 }
             },
             error: function () {
-                alert('系统繁忙，请稍后再试');
+                jfShowTips.toastShow('系统繁忙，请稍后再试');
             }
         })
     }

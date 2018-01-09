@@ -15,7 +15,7 @@ $(function(){
 	    success:function(res){
 	       	console.log(res);
 	       	if(res.status !== 200){
-	            alert(res.msg);
+	            jfShowTips.toastShow(res.msg);
 	            return;
 	        };
 	      	var html = template('detailTop',{list:res.data});
@@ -23,7 +23,7 @@ $(function(){
 	    },
 	    error:function(res) {
 		   	console.log(res);
-		   	alert("系统繁忙，请稍后再试")
+		   	jfShowTips.toastShow("系统繁忙，请稍后再试")
 		}
     });
 	//资质图
@@ -43,14 +43,14 @@ $(function(){
         success:function(res){
             console.log(res);
             if(res.status !== 200){
-                alert(res.msg);
+                jfShowTips.toastShow(res.msg);
                 return;
             };
             //配送范围
             $(".distribution img").attr("src",res.data[0].imgUrl);
         },
         error:function(res) {
-            alert("系统繁忙，请稍后再试");
+            jfShowTips.toastShow("系统繁忙，请稍后再试");
         }
     });
 
@@ -94,7 +94,7 @@ $(function(){
             success:function(res){
                 console.log(res);
                 if(res.status !== 200){
-                    alert(res.msg);
+                    jfShowTips.toastShow(res.msg);
                     return;
                 };
                 var html = template(tem,{list:res.data});
@@ -102,7 +102,7 @@ $(function(){
 
             },
             error:function(res) {
-                alert("系统繁忙，请稍后再试");
+                jfShowTips.toastShow("系统繁忙，请稍后再试");
             }
         });
     }
