@@ -11,6 +11,9 @@ $(function(){
     //优惠券
     var coupon = '/coupon/';
 
+    //支付接口
+    var wxPay='/pay/wxPay';
+
     //订单基本信息
     $.ajax({
         url:urL + orderInfo,
@@ -62,7 +65,7 @@ $(function(){
             $('.order_page_note').text(info.data.orderRemarks);
 
             //总金额
-            $('.totalPrices').text('¥'+ info.data.orderAmount + '元');
+            $('.totalPrices').text('¥'+ info.data.orderAmount);
             //券、红包抵扣金额
             if(info.data.couponsAmount && info.data.redpacketAmount){
                 $('.couponsPrices').html('用券抵扣<span>'+info.data.couponsAmount+'元</span>' + ',' + '用红包抵扣<span>'+info.data.redpacketAmount+'元</span>')
@@ -73,41 +76,75 @@ $(function(){
             }
 
             //应付金额
-            $('.amountPayable').text('¥' + info.data.realPay + '元');
+            $('.amountPayable').text('¥' + info.data.realPay);
+
 
             //去支付
             $('.payMode').click(function(){
-                if( info.data.payMode == '1'){
 
-                   /* function onBridgeReady(){
-                        WeixinJSBridge.invoke(
-                            'getBrandWCPayRequest', {
-                                "appId":"wxa65cb239c6a0b470",     //公众号名称，由商户传入
-                                "timeStamp":"1395712654",         //时间戳，自1970年以来的秒数
-                                "nonceStr":"e61463f8efa94090b1f366cccfbbb444", //随机串
-                                "package":"prepay_id=u802345jgfjsdfgsdg888",
-                                "signType":"MD5",         //微信签名方式：
-                                "paySign":"70EA570631E4BB79628FBCA90534C63FF7FADD89" //微信签名
+                var orderNote= $('.order_page_note').text();//订单备注
+
+                var orderFee= $('.amountPayable').text().toString().substr(1);//订单金额
+
+
+                if(info.data.payMode == '1'){//微信支付
+
+                 //  if(browser.supplier.weixin){//公总号支付
+
+                        var  wxPayObj={
+                            orderId:orderId,
+                            body:orderNote,
+                            subject: "订单标题测试",
+                            deviceInfo: "订单信息测试",
+                            tradeType:'JSAPI',//-公众号为JSAPI，H5为MWEB
+                            fee:orderFee
+                        };
+
+                        //支付信息
+                        $.ajax({
+                            url:urL + wxPay,
+                            type: 'post',
+                            data:JSON.stringify(wxPayObj),
+                            contentType: "application/json;charset=UTF-8",
+                            success:function(info){
+                                console.log(info);
+                                function onBridgeReady(info){
+                                    WeixinJSBridge.invoke(
+                                        'getBrandWCPayRequest',{
+                                            "appId":info.data.appId,     //公众号名称，由商户传入
+                                            "timeStamp":info.data.timeStamp,         //时间戳，自1970年以来的秒数
+                                            "nonceStr":info.data.nonceStr, //随机串
+                                            "package":info.data.package,
+                                            "signType":info.data.signType,         //微信签名方式：
+                                            "paySign":info.data.paySign //微信签名
+                                        },
+                                        function(res){
+                                            if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                                        }
+                                    );
+                                }
+
+                                console.log(typeof WeixinJSBridge == "undefined")
+                                if (typeof WeixinJSBridge == "undefined"){
+                                    if( document.addEventListener ){
+                                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                                    }else if (document.attachEvent){
+                                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                                    }
+                                }else{
+                                    onBridgeReady(info);
+                                }
                             },
-                            function(res){
-                                if(res.err_msg == "get_brand_wcpay_request:ok" ) {}     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                            error: function(info) {
+                                console.log(info)
+                                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                             }
-                        );
-                    }
-                    if (typeof WeixinJSBridge == "undefined"){
-                        if( document.addEventListener ){
-                            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                        }else if (document.attachEvent){
-                            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-                        }
-                    }else{
-                        onBridgeReady();
-                    }*/
-
+                        })
+                   // }
 
                     //微信
-                    location.href = '../../html/order/shopping_order_pay.html';
+                  //  location.href = '../../html/order/shopping_order_pay.html';
                 }else if(info.data.payMode == '2'){
                     //支付宝
                     location.href = '../../html/order/shopping_order_pay.html';
@@ -120,7 +157,7 @@ $(function(){
 
         },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -136,7 +173,7 @@ $(function(){
             $('.productMsg').html(html);
         },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 

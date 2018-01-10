@@ -50,10 +50,10 @@ $(function(){
 									isDefault: isD
 								},
 								success:function(res){
-									jfShowTips.toastShow(res.msg)
+									jfShowTips.toastShow({'text':res.msg})
 								},
                                 error: function() {
-                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                                 }
 							});
 		                    function deleteFn(){
@@ -136,7 +136,7 @@ $(function(){
             
 	    },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     });
 	

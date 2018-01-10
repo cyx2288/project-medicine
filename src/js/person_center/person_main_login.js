@@ -27,7 +27,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                jfShowTips.toastShow(res.msg);
+	                jfShowTips.toastShow({'text':res.msg});
 	                return;
 	            };
 	            $(".login_name").html(res.data.loginName);
@@ -49,7 +49,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                jfShowTips.toastShow(res.msg);
+	                jfShowTips.toastShow({'text':res.msg});
 	                return;
 	            };
 	            $("#ordNumAll").show();

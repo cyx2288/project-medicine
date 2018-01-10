@@ -75,7 +75,7 @@ $(function () {
             $('.parameter_table').html('<p>' + info.data[0].goodDesc + '</p>');
         },
         error: function () {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -110,7 +110,7 @@ $(function () {
             });
         },
         error: function () {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -126,7 +126,7 @@ $(function () {
             $('.images_info').html(info.data[0].goodDetails)
         },
         error: function () {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -157,7 +157,7 @@ $(function () {
             }
         },
         error: function () {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -178,7 +178,7 @@ $(function () {
             $('.medicine_usage').append(html);
         },
         error: function () {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -214,7 +214,7 @@ $(function () {
 
                 },
                 error: function () {
-                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
         }
@@ -268,7 +268,7 @@ $(function () {
                     jfShowTips.toastShow(info.msg);
                 },
                 error: function () {
-                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
         }
@@ -378,7 +378,7 @@ $(function () {
                 }
             },
             error: function () {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }

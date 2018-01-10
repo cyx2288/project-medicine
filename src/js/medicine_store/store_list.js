@@ -12,7 +12,7 @@ $(function(){
         success:function(res){
             console.log(res);
             if(res.status !== 200){
-                jfShowTips.toastShow(res.msg);
+                jfShowTips.toastShow({'text':res.msg});
                 return;
             };
             var html = template('storeList',{list:res.data});
