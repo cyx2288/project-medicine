@@ -15,7 +15,7 @@ $(function(){
 	    success:function(res){
 	       	console.log(res);
 	       	if(res.status !== 200){
-	            jfShowTips.toastShow(res.msg);
+	            jfShowTips.toastShow({'text':res.msg});
 	            return;
 	        };
 	      	var html = template('detailTop',{list:res.data});
@@ -43,7 +43,7 @@ $(function(){
         success:function(res){
             console.log(res);
             if(res.status !== 200){
-                jfShowTips.toastShow(res.msg);
+                jfShowTips.toastShow({'text':res.msg});
                 return;
             };
             //配送范围
@@ -94,7 +94,7 @@ $(function(){
             success:function(res){
                 console.log(res);
                 if(res.status !== 200){
-                    jfShowTips.toastShow(res.msg);
+                    jfShowTips.toastShow({'text':res.msg});
                     return;
                 };
                 var html = template(tem,{list:res.data});

@@ -166,7 +166,7 @@ $(function () {
                         success: function (info) {
                             console.log(info);
                             if (info.status !== 200) {
-                                jfShowTips.toastShow(info.msg);
+                                jfShowTips.toastShow({'text':info.msg});
                                 return;
                             };
                             storeId = info.data.storeId;
@@ -179,7 +179,7 @@ $(function () {
 
                         },
                         error: function () {
-                            jfShowTips.toastShow('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
                     })
                 } else {
@@ -191,7 +191,7 @@ $(function () {
                         success: function (info) {
                             console.log(info);
                             if (info.status !== 200) {
-                                jfShowTips.toastShow(info.msg);
+                                jfShowTips.toastShow({'text':info.msg});
                                 return;
                             };
                             storeId = info.data.storeId;
@@ -205,7 +205,7 @@ $(function () {
 
                         },
                         error: function () {
-                            jfShowTips.toastShow('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
                     })
                 }
@@ -245,7 +245,7 @@ $(function () {
 
         //判断库存，如果不足，拦截
         if($('.repertory')[0]){
-            jfShowTips.toastShow('您提交的商品中，有库存不足，请重新提交');
+            jfShowTips.toastShow({'text':'您提交的商品中，有库存不足，请重新提交'});
             return;
         };
 
@@ -332,11 +332,11 @@ $(function () {
             success: function (info) {
                 console.log(info);
                 if (info.status !== 200) {
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     flag = false;
                     return;
                 }
-                jfShowTips.toastShow(info.msg);
+                jfShowTips.toastShow({'text':info.msg});
                 //存订单号
                 var orderNumber = info.data;
 
@@ -346,7 +346,7 @@ $(function () {
                 location.href = 'check_order_page.html?orderNumber=' + orderNumber;
             },
             error: function () {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     })
@@ -395,17 +395,17 @@ $(function () {
                             stock2();
                         },
                         error: function () {
-                            jfShowTips.toastShow('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
                     })
                 },
                 error: function () {
-                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
         } else if (packageId) {
             orderSource = 3;
-            jfShowTips.toastShow(orderSource)
+            jfShowTips.toastShow({'text':orderSource})
             $.ajax({
                 url: urL + goodPackageDetail,
                 anysc: false,
@@ -527,17 +527,17 @@ $(function () {
                                     redpage();
                                 },
                                 error: function () {
-                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                                 }
                             })
                         },
                         error: function () {
-                            jfShowTips.toastShow('系统繁忙，请稍后再试');
+                            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
                     })
                 },
                 error: function () {
-                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
         } else if (goodId) {
@@ -658,7 +658,7 @@ $(function () {
                                     redpage();
                                 },
                                 error: function () {
-                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                                 }
                             })
                         }
@@ -666,7 +666,7 @@ $(function () {
 
                 },
                 error: function () {
-                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
         }
@@ -760,7 +760,7 @@ $(function () {
                 redpage();
             },
             error: function () {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }
@@ -819,7 +819,7 @@ $(function () {
                 })
             },
             error: function () {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }
@@ -1032,7 +1032,6 @@ $(function () {
         if(browser.supplier.weixin){
 
             zfbPay.style.display="none";
-
         }
         
     }

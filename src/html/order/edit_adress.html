@@ -1,0 +1,180 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+<link rel="stylesheet" href="../../css/ak_medicine.min.css">
+
+    <title>编辑收货地址</title>
+</head>
+<body>
+
+<div class="main_edit_address yao_shadow store_id">
+
+    <label class="yao_alignment_middle">
+        <span>收货人：</span>
+        <input type="text" placeholder="请输入姓名" id="inNa">
+    </label>
+
+    <label class="yao_alignment_middle">
+        <span>联系电话：</span>
+        <input type="number" pattern="[0-9]*" placeholder="请输入联系电话" id="inPh">
+    </label>
+
+    <label class="address_choose yao_alignment_middle" onclick="addressSelect.show({fn:
+
+function(){
+
+     shoppingCart.run({
+     api: '../../api/address.json',
+     type: 'get',
+     firstTargetDom:document.getElementById('address_info'),
+     'addressPart':true,//ture表示不分开显示地址,默认为false.表示分开显示地址
+     fn:function() {
+       addressSelect.hide();
+
+       console.log(chooseAdressId);//当前选择地址ID
+
+       $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[1]
+            },
+            success:function(info){
+                console.log(info);
+                //将storeId存cookie
+                //$.cookie('storeId',info.data,{path:'/'});
+                $('.store_id').attr('data-storeId',info.data);
+                //存区域
+                $('.store_id').attr('data-AdressId',chooseAdressId)
+            }
+        })
+
+     }
+
+     })
+}
+
+})">
+        <span>所在地区：</span>
+        <p id="address_info"></p>
+    </label>
+    <label class="yao_alignment_left">
+        <span>详细地址：</span>
+        <textarea rows="2" placeholder="请输入详细地址 如：虹桥路808号" id="addrDe"></textarea>
+    </label>
+
+</div>
+
+
+<div class="main_edit_address yao_shadow">
+
+    <label class="yao_alignment_center" id="inDef">
+        <span>设为默认</span>
+        <input type="checkbox" class="default_box" id="incheck">
+    </label>
+
+</div>
+
+
+<a class="new_address" id="save">
+    <div class="address_bar"></div>
+    <div class="add_address">保存</div>
+</a>
+
+
+
+
+<!--地址弹出框-->
+
+
+<div class="jf_pop_up" id="delivery_address">
+
+    <div class="jf_pop_up_main">
+
+        <div class="pop_top">
+
+            <div class="pop_title">请选择地址</div>
+
+            <div class="pop_cancel"></div>
+
+<!--            <div class="pop_line"></div>-->
+
+
+        </div>
+
+        <div class="pop_main">
+
+            <div class="product_prompt_address">
+
+                <div id="address_select">
+
+                    <div class="top_address jdshop_alignment_middle">
+
+                        <div>请选择</div>
+
+                        <div></div>
+<!--
+                        <div></div>
+
+                        <div></div>
+
+                        <div></div>-->
+
+                    </div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
+
+                   <!-- <div class="address"></div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>-->
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="jf_pop_up_bg">
+
+    </div>
+
+</div>
+
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/urL.js"></script>
+<script src="../../js/order/edit_adress.js"></script>
+
+<script>
+
+    addressSelect = new jfShowPop({
+
+        'ele': 'delivery_address',
+
+        'fatherId':'delivery_address',
+
+        'scrollClassname':'address'
+    })
+
+
+
+
+    //点穿问题
+    jfProductDetails.clickThrough('delivery_address','address')
+
+
+</script>
+</body>
+</html>

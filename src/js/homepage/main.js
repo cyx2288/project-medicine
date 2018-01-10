@@ -54,7 +54,7 @@ $(function(){
             $('.list_brand').html(html);
         },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
     //4. 套餐参考部分（初始化）
@@ -92,7 +92,7 @@ $(function(){
             })
         },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
     //5. 分类部分
@@ -124,7 +124,7 @@ $(function(){
             $('.store_list1').html(html);
         },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
     
@@ -164,7 +164,7 @@ $(function(){
                 dom.html(html);
             },
             error: function() {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }
@@ -187,7 +187,7 @@ $(function(){
                 dom.html(html);
             },
             error: function() {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }
@@ -210,7 +210,7 @@ $(function(){
         },
         error: function (info) {
             console.log(info)
-            //jfShowTips.toastShow('系统繁忙，请稍后再试');
+            //jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 
@@ -231,7 +231,7 @@ $(function(){
         },
         error: function (info) {
             console.log(info)
-           // jfShowTips.toastShow('系统繁忙，请稍后再试');
+           // jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     })
 

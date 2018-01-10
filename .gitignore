@@ -64,4 +64,5 @@ dist
 rev
 .project
 .setting
+gulp/config.js
 

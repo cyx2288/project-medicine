@@ -54,7 +54,7 @@ $(function(){
 		        console.log(res);
 		        if(res.status !== 200){
 		        	jfShowTips.toastShow('暂无订单');
-		           // jfShowTips.toastShow(res.msg);
+		           // jfShowTips.toastShow({'text':res.msg});
 		            return;
 		        };
 		       	
@@ -81,7 +81,7 @@ $(function(){
 		    success:function(res){
 		        console.log(res);
 		        if(res.status !== 200){
-		            jfShowTips.toastShow(res.msg);
+		            jfShowTips.toastShow({'text':res.msg});
 		            return;
 		        };
 		       	
