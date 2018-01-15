@@ -113,8 +113,8 @@ $(function(){
 		$(".distribution").show();
 		$(".distribution").css("width",document.body.clientWidth);
 		$(".distribution").css("height",document.body.clientHeight);
-		$(".distribution img").css("width",widt);
-		$(".distribution img").css("height",heit);
+		$(".distribution img").css("width",'100%');
+		//$(".distribution img").css("height",heit);
 		$(".distribution img").css("padding-top",100);
 		$(".distribution").click(function(){
 			$(".personal_center_page").show();
