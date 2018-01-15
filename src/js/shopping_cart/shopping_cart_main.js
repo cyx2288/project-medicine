@@ -245,31 +245,73 @@ $(function () {
     //购物车去结算
     $('#go_buy').on('click',function () {
 
-        var goodIdList=[];//goodid数组
 
-        var goodNum=[];//商品数量数组
+        var goodIdList = [];//goodid数组
 
-        var goodListEle=document.getElementsByClassName('shopping_list');
+        var goodNum = [];//商品数量数组
 
-        for(var i =0;i<goodListEle.length;i++){
+        function judegNocheck(){//判断当前是否一个都没有选择
 
-            var thisGoodId=goodListEle[i].getAttribute('goodid');
+            var allsingleBox=document.getElementsByClassName('singlecheck');
 
-            var inputNum=goodListEle[i].getElementsByTagName('input')[0].value;
+            for(var i=0;i<allsingleBox.length;i++){
 
-            goodNum.push(inputNum);
+                if(allsingleBox[i].checked){
 
-            goodIdList.push(thisGoodId);
+                    return true;
+                }
+            }
+
+            return false;
+        };
+
+        var thisChooseGoods=judegNocheck();
+
+        if(thisChooseGoods){
+
+            var allsingleBox=document.getElementsByClassName('singlecheck');
+
+            for(var i=0;i<allsingleBox.length;i++){
+
+                if(allsingleBox[i].checked){
+
+                    var thisGoodId = allsingleBox[i].getAttribute('data_id');
+
+                    var inputNum = allsingleBox[i].getAttribute('data_num');
+
+                    goodNum.push(inputNum);
+
+                    goodIdList.push(thisGoodId);
+
+                }
+
+            };
+
+            var sumMoney=$('#allMoney').text();
+
+            var totalMoney=$('#totalMoney').text();
+
+            $.cookie('cartGoodIdList', goodIdList, {expires:1,path: '/'});//存入商品数组list
+
+            $.cookie('cartGoodNum', goodNum, {expires:1,path: '/'});//存入商品数量list
+
+            $.cookie('sumMoney', sumMoney, {expires:1,path: '/'});//合计
+
+            $.cookie('totalMoney', totalMoney, {expires:1,path: '/'});//总额
+
+
+            console.log( $.cookie('cartGoodIdList'));
+
+
+           // document.getElementById('checkAll').checked=false;
+
+            window.location.href = '../order/submit_order_page.html';
+
+        }else {
+
+            jfShowTips.toastShow({"text":"当前还没有商品被选中"})
+
         }
-
-        console.log(goodIdList)
-
-        $.cookie('goodIdList', goodIdList, {expires: -1,path: '/'});//存入商品数组list
-
-        $.cookie('goodNum', goodNum, {expires: -1,path: '/'});//存入商品数量list
-
-        window.location.href='../order/submit_order_page.html';
-
     });
 
 
