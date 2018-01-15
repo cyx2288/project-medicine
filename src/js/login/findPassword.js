@@ -35,7 +35,7 @@ $(function(){
     $('#user_updateget').click(function(){
         mobileNum = $('#user_updatetel').val();
         if(mobileNum == ''){
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         };
         $.ajax({
@@ -48,7 +48,7 @@ $(function(){
                 console.log(info);
                 inputFn.inputCheck(60);//发送验证码
                 if(info.status !==200){
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     return;
                 }
                 hash = info.data.hash;
@@ -66,15 +66,15 @@ $(function(){
         userUpdatepsw = $.md5($('#user_updatenew').val() + 'zbkj');
         user_updateverify = $('#user_updateverify').val();
         if(mobileNum == ''){
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         };
         if(userUpdatepsw == ''){
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         };
         if(user_updateverify == ''){
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         };
         $.ajax({
@@ -90,7 +90,7 @@ $(function(){
             success:function(info){
                 console.log(info);
                 if(info.status !== 200){
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     return;
                 };
                 //jfShowTips.toastShow(info.msg);
@@ -109,7 +109,8 @@ $(function(){
     function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            jfShowTips.toastShow('手机号有误，请重新输入');
+
+            jfShowTips.toastShow({'text':'手机号有误，请重新输入'});
             return false;
         }
     }
@@ -118,7 +119,8 @@ $(function(){
     function checkPsw(psw){
         var reg = /^[\w]{6,12}$/;
         if(!reg.test(psw)){
-            jfShowTips.toastShow("密码为6-16位");
+
+            jfShowTips.toastShow({'text':'密码为6-16位'});
             return false;
         }
     }

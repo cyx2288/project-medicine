@@ -27,11 +27,9 @@
 
 function(){
 
-     shoppingCart.run({
-     api: '../../api/address.json',
-     type: 'get',
+     addressChoose.run({
      firstTargetDom:document.getElementById('address_info'),
-     'addressPart':true,//ture表示不分开显示地址,默认为false.表示分开显示地址
+     addressPart:true,
      fn:function() {
        addressSelect.hide();
 
@@ -116,12 +114,12 @@ function(){
                         <div>请选择</div>
 
                         <div></div>
-<!--
-                        <div></div>
 
                         <div></div>
 
-                        <div></div>-->
+                        <div></div>
+
+                        <div></div>
 
                     </div>
 
@@ -129,11 +127,11 @@ function(){
 
                     <div class="address"></div>
 
-                   <!-- <div class="address"></div>
+                    <div class="address"></div>
 
                     <div class="address"></div>
 
-                    <div class="address"></div>-->
+                    <div class="address"></div>
 
                 </div>
 
@@ -154,7 +152,7 @@ function(){
 <script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
 <script src="../../js/libs/art-template/template.js"></script>
 <script src="../../js/ak_medicine.min.js"></script>
-<script src="../../js/urL.js"></script>
+<script src="../../js/common.js"></script>
 <script src="../../js/order/edit_adress.js"></script>
 
 <script>

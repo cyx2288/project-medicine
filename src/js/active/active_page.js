@@ -30,7 +30,7 @@ $(function(){
             success:function(info){
                 console.log(info);
                 if(info.status !== 200){
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     return;
                 };
                 var html = template(htmlId,{list:info.data});
@@ -88,13 +88,13 @@ $(function(){
 
 
     // 拦截Webview窗口的URL请求
-    //(function () {
+   /* (function () {
 
 
         // H5 plus事件处理
         var ws=null,as='pop-in';
 
-        /*增加plus ready后监听*/
+        /!*增加plus ready后监听*!/
         if(window.plus){
             plusReady();
         }else{
@@ -133,7 +133,7 @@ $(function(){
             });
         }
 
-        /*跳转方法*/
+        /!*跳转方法*!/
         function toUrl(url) {
 
 
@@ -152,7 +152,7 @@ $(function(){
 
             }
 
-            /*如果有需要单页，则放开拦截*/
+            /!*如果有需要单页，则放开拦截*!/
 
             else{
 
@@ -160,7 +160,7 @@ $(function(){
 
                 ws.overrideUrlLoading({mode:thisMode});
 
-                /*plus.webview.currentWebview().loadURL(url)*/
+                /!*plus.webview.currentWebview().loadURL(url)*!/
 
                 var timer=null;
 
@@ -189,7 +189,7 @@ $(function(){
         }
 
 
-        /*url字符串截取*/
+        /!*url字符串截取*!/
         function urlString(url) {
 
             var thisUrl=url;
@@ -209,7 +209,7 @@ $(function(){
 
         var w=window;
 
-        /*回退键拦截器*/
+        /!*回退键拦截器*!/
         function plusReadyBack(){
             ws=plus.webview.currentWebview();
             // Android处理返回键
@@ -250,7 +250,7 @@ $(function(){
         function back(hide){
 
 
-            /*本页面跳转*/
+            /!*本页面跳转*!/
             if(w.plus&&history.length>1){
 
                 var thisUrl=window.location.href;
@@ -299,13 +299,13 @@ $(function(){
         };
     // 处理点击事件
         var openw=null,waiting=null;
-        /**
+        /!**
          * 打开新窗口
          * @param {URIString} id : 要打开页面url
          * @param {boolean} wa : 是否显示等待框
          * @param {boolean} ns : 是否不自动显示
          * @param {JSON} ws : Webview窗口属性
-         */
+         *!/
         function clicked(id,wa,ns,ws){
             if(openw){//避免多次打开同一个页面
                 //return null;
@@ -318,7 +318,7 @@ $(function(){
                 var pre='';//'http://192.168.1.178:8080/h5/';
 
 
-                /*如果存在该id的webview，则打开该webview*/
+                /!*如果存在该id的webview，则打开该webview*!/
                 if(plus.webview.getWebviewById(id)){
 
                     openw=plus.webview.getWebviewById(id);
@@ -330,7 +330,7 @@ $(function(){
                     return openw;
                 }
 
-                /*如果不存在该webview，新打开一个*/
+                /!*如果不存在该webview，新打开一个*!/
                 else{
 
                     openw=plus.webview.create(pre+id,id,ws);
@@ -354,13 +354,13 @@ $(function(){
             return null;
         };
 
-        /**
+        /!**
          * 关闭等待框
-         */
+         *!/
         function closeWaiting(){
             waiting&&waiting.close();
             waiting=null;
         }
 
-    //})()
+    })()*/
 })

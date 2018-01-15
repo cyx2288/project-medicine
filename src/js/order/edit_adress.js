@@ -10,6 +10,7 @@ $(function(){
 	var detailAddr
 	var isDefault = false
 	var id
+
 	
 	if($.cookie("cneeArea") != null){
 		$("#address_info").text($.cookie("cneeArea"));
@@ -35,6 +36,7 @@ $(function(){
 		})
 		//地址更改
 	    $("#save").click(function(){
+
 	    	cneeArea = $("#address_info").text();    
 	    	cneeName = $("#inNa").val();
 	  		detailAddr = $("#addrDe").val();
@@ -51,9 +53,11 @@ $(function(){
 		//地址保存提交
 	    $("#save").click(function(){
 
+
+
 	    	//判断详细地址是否为空
 			if($('#addrDe').val() == ''){
-				jfShowTips.toastShow("请您填写详细地址");
+				jfShowTips.toastShow({'text':'请您填写详细地址'});
 				return;
 			}
 	    	cneeArea = $("#address_info").text();    
@@ -106,7 +110,7 @@ $(function(){
 				//$.cookie("userId", '',{ expires: -1, path: '/' });
 				//$.cookie("storeIdList", '',{ expires: -1 , path: '/'});
 				$.cookie("adrId", '',{ expires: -1 , path: '/'});
-	            location.href = "./choose_address.html"
+	            location.href = "choose_address.html"
 	        },
             error: function() {
                 jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
@@ -145,7 +149,7 @@ $(function(){
 	function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            jfShowTips.toastShow('手机号有误，请重新输入');
+            jfShowTips.toastShow({'text':'手机号有误，请重新输入'});
             return false;
         }
     }

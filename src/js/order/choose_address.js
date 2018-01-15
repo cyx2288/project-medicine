@@ -120,7 +120,7 @@ $(function(){
 					//$.cookie("userId",detailAddr,{ path: '/' });
 					$.cookie("storeIdList",storeIdList,{ path: '/' });
 					$.cookie("adrId",adrId,{ path: '/' });
-					location.href = "./edit_adress.html"
+					location.href = "edit_adress.html"
 				})
 			});
             //跳转结算页

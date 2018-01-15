@@ -25,7 +25,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 	        }
 	    })
 	
@@ -51,7 +51,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res); 
-	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 	        }
 	    })
 		$(".verNum").html('v'+ version);

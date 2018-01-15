@@ -43,7 +43,7 @@ $(function(){
 				    },
 				    error:function(res){
 				       	console.log(res);
-				       	jfShowTips.toastShow("系统繁忙，请稍后再试")
+				       	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 				    }
 				})
             }
@@ -58,7 +58,6 @@ $(function(){
         var obj = {};
         obj[arr[0]] = arr[1];
         return obj[arr[0]];
-
 	}
     //订单基本信息
     function ordInfo(orderId){

@@ -58,15 +58,15 @@ $(function () {
         userRegisterpws = $.md5($('#user_registerpws').val() + 'zbkj');
         var referrerPhone = $('#recommend_tel').val();
         if (mobileNum == '') {
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         };
         if (userRegisterpws1 == '') {
-            jfShowTips.toastShow('登录密码不能为空');
+            jfShowTips.toastShow({'text':'登录密码不能为空'});
             return;
         };
         if (msgNum == '') {
-            jfShowTips.toastShow('验证码不能为空');
+            jfShowTips.toastShow({'text':'验证码不能为空'});
             return;
         };
         $.ajax({
@@ -83,10 +83,10 @@ $(function () {
             success: function (info) {
                 console.log(info)
                 if (info.status !== 200) {
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     return;
                 }
-                jfShowTips.toastShow(info.msg);
+                jfShowTips.toastShow({'text':info.msg});
 
                 //plus.storage.setItem('storeId', 1); //默认门店id，初始化使用。
                 userIds = info.data.id;
@@ -113,7 +113,7 @@ $(function () {
         document.getElementById('user_sendMs').addEventListener('click',function () {
             mobileNum = $('#user_registertel').val();
             if(mobileNum == ''){
-                jfShowTips.toastShow('账号不能为空');
+                jfShowTips.toastShow({'text':'账号不能为空'});
                 return;
             }
 
@@ -143,7 +143,7 @@ $(function () {
     function checkTel(tel) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if (!reg.test(tel)) {
-            jfShowTips.toastShow('手机号有误，请重新输入');
+            jfShowTips.toastShow({'text':'手机号有误，请重新输入'});
             return false;
         }
     }
@@ -152,7 +152,7 @@ $(function () {
     function checkPsw(psw) {
         var reg = /^[\w]{6,12}$/;
         if (!reg.test(psw)) {
-            jfShowTips.toastShow("密码为6-16位");
+            jfShowTips.toastShow({'text':"密码为6-16位"});
             return false;
         }
     }

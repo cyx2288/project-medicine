@@ -36,7 +36,7 @@ $(function(){
 	$("#sendmsg").on('click',function(){
 		mobileNum = $("#phNum").val();
         if(mobileNum == ''){
-            jfShowTips.toastShow('请输入验证码');
+            jfShowTips.toastShow({'text':'请输入验证码'});
             return;
         };
 		$.ajax({
@@ -66,11 +66,11 @@ $(function(){
         mobileNum = $("#phNum").val();
         msgNum = $("#sendMsgNum").val();
         if(mobileNum == ''){
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         };
         if(msgNum == ''){
-            jfShowTips.toastShow('验证码不能为空');
+            jfShowTips.toastShow({'text':'验证码不能为空'});
             return;
         };
         $.ajax({
@@ -103,7 +103,7 @@ $(function(){
 	function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            jfShowTips.toastShow('手机号有误，请重新输入');
+            jfShowTips.toastShow({'text':'手机号有误，请重新输入'});
             return false;
         }
     }
