@@ -22,7 +22,7 @@ $(function(){
         },
         success:function(info){
             if(info.status !== 200){
-                jfShowTips.toastShow(info.msg);
+                jfShowTips.toastShow({'text':info.msg});
                 return;
             };
             var html = template('active_details',{list:info.data});

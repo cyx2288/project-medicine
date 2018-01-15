@@ -13,7 +13,9 @@
 
 <div class="order_page">
 
-    <a class="address_select yao_alignment_middle yao_shadow address_change" href="#">
+    <div class="order_content_submit">
+
+    <a class="address_select yao_alignment_middle yao_shadow address_change">
         <div><img src="../../images/shopping_address.png"></div>
         <div class="check_address">
             <!--<div class="yao_alignment_center">-->
@@ -25,7 +27,6 @@
             <!--</div>-->
         </div>
     </a>
-
 
     <div class="order_main yao_shadow">
 
@@ -84,11 +85,19 @@
             </label>
 
             <label class="yao_alignment_center RedPackage">
-                <span>输入红包抵现</span>
+                <span>输入购物红包抵现</span>
                 <input type="number" pattern="[0-9]*" placeholder="">
                 <!--<p><span>余额：</span><span>¥50</span></p>-->
 
             </label>
+
+            <label class="yao_alignment_center cashAmount">
+                <span>输入现金红包抵现</span>
+                <input type="number" pattern="[0-9]*" placeholder="">
+                <!--<p><span>余额：</span><span>¥50</span></p>-->
+
+            </label>
+
 
         </div>
 
@@ -148,14 +157,16 @@
 
 
     </div>
+
+    </div>
     <div class="order_bottom">
         <div class="bottom_bar"></div>
         <div class="fixed_price">
             <span>总金额：</span>
-            <span class="orderAmount_money">¥600.00</span>
+            <span class="orderAmount_money"></span>
         </div>
         <div class="fixed_order yao_alignment_center">
-            <p><span>应付金额：</span><span class="shouldPay_money">¥550.00</span></p>
+            <p><span>应付金额：</span><span class="shouldPay_money"></span></p>
             <a href="javascript:;" class="put_order">提交订单</a>
         </div>
     </div>
@@ -245,6 +256,9 @@
     jfProductDetails.clickThrough('delivery_address', 'address')
 
 
+    AnkangMain.CompatibleIOS11(document.getElementsByClassName('order_content_submit')[0],'compatible_active_change')
+
+
 </script>
 <!--地址-->
 <script type="text/html" id="address_tem">
@@ -299,7 +313,14 @@
 <!--红包-->
 <script type="text/html" id="RedPackage_html">
     {{if list}}
-    <p><span>余额：</span><span>¥{{list.redPackage}}</span></p>
+    <p><span>余额：</span><span>¥{{list.shopRedPackage}}</span></p>
+    {{/if}}
+</script>
+
+<!--红包-->
+<script type="text/html" id="cash_html">
+    {{if list}}
+    <p><span>余额：</span><span>¥{{list.moneyRedPackage}}</span></p>
     {{/if}}
 </script>
 <!--优惠券-->

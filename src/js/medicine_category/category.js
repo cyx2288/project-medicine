@@ -165,7 +165,7 @@ $(function(){
         },
         success:function(info){
             if(info.status !== 200){
-                jfShowTips.toastShow(info.msg);
+                jfShowTips.toastShow({'text':info.msg});
                 return;
             };
             var html = template('yao_shadow_html',{list:info.data});
@@ -220,7 +220,7 @@ $(function(){
             },
             success:function(info){
                 if(info.status !== 200){
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     console.log(info)
                     return;
                 };

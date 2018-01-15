@@ -46,17 +46,17 @@ $(function() {
         psw = $.md5($('#pswNum').val() + 'zbkj');
         console.log(psw);
         if (mobileNum == '') {
-            jfShowTips.toastShow('账号不能为空');
+            jfShowTips.toastShow({'text':'账号不能为空'});
             return;
         }
         ;
         if (psw1 == '') {
-            jfShowTips.toastShow('密码不能为空');
+            jfShowTips.toastShow({'text':'密码不能为空'});
             return;
         }
         ;
         if (psw == '') {
-            jfShowTips.toastShow('密码不能为空');
+            jfShowTips.toastShow({'text':'密码不能为空'});
             return;
         }
         $.ajax({
@@ -94,7 +94,7 @@ $(function() {
     function checkTel(tel) {
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if (!reg.test(tel)) {
-            jfShowTips.toastShow('手机号有误，请重新输入');
+            jfShowTips.toastShow({'text':'手机号有误，请重新输入'});
             return false;
         }
     }
@@ -103,7 +103,7 @@ $(function() {
     function checkPsw(psw) {
         var reg = /^[\w]{6,12}$/;
         if (!reg.test(psw)) {
-            jfShowTips.toastShow("密码为6-16位");
+            jfShowTips.toastShow({'text':'密码为6-16位'});
             return false;
         }
     }

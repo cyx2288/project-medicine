@@ -235,11 +235,43 @@ $(function () {
     var urL = url();
     var cartList = '/cart/list';
     var cartUpdate = '/cart/update';
-    var cartDelete='/cart/delete'
+    var cartDelete='/cart/delete';
     var userId = $.cookie('userId');
     var sum = 0;
     var allSum = 0;
     var goodIdList = new Array();
+
+
+    //购物车去结算
+    $('#go_buy').on('click',function () {
+
+        var goodIdList=[];//goodid数组
+
+        var goodNum=[];//商品数量数组
+
+        var goodListEle=document.getElementsByClassName('shopping_list');
+
+        for(var i =0;i<goodListEle.length;i++){
+
+            var thisGoodId=goodListEle[i].getAttribute('goodid');
+
+            var inputNum=goodListEle[i].getElementsByTagName('input')[0].value;
+
+            goodNum.push(inputNum);
+
+            goodIdList.push(thisGoodId);
+        }
+
+        console.log(goodIdList)
+
+        $.cookie('goodIdList', goodIdList, {expires: -1,path: '/'});//存入商品数组list
+
+        $.cookie('goodNum', goodNum, {expires: -1,path: '/'});//存入商品数量list
+
+        window.location.href='../order/submit_order_page.html';
+
+    });
+
 
     //初始化列表 获取
     $.ajax({
@@ -335,8 +367,8 @@ $(function () {
                 var inNum = $(this);
                 $(this).click(function () {
                     var val = parseInt($(this).next().val()) - 1
-                    if (val < 0) {
-                        $(this).next().val("0");
+                    if (val < 1) {
+                        $(this).next().val("1");
                         return false;
                     } else {
                         $(this).next().val(val)
@@ -351,11 +383,18 @@ $(function () {
                         },
                         success: function (res) {
                             inNum.parent().parent().parent().parent().prev().children().attr("data_num", inNum.next().val())
+
                             sum = 0
                             $(".singlecheck").each(function () {
+
                                 if (this.checked == true) {
                                     sum = sum + $(this).attr("data_price") * 100 * $(this).attr("data_num");
-                                    $("#allMoney").html(sum / 100);
+
+                                    var sumTotal=(sum / 100).toFixed(2);
+
+                                    $("#allMoney").html('¥'+sumTotal);
+
+                                    $("#totalMoney").html('¥'+sumTotal);
 
                                 } else {
 
@@ -392,7 +431,11 @@ $(function () {
 
                                 if (this.checked == true) {
                                     sum = sum + $(this).attr("data_price") * 100 * $(this).attr("data_num");
-                                    $("#allMoney").html(sum / 100);
+                                    var sumTotal=(sum / 100).toFixed(2);
+
+                                    $("#allMoney").html('¥'+sumTotal);
+
+                                    $("#totalMoney").html('¥'+sumTotal);
 
                                 } else {
 
@@ -422,12 +465,19 @@ $(function () {
                             //	console.log(res);
                             inNum.parent().parent().parent().parent().prev().children().attr("data_num", inNum.val())
 //					       	console.log(inNum.parent().parent().parent().parent().prev().children().attr("data_num"))
-                            sum = 0
+                            sum = 0;
+
+
                             $(".singlecheck").each(function () {
+
                                 if (this.checked == true) {
                                     sum = sum + $(this).attr("data_price") * 100 * $(this).attr("data_num");
-                                    $("#allMoney").html(sum / 100);
-                                    sum = 0
+
+                                    var sumTotal=(sum / 100).toFixed(2);
+                                    $("#allMoney").html(sumTotal);
+
+                                    $("#totalMoney").html(sumTotal);
+                                    //sum = 0
                                 } else {
 
                                 }
@@ -450,12 +500,20 @@ $(function () {
                     console.log(1)
                     if (this.checked == true) {
                         sum = sum + $(this).attr("data_price") * 100 * $(this).attr("data_num");
-                        $("#allMoney").html(sum / 100);
+                        var sumTotal=(sum / 100).toFixed(2);
+
+                        $("#allMoney").html('¥'+sumTotal);
+
+                        $("#totalMoney").html('¥'+sumTotal);
 
                     }
                     else {
                         sum = sum - $(this).attr("data_price") * 100 * $(this).attr("data_num");
-                        $("#allMoney").html(sum / 100);
+                        var sumTotal=(sum / 100).toFixed(2);
+
+                        $("#allMoney").html('¥'+sumTotal);
+
+                        $("#totalMoney").html('¥'+sumTotal);
                     }
 
                 })
@@ -469,11 +527,16 @@ $(function () {
                             allSum = allSum + $(this).attr("data_price") * 100 * $(this).val()
 
                         })
-                        $("#allMoney").html(allSum / 100);
+                        var sumTotal=(allSum / 100).toFixed(2);
+
+                        $("#allMoney").html('¥'+sumTotal);
+
+                        $("#totalMoney").html('¥'+sumTotal);
                         sum = allSum
                         allSum = 0;
                     } else {
-                        $("#allMoney").html("0");
+                        $("#allMoney").html('¥0.00');
+                        $("#totalMoney").html('¥0.00');
                         sum = 0
                     }
 

@@ -35,7 +35,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 	        }
 	    })
 		//订单数量
@@ -54,13 +54,18 @@ $(function(){
 	            };
 	            $("#ordNumAll").show();
 				$("#ordNumPend").show();
-	            $("#ordNumAll").text(res.data.allOrderCount);
+
+				if(res.data.allOrderCount>99){
+                    res.data.allOrderCount='99+'
+				}
+                $("#ordNumAll").text(res.data.allOrderCount);
+
 	            $("#ordNumPend").text(res.data.unpaidOrderCount);
 	            
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 	        }
 	    })
 		 
@@ -93,7 +98,8 @@ $(function(){
 					location.href = "../../html/login/login_system.html"
 				}
 			}else{
-				location.href = $(this).attr("data_src")
+
+				//location.href = $(this).attr("data_src")
 			}
 		})
 	})

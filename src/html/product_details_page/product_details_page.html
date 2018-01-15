@@ -87,11 +87,8 @@
 
 function(){
 
-     shoppingCart.run({
-     api: '../../api/address.json',
-     type: 'get',
+     addressChoose.run({
      firstTargetDom:document.getElementById('address_info'),
-     'addressPart':true,//ture表示不分开显示地址
      fn:function() {
        addressSelect.hide();
 
@@ -317,11 +314,17 @@ function(){
                         <div>请选择</div>
 
                         <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
 
                     </div>
 
                     <div class="address"></div>
 
+                    <div class="address"></div>
+                    <div class="address"></div>
+                    <div class="address"></div>
                     <div class="address"></div>
 
                 </div>
@@ -438,7 +441,7 @@ function(){
 
 
 
-
+    AnkangMain.CompatibleIOS11(document.getElementsByClassName('product_page')[0],'compatible_active_change');
 
 
 
