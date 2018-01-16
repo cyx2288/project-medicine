@@ -70,23 +70,28 @@
 			       addressSelect.hide();
 			        console.log(chooseAdressId);//当前选择地址ID
 
-			        $.ajax({
-                    url:url() + '/storeArea',
-                    data:{
-                        areaCode:chooseAdressId[1]
-                    },
-                    success:function(info){
-                        console.log(info);
-                        //将storeId存cookie
-                        $.cookie('storeId',info.data,{path:'/'});
+			        var thisAddressLength=chooseAdressId.length
 
-                        //获取地址
-                        var addressHtml = $('#message_address_select2').text();
-                        //存cookie
-                        $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+        $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[thisAddressLength-1]
+            },
+            success:function(info){
 
-                    }
-                 })
+              console.log({
+
+                areaCode:chooseAdressId[thisAddressLength-1]
+            })
+                console.log(info);
+                //将storeId存cookie
+                $.cookie('storeId',info.data,{path:'/'});
+                //获取地址
+                var addressHtml = $('#address_info').text();
+                //存cookie
+                $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+            }
+        })
 			
 			     }
 			

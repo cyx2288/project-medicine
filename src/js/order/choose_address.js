@@ -140,7 +140,17 @@ $(function(){
         }
     });
 	
-	$("#addAdr").click(function(){
+	$("#addAdr").click(function(){//新增地址时，清空所有地址Cookie
+
+        $.cookie("cneeArea",'',{ path: '/' });
+        $.cookie("cneeMobile",'',{ path: '/' });
+        $.cookie("cneeName",'',{ path: '/' });
+        $.cookie("detailAddr",'',{ path: '/' });
+        $.cookie("isDefault",'',{ path: '/' });
+        //$.cookie("userId",detailAddr,{ path: '/' });
+        $.cookie("storeIdList",'',{ path: '/' });
+        $.cookie("adrId",'',{ path: '/' });
+
 		location.href="edit_adress.html"
 	});
 	

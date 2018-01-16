@@ -507,16 +507,22 @@ function(){
        addressSelect.hide();
         console.log(chooseAdressId);//当前选择地址ID
 
+        var thisAddressLength=chooseAdressId.length
+
         $.ajax({
             url:url() + '/storeArea',
             data:{
-                areaCode:chooseAdressId[1]
+                areaCode:chooseAdressId[thisAddressLength-1]
             },
             success:function(info){
+
+              console.log({
+
+                areaCode:chooseAdressId[thisAddressLength-1]
+            })
                 console.log(info);
                 //将storeId存cookie
                 $.cookie('storeId',info.data,{path:'/'});
-
                 //获取地址
                 var addressHtml = $('#address_info').text();
                 //存cookie

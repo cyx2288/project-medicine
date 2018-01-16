@@ -29,6 +29,8 @@ $(function () {
     var userId = $.cookie('userId');
     var storeId = $.cookie('storeId');
 
+    console.log('storeId='+storeId)
+
     var goodIdList;
 
     if (getParam('goodIdList') !== null) {
@@ -37,35 +39,43 @@ $(function () {
         goodIdList = $.cookie('goodIdList') || '';
     }
 
-    console.log(goodIdList);
+    console.log('goodIdList='+goodIdList);
     //$.cookie('goodIdList',goodIdList);
     //goodIdList = $.cookie('goodList');
     //$.cookie('goodIdList', '', {expires: -1});
 
     var packageId = getParam('packageId') || $.cookie('packageId') || '';
+
+    jfShowTips.toastShow({text:packageId})
+
+    console.log('packageId='+packageId)
+
     //$.cookie('packageId',packageId);
     //packageId = $.cookie('packageId');
     //$.cookie('packageId', '', {expires: -1});
-    console.log(typeof(packageId));
+
 
     var goodId = getParam('goodId') || $.cookie('goodId') || '';
+
+    console.log('goodId='+goodId)
     //$.cookie('goodId',goodId);
     //goodId = $.cookie('goodId');
     //$.cookie('goodId', '', {expires: -1}, { path :'/' } );
 
     var buyGoodNum = getParam('buyGoodNum') || $.cookie('buyGoodNum') || '';
+
+    console.log('buyGoodNum='+buyGoodNum)
+
+
     //$.cookie('buyGoodNum',buyGoodNum);
     //buyGoodNum = $.cookie('buyGoodNum');
     //$.cookie('buyGoodNum', '', {expires: -1});
 
     //地址ID
     var addressId = $.cookie('addressId');
-    $.cookie('addressId', '', {expires: -1, path: '/'});
-    console.log(goodIdList);
-    console.log(packageId);
-    console.log(goodId);
-    console.log(buyGoodNum);
-    console.log(addressId);
+
+   // $.cookie('addressId', '', {expires: -1, path: '/'});
+
 
 
     // $.cookie('goodIdList',goodIdList);
@@ -93,9 +103,9 @@ $(function () {
     var cartList = '/cart/list';
     //优惠券
     var availableList = '/coupon/available/list';
-    //库存
+    //库存（多个商品）
     var stockList = '/stock/list';
-    //某个地址
+    //某个地址详细信息
     var userAddr = '/userAddr/';
     //套餐商品详情
     var goodPackageDetail = '/good/package/detail';
@@ -103,7 +113,8 @@ $(function () {
     var goodDesc = '/good/desc';
     //提交订单
     var orderCreate = '/order/create';
-    //单个商品提交订单
+
+    //单个商品提交订单库存
     var stocksigle = '/stock';
 
 
@@ -126,6 +137,12 @@ $(function () {
     var orderGoodsList, orderSource;
 
 
+    var cartGoodIdList,cartGoodNum;//购物车提交商品id数组以及对应购买数量
+
+    //判断用户是否有默认地址
+
+
+
     //判断用户是否有地址
     $.ajax({
         url: urL + userAddrList + userId,
@@ -133,7 +150,12 @@ $(function () {
         data: {
             userId: userId
         },
-        success: function (info) {
+        success: function (info) {//当前没有地址
+
+            console.log('地址：'+info);
+
+            console.log(info.data)
+
             if (!info.data) {
                 var suggest = confirm("请新增地址");
                 if (suggest == true) {
@@ -149,7 +171,6 @@ $(function () {
                     $.cookie('remark', $('.remark_msg textarea').val());
                     $.cookie('amountPayable1', $('.fixed_order span:eq(1)').text());
                     $.cookie('couponId', $('#tickets_select option:selected').attr('data-couponId'))
-                    console.log($('.fixed_order span:eq(1)').text());
 
 
                     $.cookie('goodIdList', goodIdList);
@@ -157,12 +178,13 @@ $(function () {
                     $.cookie('goodId', goodId);
                     $.cookie('buyGoodNum', buyGoodNum);
 
-
-
                     location.href = "../../html/order/edit_adress.html"
                 }
             }else{
                 //地址(初始化)
+
+                console.log('addressId='+addressId)
+
                 if (addressId) {
                     $.ajax({
                         url: urL + userAddr + addressId,
@@ -261,6 +283,16 @@ $(function () {
         $.cookie('buyGoodNum', '', {expires: -1});
         $.cookie('addressId', '', {expires: -1, path: '/'});
 
+        $.cookie('sumMoney','',{expires:1,path: '/'});
+
+        $.cookie('totalMoney','',{expires:1,path: '/'});
+
+        $.cookie('cartGoodIdList','',{expires:1,path: '/'});//清空
+
+        console.log('清空购物车商品cookie'+$.cookie('cartGoodIdList'))
+
+        $.cookie('cartGoodNum','',{expires:1,path: '/'});//清空
+
         flag = true;
         $(this).attr('disabled', true);
         //获取数据
@@ -299,13 +331,13 @@ $(function () {
         var payMode = $('.pay_choose input:checked').attr('data-payid');
         console.log(payMode);
         //订单列表
-        console.log(orderGoodsList);
+        console.log('orderGoodsList='+orderGoodsList);
         //orderAux
         var storeId1 = $('.yao_alignment_center').attr('data-storeId');
         var areaAllCode = $('.yao_alignment_center').attr('data-areaAllCode');
-        console.log(storeId1);
-        console.log(areaAllCode);
-        console.log(orderSource);
+       // console.log(storeId1);
+       // console.log(areaAllCode);
+       // console.log(orderSource);
 
         var orderAuxobj = {
             storeId: storeId1,
@@ -342,7 +374,9 @@ $(function () {
             data: JSON.stringify(orderObj1),
             contentType: "application/json;charset=UTF-8",
             success: function (info) {
+                console.log(orderObj1)
                 console.log(info);
+                
                 if (info.status !== 200) {
                     jfShowTips.toastShow({'text':info.msg});
                     flag = false;
@@ -351,9 +385,12 @@ $(function () {
                 jfShowTips.toastShow({'text':info.msg});
                 //存订单号
                 var orderNumber = info.data;
+                
+                console.log('orderNumber='+orderNumber)
 
                 $(this).attr('disabled', true);
                 flag = false;
+
                 //跳页面
                 location.href = 'check_order_page.html?orderNumber=' + orderNumber;
             },
@@ -364,13 +401,17 @@ $(function () {
         })
     })
 
+    console.log('packageId='+packageId)
+
+    jfShowTips.toastShow({'text':packageId})
+
 
     //商品列表(初始化)
     function goodsList(){
 
-        var cartGoodIdList=$.cookie('cartGoodIdList');
+         cartGoodIdList=$.cookie('cartGoodIdList');
 
-        var cartGoodNum=$.cookie('cartGoodNum');
+         cartGoodNum=$.cookie('cartGoodNum');
 
         var sumMoney=$.cookie('sumMoney');
 
@@ -378,7 +419,9 @@ $(function () {
 
         //判断商品来源
 
-        if (cartGoodIdList) {
+        if (cartGoodIdList) {//购物车立即购买
+
+            console.log('购物车商品:'+cartGoodIdList)
 
             orderSource = 1;
 
@@ -398,9 +441,6 @@ $(function () {
                 )
 
             }
-
-
-
             $.ajax({
                 url: urL + cartList,
                 anysc: false,
@@ -410,9 +450,10 @@ $(function () {
                 },
                 traditional: true,
                 success: function (info) {
-                    console.log(info);
+                    console.log('多个商品列表')
+                    console.log(info.data)
                     if (info.status !== 200) {
-                        jfShowTips.toastShow({'text':info.msg});
+                        jfShowTips.toastShow({'text':'购物车'+info.msg});
                         return;
                     }
                     ;
@@ -421,42 +462,37 @@ $(function () {
 
                     $('.orderAmount_money').text(sumMoney);
 
-                    $('.shouldPay_money').text(totalMoney)
-
-                    //setTimeout(function () {
-
-                        $.cookie('sumMoney','',{expires:1,path: '/'});
-
-                        $.cookie('totalMoney','',{expires:1,path: '/'});
-
-                        $.cookie('cartGoodIdList','',{expires:1,path: '/'});//清空
-
-                        console.log('清空'+$.cookie('cartGoodIdList'))
-
-                        $.cookie('cartGoodNum','',{expires:1,path: '/'});//清空
-
-
-                  //  },300)
-
-
+                    $('.shouldPay_money').text(totalMoney);
 
                     objdata1 = info.data;
+
+
+
                     //库存
                     $.ajax({
                         url: urL + stockList,
                         data: {
-                            goodIdList: goodIdList,
+                            goodIdList: cartGoodIdList,
                             storeId: storeId
                         },
                         traditional: true,
                         success: function (info1) {
+
+                            console.log({
+                                goodIdList: cartGoodIdList,
+                                storeId: storeId
+                            })
+                            console.log('多个商品列表库存信息')
                             console.log(info1);
                             if (info1.status !== 200) {
-                                jfShowTips.toastShow({'text':info1.msg});
+                                jfShowTips.toastShow({'text':'库存'+info1.msg});
                                 return;
                             }
-                            ;
+
                             objdata2 = info1.data;
+
+                            console.log('库存信息='+info1)
+
                             stock2();
                         },
                         error: function () {
@@ -468,11 +504,10 @@ $(function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
-        } else if (packageId) {
+        } else if (packageId) {//套餐购买
 
-            console.log('packageId='+packageId)
+            console.log('套餐购买-packageId='+packageId)
             orderSource = 3;
-            jfShowTips.toastShow({'text':orderSource})
             $.ajax({
                 url: urL + goodPackageDetail,
                 anysc: false,
@@ -481,9 +516,9 @@ $(function () {
                 },
                 traditional: true,
                 success: function (info) {
-                    console.log(info);
+
                     if (info.status !== 200) {
-                        jfShowTips.toastShow({'text':info.msg});
+
                         return;
                     };
                     var html = template('product_html_meal', {list: info.data});
@@ -500,6 +535,8 @@ $(function () {
                     //获取一下当前地址的门店ID
                     storeId = $('.yao_alignment_center').attr('data-storeid');
                     console.log(storeId);
+
+                    //库存信息
                     $.ajax({
                         url: urL + stockList,
                         data: {
@@ -616,19 +653,18 @@ $(function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                 }
             })
-        } else if (goodId) {
+        } else if (goodId) {//单个商品提交
 
-            console.log('goodId='+goodId)
-
+            console.log('单个商品--goodId='+goodId);
             orderSource = 2;
-           // jfShowTips.toastShow(orderSource)
+
             $.ajax({
                 url: urL + goodDesc,
                 anysc: false,
                 data: {
                     id: goodId
                 },
-                traditional: true,
+               // traditional: true,
                 success: function (info) {
                     console.log(info);
                     if (info.status !== 200) {
@@ -643,7 +679,7 @@ $(function () {
                     //库存
                     //获取一下当前地址的门店ID
                     storeId = $('.yao_alignment_center').attr('data-storeid');
-                    console.log(storeId);
+                    console.log('storeId='+storeId);
                     $.ajax({
                         url: urL + stocksigle,
                         data: {
@@ -757,11 +793,15 @@ $(function () {
 
 
 
-
-
     function stock2() {
         //库存判断
         orderGoodsList = [];
+
+        console.log('objdata1.length='+objdata1.length)
+
+        console.log('objdata2.length='+objdata2.length)
+
+
         for (var i = 0; i < objdata1.length; i++) {
             if (objdata1[i].buyCount > objdata2[i].stock) {
                 $('#product_list' + i).addClass('repertory');
@@ -961,6 +1001,7 @@ $(function () {
     }
 
 
+    //
     function clickBtn() {
         //取cookie
         var pay = $.cookie('pay') || 1;
@@ -994,32 +1035,17 @@ $(function () {
         $.cookie('amountPayable1', '', {expires: -1});
         $.cookie('couponId', '', {expires: -1});
 
-        //点击地址
-        $('.order_page').on('click', '.address_change', function () {
-            //存cookie,
-            // 付款方式，优惠券，红包金额，发票信息，抬头，备注，应付金额，
-            $.cookie('pay', $('.pay_choose input:checked').attr('data-payid'));
-            $.cookie('voucherId', $('.tickets select').find("option:selected").attr('data-voucherId'));
-            $.cookie('RedPackageMoney', $('.RedPackage input').val());
-            $.cookie('invoiceId', $('.invoice_input input:checked').attr('data-invoiceId'));
-            $.cookie('invoiceMsg', $('.invoice_msg textarea').val());
-            $.cookie('remark', $('.remark_msg textarea').val());
-            $.cookie('amountPayable1', $('.fixed_order span:eq(1)').text());
-            $.cookie('couponId', $('#tickets_select option:selected').attr('data-couponId'))
-            console.log($('.fixed_order span:eq(1)').text());
 
-
-            $.cookie('goodIdList', goodIdList);
-            $.cookie('packageId', packageId);
-            $.cookie('goodId', goodId);
-            $.cookie('buyGoodNum', buyGoodNum);
-
-            //跳选择页面
-            location.href = 'choose_address.html';
-        })
+        chooseAddress();//地址选择
     }
 
-    //点击地址
+
+
+    chooseAddress();
+
+
+    function chooseAddress() {//选择地址
+        //点击地址
     $('.order_page').on('click', '.address_change', function () {
         //存cookie,
         // 付款方式，优惠券，红包金额，发票信息，抬头，备注，应付金额，
@@ -1036,12 +1062,17 @@ $(function () {
 
         $.cookie('goodIdList', goodIdList);
         $.cookie('packageId', packageId);
+
+        console.log($.cookie('packageId')+'套餐')
         $.cookie('goodId', goodId);
         $.cookie('buyGoodNum', buyGoodNum);
 
         //跳选择页面
         location.href = 'choose_address.html';
     })
+
+    }
+
 
 
     /**
@@ -1102,27 +1133,6 @@ $(function () {
         return format;
     });
 
-
-    /*获取url上的参数值的方法*/
-    function getParam(name) {
-        var search = document.location.search;
-        //jfShowTips.toastShow(search);
-        var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
-        var matcher = pattern.exec(search);
-        var items = null;
-        if (null != matcher) {
-            try {
-                items = decodeURIComponent(decodeURIComponent(matcher[1]));
-            } catch (e) {
-                try {
-                    items = decodeURIComponent(matcher[1]);
-                } catch (e) {
-                    items = matcher[1];
-                }
-            }
-        }
-        return items;
-    };
 
 
     //获取url上的参数值的方法
