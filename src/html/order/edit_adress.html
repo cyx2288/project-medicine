@@ -35,20 +35,25 @@ function(){
 
        console.log(chooseAdressId);//当前选择地址ID
 
+        var thisAddressLength=chooseAdressId.length
+
        $.ajax({
             url:url() + '/storeArea',
             data:{
-                areaCode:chooseAdressId[1]
+                areaCode:chooseAdressId[thisAddressLength-1]
             },
             success:function(info){
                 console.log(info);
                 //将storeId存cookie
                 //$.cookie('storeId',info.data,{path:'/'});
                 $('.store_id').attr('data-storeId',info.data);
+
+                console.log('门店id='+info.data)
                 //存区域
                 $('.store_id').attr('data-AdressId',chooseAdressId)
             }
         })
+
 
      }
 
@@ -71,7 +76,7 @@ function(){
 
     <label class="yao_alignment_center" id="inDef">
         <span>设为默认</span>
-        <input type="checkbox" class="default_box" id="incheck">
+        <input type="checkbox" class="default_box" id="incheck" checked>
     </label>
 
 </div>

@@ -8,16 +8,24 @@ $(function(){
 	var	cneeMobile
 	var cneeName
 	var detailAddr
-	var isDefault = false
+	var isDefault = true;//默认选择
 	var id
 
+	console.log($.cookie("cneeArea").length>0)
+
+	console.log($.cookie("cneeArea"))
+
+
 	
-	if($.cookie("cneeArea") != null){
+	if($.cookie("cneeArea").length>0){//当前属于修改地址
 		$("#address_info").text($.cookie("cneeArea"));
 		id = $.cookie("adrId");
 		$("#inPh").val($.cookie("cneeMobile"));
 		$("#inNa").val($.cookie("cneeName"));
 		$("#addrDe").val($.cookie("detailAddr"));
+
+		console.log($.cookie("isDefault"))
+
 		if($.cookie("isDefault") == 0){
 			isDefault = false;
 			$("#incheck").prop("checked",false);
@@ -28,7 +36,6 @@ $(function(){
 			
 		}
 
-		
 		//获取地址是否默认状态	
 		$("#inDef").click(function(){
 			isDefault = !isDefault;
@@ -45,10 +52,16 @@ $(function(){
 	    	console.log(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList,id);
 	    	changeadr(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList,id)
 	    });
-	}else{
-		$("#inDef").click(function(){
-			isDefault = !isDefault;
-			console.log(isDefault)
+
+
+	}else{//新增地址
+
+		$("#inDef").click(function(e){
+
+			e.stopPropagation();
+
+			isDefault=$(this).find('input').is(':checked');
+
 		})
 		//地址保存提交
 	    $("#save").click(function(){
@@ -66,7 +79,7 @@ $(function(){
 	  		cneeMobile = $("#inPh").val();
             var storeIdList = $('.store_id').attr('data-storeid') || $.cookie('storeIdList');
             var areaAllCode = $('.store_id').attr('data-AdressId').split(',').join('|');
-            console.log($('.store_id').attr('data-storeid'));
+            //console.log($('.store_id').attr('data-storeid'));
             console.log(areaAllCode);
             console.log(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList);
 	    	saveadr(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList,areaAllCode);
@@ -118,7 +131,7 @@ $(function(){
 	    })
 
     }
-    //添加地址
+    //新增地址
     function saveadr(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeId,areaAllCode){
 	    $.ajax({
 	    	type:'POST',
@@ -135,7 +148,7 @@ $(function(){
 	        },
 	        success:function(res){
 	            console.log(res);  
-				location.href = "./choose_address.html"
+				location.href = "choose_address.html"
 	           
 	        },
             error: function() {

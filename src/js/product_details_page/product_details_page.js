@@ -25,6 +25,7 @@ $(function () {
 
     //门店ID
     var storeId = $.cookie('storeId');
+
     //var userId = plus.cookie('userId');
     var userId = $.cookie('userId');
     var buyCount = '';
