@@ -108,20 +108,23 @@ $(function(){
 	var widt = document.body.clientWidth -100
 	var heit = document.body.clientHeight -200
 	$(".addrArea").click(function(){
-		$(".personal_center_page").hide();
-		$(".bottom_tabbar").hide();
-		$(".distribution").show();
-		$(".distribution").css("width",document.body.clientWidth);
-		$(".distribution").css("height",document.body.clientHeight);
-		$(".distribution img").css("width",'100%');
-		//$(".distribution img").css("height",heit);
-		$(".distribution img").css("padding-top",100);
-		$(".distribution").click(function(){
-			$(".personal_center_page").show();
-			$(".bottom_tabbar").show();
-			$("this").hide();
-		})
+
+			$(".personal_center_page").hide();
+			$(".bottom_tabbar").hide();
+			$(".distribution").show();
+			$(".distribution").css("width", document.body.clientWidth);
+			$(".distribution").css("height", document.body.clientHeight);
+			$(".distribution img").css("width", '100%');
+			//$(".distribution img").css("height",heit);
+			$(".distribution img").css("padding-top", 100);
+		
 	});
+
+	$(".distribution").click(function () {
+		$(".personal_center_page").show();
+		$(".bottom_tabbar").show();
+		$(".distribution").hide();
+	})
 
 	
 })
