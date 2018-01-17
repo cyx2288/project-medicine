@@ -1,20 +1,8 @@
 
 $(function() {
 
-
-    if (window.plus) {
-        plusReady();
-    } else {
-        document.addEventListener('plusready', plusReady, false);
-    }
-
-    // H5 plus事件处理
-    function plusReady() {
-        // 设置cookie
-    }
-
     var urL = url();
-    var loginUrl = '/backUser/manager_login';
+    var loginUrl = '/backUser/login';
     var mobileNum;
     var psw;
     var userIds;
@@ -38,7 +26,6 @@ $(function() {
         if (psw == '') {
             return;
         }
-        checkPsw(psw);
         return;
     });
 
@@ -67,33 +54,26 @@ $(function() {
         $.ajax({
             type: 'post',
             url: urL + loginUrl,
+
             data: {
                 mobileNum: mobileNum,
-                loginPsw: psw
+                loginPsw: psw1
             },
             success: function (res) {
-                console.log(res);
-                if (res.status !== 200) {
-                    jfShowTips.toastShow({'text':res.msg});
-                    return;
+
+                if(res.status==200){
+
+                    $.cookie('bUserId',res.data.id , { expires: 30 ,path: '/'});
+
+                    $.cookie('bStoreId',res.data.storeId , { expires: 30 ,path: '/'});
+
+                    $.cookie('bType',res.data.buType , { expires: 30 ,path: '/'});
+
                 }
-                userIds = res.data.id;
-
-                buType=res.data.buType;
-
-                storeId=res.data.storeId;
-
-                $.cookie('userId', userIds , { expires: 30 ,path: '/'});
-
-                $.cookie('buType', buType , { expires: 30 ,path: '/'});
-
-                $.cookie('storeId', storeId , { expires: 30 ,path: '/'});
-
-                window.location.href = "../manager_order/order_list.html";
 
             },
-            error: function () {
-                console.log("登录失败")
+            error: function (res) {
+                console.log(res)
                 jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         });
@@ -108,13 +88,6 @@ $(function() {
             return false;
         }
     }
-    //验证密码
-    function checkPsw(psw) {
-        var reg = /^[\w]{6,12}$/;
-        if (!reg.test(psw)) {
-            jfShowTips.toastShow({'text':'密码为6-16位'});
-            return false;
-        }
-    }
+
 
 });
