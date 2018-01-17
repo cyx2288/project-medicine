@@ -129,7 +129,7 @@ $(function(){
                 });
             },
             error: function() {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }
@@ -165,7 +165,7 @@ $(function(){
         },
         success:function(info){
             if(info.status !== 200){
-                jfShowTips.toastShow(info.msg);
+                jfShowTips.toastShow({'text':info.msg});
                 return;
             };
             var html = template('yao_shadow_html',{list:info.data});
@@ -220,7 +220,7 @@ $(function(){
             },
             success:function(info){
                 if(info.status !== 200){
-                    jfShowTips.toastShow(info.msg);
+                    jfShowTips.toastShow({'text':info.msg});
                     console.log(info)
                     return;
                 };
@@ -276,7 +276,7 @@ $(function(){
                 });
             },
             error: function() {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
         })
     }

@@ -22,7 +22,7 @@ $(function(){
         },
         success:function(info){
             if(info.status !== 200){
-                jfShowTips.toastShow(info.msg);
+                jfShowTips.toastShow({'text':info.msg});
                 return;
             };
             var html = template('active_details',{list:info.data});
@@ -30,7 +30,7 @@ $(function(){
         },
         error: function(info) {
             console.log(info)
-            jfShowTips.toastShow('系统繁忙，请稍后再试')
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'})
         }
     })
 

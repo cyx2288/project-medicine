@@ -50,10 +50,10 @@ $(function(){
 									isDefault: isD
 								},
 								success:function(res){
-									jfShowTips.toastShow(res.msg)
+									jfShowTips.toastShow({'text':res.msg})
 								},
                                 error: function() {
-                                    jfShowTips.toastShow('系统繁忙，请稍后再试');
+                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                                 }
 							});
 		                    function deleteFn(){
@@ -120,7 +120,7 @@ $(function(){
 					//$.cookie("userId",detailAddr,{ path: '/' });
 					$.cookie("storeIdList",storeIdList,{ path: '/' });
 					$.cookie("adrId",adrId,{ path: '/' });
-					location.href = "./edit_adress.html"
+					location.href = "edit_adress.html"
 				})
 			});
             //跳转结算页
@@ -136,11 +136,21 @@ $(function(){
             
 	    },
         error: function() {
-            jfShowTips.toastShow('系统繁忙，请稍后再试');
+            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
         }
     });
 	
-	$("#addAdr").click(function(){
+	$("#addAdr").click(function(){//新增地址时，清空所有地址Cookie
+
+        $.cookie("cneeArea",'',{ path: '/' });
+        $.cookie("cneeMobile",'',{ path: '/' });
+        $.cookie("cneeName",'',{ path: '/' });
+        $.cookie("detailAddr",'',{ path: '/' });
+        $.cookie("isDefault",'',{ path: '/' });
+        //$.cookie("userId",detailAddr,{ path: '/' });
+        $.cookie("storeIdList",'',{ path: '/' });
+        $.cookie("adrId",'',{ path: '/' });
+
 		location.href="edit_adress.html"
 	});
 	

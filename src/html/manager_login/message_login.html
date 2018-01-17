@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="../../css/weuix.min.css">
+    <title>短信登陆</title>
+</head>
+<body>
+
+<div class="weui-cells weui-cells_form">
+<div class="weui-cell">
+
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入手机号号" id="phNum">
+    </div>
+</div>
+
+<div class="weui-cell weui-cell_vcode">
+
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="tel" placeholder="请输入验证码" id="sendMsgNum">
+    </div>
+    <div class="weui-cell__ft">
+        <button class="weui-vcode-btn">获取验证码</button>
+    </div>
+</div>
+</div>
+
+<div class="page-bd-15" style="margin-top: 30px">
+    <a class="weui-btn weui-btn_primary" id="verifyLogin">登录系统</a>
+</div>
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/libs/MD5.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/manager_login/message_login.js"></script>
+<script>
+
+</script>
+
+</body>
+</html>

@@ -27,7 +27,7 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                jfShowTips.toastShow(res.msg);
+	                jfShowTips.toastShow({'text':res.msg});
 	                return;
 	            };
 	            $(".login_name").html(res.data.loginName);
@@ -35,7 +35,7 @@ $(function(){
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 	        }
 	    })
 		//订单数量
@@ -49,18 +49,23 @@ $(function(){
 	        success:function(res){
 	            console.log(res);
 	            if(res.status !== 200){
-	                jfShowTips.toastShow(res.msg);
+	                jfShowTips.toastShow({'text':res.msg});
 	                return;
 	            };
 	            $("#ordNumAll").show();
 				$("#ordNumPend").show();
-	            $("#ordNumAll").text(res.data.allOrderCount);
+
+				if(res.data.allOrderCount>99){
+                    res.data.allOrderCount='99+'
+				}
+                $("#ordNumAll").text(res.data.allOrderCount);
+
 	            $("#ordNumPend").text(res.data.unpaidOrderCount);
 	            
 	        },
 	        error:function(res){
 	        	console.log(res);
-	        	jfShowTips.toastShow("系统繁忙，请稍后再试")
+	        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"})
 	        }
 	    })
 		 
@@ -93,7 +98,8 @@ $(function(){
 					location.href = "../../html/login/login_system.html"
 				}
 			}else{
-				location.href = $(this).attr("data_src")
+
+				//location.href = $(this).attr("data_src")
 			}
 		})
 	})
@@ -102,20 +108,23 @@ $(function(){
 	var widt = document.body.clientWidth -100
 	var heit = document.body.clientHeight -200
 	$(".addrArea").click(function(){
-		$(".personal_center_page").hide();
-		$(".bottom_tabbar").hide();
-		$(".distribution").show();
-		$(".distribution").css("width",document.body.clientWidth);
-		$(".distribution").css("height",document.body.clientHeight);
-		$(".distribution img").css("width",widt);
-		$(".distribution img").css("height",heit);
-		$(".distribution img").css("padding-top",100);
-		$(".distribution").click(function(){
-			$(".personal_center_page").show();
-			$(".bottom_tabbar").show();
-			$("this").hide();
-		})
+
+			$(".personal_center_page").hide();
+			$(".bottom_tabbar").hide();
+			$(".distribution").show();
+			$(".distribution").css("width", document.body.clientWidth);
+			$(".distribution").css("height", document.body.clientHeight);
+			$(".distribution img").css("width", '100%');
+			//$(".distribution img").css("height",heit);
+			$(".distribution img").css("padding-top", 100);
+		
 	});
+
+	$(".distribution").click(function () {
+		$(".personal_center_page").show();
+		$(".bottom_tabbar").show();
+		$(".distribution").hide();
+	})
 
 	
 })

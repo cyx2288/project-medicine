@@ -23,26 +23,29 @@
 
 function(){
 
-     shoppingCart.run({
-     api: '../../api/address.json',
-     type: 'get',
+     addressChoose.run({
      firstTargetDom:document.getElementById('address_info'),
-     'addressPart':true,//ture表示不分开显示地址,默认为false.表示分开显示地址
      fn:function() {
        addressSelect.hide();
 
        console.log(chooseAdressId);//当前选择地址ID
 
+      var thisAddressLength=chooseAdressId.length
+
         $.ajax({
             url:url() + '/storeArea',
             data:{
-                areaCode:chooseAdressId[1]
+                areaCode:chooseAdressId[thisAddressLength-1]
             },
             success:function(info){
+
+              console.log({
+
+                areaCode:chooseAdressId[thisAddressLength-1]
+            })
                 console.log(info);
                 //将storeId存cookie
                 $.cookie('storeId',info.data,{path:'/'});
-
                 //获取地址
                 var addressHtml = $('#address_info').text();
                 //存cookie
@@ -57,7 +60,7 @@ function(){
 
 })">
         <p>送至：</p>
-        <p><img src="../../images/icon_AK_address.png"><span id="address_info"></span></p>
+        <p><img src="../../images/icon_AK_address.png"><span id="address_info">请选择地址</span></p>
     </div>
 
 
@@ -203,37 +206,35 @@ function(){
 
 </div>
 
-
-
-<!--底部结算-->
+    <!--底部结算-->
 <div class="shopping_box_bottom">
-    <div class="bottom_bar"></div>
-    <div class="bottom_go_buy yao_alignment_center">
-        <label>
-            <input class="aui-radio allcheck" type="checkbox" id="checkAll">
-            <span>全选</span>
-        </label>
+        <div class="bottom_bar"></div>
+        <div class="bottom_go_buy yao_alignment_center">
+            <label>
+                <input class="aui-radio allcheck" type="checkbox" id="checkAll">
+                <span>全选</span>
+            </label>
 
-        <div>
-            <p><span>合计：</span><span id="allMoney">0</span></p>
+            <div>
+                <p><span>合计：</span><span id="allMoney">¥0.00</span></p>
 
-            <!--<p><span>总额：</span><span id="all2"></span></p>-->
+                <p><span>总额：</span><span id="totalMoney">¥0.00</span></p>
+            </div>
+
+            <a id="go_buy" data-src="../order/submit_order_page.html">去结算</a>
         </div>
 
-        <a id="goOrder">去结算</a>
+        <div class="bottom_delete yao_alignment_center">
+
+            <label>
+                <input class="aui-radio allcheck" type="checkbox">
+                <span>全选</span>
+            </label>
+
+            <a class="delete_btn">删除</a>
+
+        </div>
     </div>
-
-    <div class="bottom_delete yao_alignment_center">
-
-        <label>
-            <input class="aui-radio allcheck" type="checkbox"/>
-            <span>全选</span>
-        </label>
-
-        <a class="delete_btn">删除</a>
-
-    </div>
-</div>
 
 
 </div>
@@ -241,26 +242,32 @@ function(){
 <footer class="bottom_tabbar">
     <div class="tab_box"></div>
     <div class="bottom_tabbar_contain yao_alignment_center">
-        <a href="../homepage/main.html">
+        <a class="current_page" href="../homepage/main.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_home_gray.png">
                 <img src="../../icon/icon_mian_home_green.png">
             </div>
             <p>首页</p>
         </a>
-        <a href="../active/active_page.html">
+        <a class="current_page" href="../active/active_page.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_active_gray.png">
                 <img src="../../icon/icon_main_active_green.png">
+
             </div>
             <p>活动</p>
         </a>
-        <a class="current_page">
+        <a class="current_page on" href="../shopping_cart/shopping_cart_main.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_shopping_gray.png">
                 <img src="../../icon/icon_main_shopping_green.png">
             </div>
             <p>购物车</p>
         </a>
-        <a href="../person_center/person_main_login.html">
-            <div class="tabbar_icon"><img src="../../icon/icon_main_individual_green.png">
+        <a class="current_page" href="../person_center/person_main_login.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_mian_individual_gray.png">
+                <img src="../../icon/icon_main_individual_green.png">
                 <p>个人中心</p>
             </div>
         </a>
@@ -297,12 +304,12 @@ function(){
                         <div>请选择</div>
 
                         <div></div>
-<!--
-                        <div></div>
 
                         <div></div>
 
-                        <div></div>-->
+                        <div></div>
+
+                        <div></div>
 
                     </div>
 
@@ -310,11 +317,11 @@ function(){
 
                     <div class="address"></div>
 
-                   <!-- <div class="address"></div>
+                   <div class="address"></div>
 
                     <div class="address"></div>
 
-                    <div class="address"></div>-->
+                    <div class="address"></div>
 
                 </div>
 

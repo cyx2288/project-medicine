@@ -87,26 +87,29 @@
 
 function(){
 
-     shoppingCart.run({
-     api: '../../api/address.json',
-     type: 'get',
+     addressChoose.run({
      firstTargetDom:document.getElementById('address_info'),
-     'addressPart':true,//ture表示不分开显示地址
      fn:function() {
        addressSelect.hide();
 
-       console.log(chooseAdressId);//当前选择地址ID
+       console.log('选择地址id:'+chooseAdressId);//当前选择地址ID
+
+       var thisAddressLength=chooseAdressId.length
 
         $.ajax({
             url:url() + '/storeArea',
             data:{
-                areaCode:chooseAdressId[1]
+                areaCode:chooseAdressId[thisAddressLength-1]
             },
             success:function(info){
+
+              console.log({
+
+                areaCode:chooseAdressId[thisAddressLength-1]
+            })
                 console.log(info);
                 //将storeId存cookie
                 $.cookie('storeId',info.data,{path:'/'});
-
                 //获取地址
                 var addressHtml = $('#address_info').text();
                 //存cookie
@@ -120,7 +123,7 @@ function(){
 
 })">
     <p>送至：</p>
-    <p><img src="../../images/icon_AK_address1.png"><span id="address_info"></span></p>
+    <p><img src="../../images/icon_AK_address1.png"><span id="address_info">请选择地址</span></p>
 </div>
 
 
@@ -317,11 +320,17 @@ function(){
                         <div>请选择</div>
 
                         <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
 
                     </div>
 
                     <div class="address"></div>
 
+                    <div class="address"></div>
+                    <div class="address"></div>
+                    <div class="address"></div>
                     <div class="address"></div>
 
                 </div>
@@ -438,7 +447,7 @@ function(){
 
 
 
-
+    AnkangMain.CompatibleIOS11(document.getElementsByClassName('product_page')[0],'compatible_active_change');
 
 
 

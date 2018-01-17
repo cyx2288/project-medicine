@@ -14,6 +14,10 @@
 
 </head>
 <body>
+
+<div class="compatible_active">
+
+
 <!--活动页面banner部分-->
 <!--活动页面banner-->
 <div class="active_banner1">
@@ -151,34 +155,40 @@
     <!--<img src="../../images/icon_active_banner2.jpg">-->
 </div>
 
+
+</div>
 <!--底部导航-->
 
 <footer class="bottom_tabbar">
     <div class="tab_box"></div>
     <div class="bottom_tabbar_contain yao_alignment_center">
-        <a href="../homepage/main.html">
+        <a class="current_page" href="../homepage/main.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_home_gray.png">
                 <img src="../../icon/icon_mian_home_green.png">
-
             </div>
             <p>首页</p>
         </a>
-        <a href="#" class="current_page">
+        <a class="current_page on" href="../active/active_page.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_active_gray.png">
                 <img src="../../icon/icon_main_active_green.png">
 
             </div>
             <p>活动</p>
         </a>
-        <a href="#" class="shoppBtn">
+        <a class="current_page" href="../shopping_cart/shopping_cart_main.html" onclick="commonFn.logOn()">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_shopping_gray.png">
                 <img src="../../icon/icon_main_shopping_green.png">
             </div>
             <p>购物车</p>
         </a>
-        <a href="../person_center/person_main_login.html">
-            <div class="tabbar_icon"><img src="../../icon/icon_main_individual_green.png">
-            <p>个人中心</p>
+        <a class="current_page" href="../person_center/person_main_login.html" onclick="commonFn.logOn()">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_mian_individual_gray.png">
+                <img src="../../icon/icon_main_individual_green.png">
+                <p>个人中心</p>
             </div>
         </a>
     </div>
@@ -191,6 +201,10 @@
 <script src="../../js/ak_medicine.min.js"></script>
 <script src="../../js/common.js"></script>
 <script src="../../js/active/active_page.js"></script>
+<script>
+    //兼容ios11 fixed闪现问题
+    AnkangMain.CompatibleIOS11(document.getElementsByClassName('compatible_active')[0],'compatible_active_change');
+</script>
 
 <script type="text/html" id="active_page_html">
     {{if list}}

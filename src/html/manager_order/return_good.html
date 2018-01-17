@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+
+
+    <meta charset="UTF-8">
+    <title>修改订单信息</title>
+    <link rel="stylesheet" href="../../css/weuix.min.css">
+
+</head>
+<body>
+
+<div class="weui_cells">
+
+    <div class="weui_cells_title">如有商品需要退货，请去掉商品左边的勾选;</div>
+
+    <div class="weui_cells weui_cells_checkbox" id="return_goods">
+        <label class="weui_cell weui_check_label goodsChoose">
+            <div class="weui_cell_hd">
+                <input type="checkbox" class="weui_check goosbox" name="checkbox1" checked="checked">
+                <i class="weui_icon_checked"></i>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>【白云山】板蓝根颗粒，￥10.60x2</p>
+            </div>
+        </label>
+        <label class="weui_cell weui_check_label goodsChoose">
+            <div class="weui_cell_hd">
+                <input type="checkbox" name="checkbox1" class="weui_check goosbox">
+                <i class="weui_icon_checked"></i>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>【白云山】板蓝根颗粒，￥10.60x2</p>
+            </div>
+        </label>
+        <label class="weui_cell weui_check_label goodsChoose" for="s13">
+            <div class="weui_cell_hd">
+                <input type="checkbox" name="checkbox1" class="weui_check goosbox" id="s13">
+                <i class="weui_icon_checked"></i>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>【白云山】板蓝根颗粒，￥10.60x2</p>
+            </div>
+        </label>
+        <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+                <p>合计：</p>
+            </div>
+            <div class="weui_cell_ft" id="shouldPay">42.20元</div>
+        </div>
+    </div>
+
+    <div class="weui_cell weui_cell_select weui_select_after">
+        <div class="weui_cell_hd">
+            <label for="" class="weui_label">用券：</label>
+        </div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <select class="weui_select" name="select2">
+                <option value="1">无</option>
+                <option value="2">满20元减5元，2016/12/24 前</option>
+                <option value="3">满50元减13元，2016/12/24 前</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label">用红包：</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="number" pattern="[0-9]*" placeholder="10.00">
+        </div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>余额：</p>
+        </div>
+        <div class="weui_cell_ft">59.55元</div>
+    </div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>还需支付：</p>
+        </div>
+        <div class="weui_cell_ft">￥32.20</div>
+    </div>
+
+    <div class="weui_cells_tips">说明：商户操作退货的，已付款的原路退回，还需支付的只支持刷卡或现金。</div>
+
+    <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+            <a href="../order_details_01.html" class="weui_btn weui_btn_mini weui_btn_default">取消</a>
+        </div>
+        <div class="weui_cell_ft">
+            <a href="../order_details_02.html" class="weui_btn weui_btn_mini weui_btn_primary">修改并提交</a>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/manager_order/return_good.js"></script>
+
+<script type="text/html" id="goodsList">
+
+    {{if list}}
+    {{each list as value}}
+
+    <label class="weui_cell weui_check_label goodsChoose">
+        <div class="weui_cell_hd">
+            <input type="checkbox" class="weui_check" name="checkbox goosbox" checked="checked">
+            <i class="weui_icon_checked"></i>
+        </div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <p>【<span>{{value.brandName}}</span>】<span>{{value.goodName}}</span>，<span class="price">￥{{value.sellingPrice}}</span><span class="num">X{{value.goodCount}}</span></p>
+        </div>
+    </label>
+
+    {{/each}}
+    {{/if}}
+</script>
+
+
+<script type="text/html" id="couponList">
+
+    {{if list}}
+    {{each list as value}}
+
+    <option>{{value.couponType}}，{{value.usableDate}}前</option>
+
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>

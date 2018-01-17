@@ -13,6 +13,8 @@
 <body>
 <div class="order_page">
 
+    <div class="order_content">
+
 <div class="address_list checked_address yao_shadow">
 
     <div class="address_select yao_alignment_middle">
@@ -28,9 +30,7 @@
     </div>
 </div>
 
-
-
-    <div class="check_order_main order_main yao_shadow">
+<div class="check_order_main order_main yao_shadow">
 
     <div class="productMsg">
         <!--<div class="product yao_alignment_middle">
@@ -76,6 +76,8 @@
 
 
 </div>
+    </div>
+
 
     <div class="order_bottom">
     <div class="bottom_bar"></div>
@@ -99,6 +101,14 @@
 <script src="../../js/ak_medicine.min.js"></script>
 <script src="../../js/common.js"></script>
 <script src="../../js/order/check_order_page.js"></script>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+
+<script>
+    AnkangMain.CompatibleIOS11(document.getElementsByClassName('order_content')[0],'compatible_active_change')
+
+
+</script>
+
 
 
 <script type="text/html" id="product_html">

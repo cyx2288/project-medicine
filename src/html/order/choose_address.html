@@ -126,7 +126,7 @@
     </div>-->
 </div>
 
-<a class="new_address" href="../order/edit_adress.html">
+<a class="new_address" id="addAdr">
     <div class="address_bar"></div>
     <div class="add_address">新增收货地址</div>
 </a>
@@ -160,12 +160,12 @@
             </div>
        	</div>
         <div class="btn_area yao_alignment_right">
-            <a href="#" class="changeAd" 
+            <a  class="changeAd"
             	data_id="{{value.id}}" data_isD="{{value.isDefault? 1:0}}" data_cne="{{value.cneeArea}}"
             	data_detail="{{value.detailAddr}}" data_phe="{{value.cneeMobile}}" data_na="{{value.cneeName}}" data_store="{{value.storeId}}">
                 <img src="../../images/personal_edit.png">
                 <span>修改</span>
-            </a>
+            </a >
             <a class="delete_address" data_id="{{value.id}}" data_isD="{{value.isDefault? 1:0}}">
                 <img src="../../images/personal_delete.png">
                 <span>删除</span>

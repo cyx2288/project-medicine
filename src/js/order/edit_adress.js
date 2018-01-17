@@ -8,15 +8,26 @@ $(function(){
 	var	cneeMobile
 	var cneeName
 	var detailAddr
-	var isDefault = false
+	var isDefault = true;//默认选择
 	var id
+
+	console.log($.cookie("cneeArea"))
+
+	console.log($.cookie("cneeArea"))
+
+
 	
-	if($.cookie("cneeArea") != null){
+	if($.cookie("cneeArea")){//当前属于修改地址
+
+		console.log($.cookie("cneeArea"))
 		$("#address_info").text($.cookie("cneeArea"));
 		id = $.cookie("adrId");
 		$("#inPh").val($.cookie("cneeMobile"));
 		$("#inNa").val($.cookie("cneeName"));
 		$("#addrDe").val($.cookie("detailAddr"));
+
+		console.log($.cookie("isDefault"))
+
 		if($.cookie("isDefault") == 0){
 			isDefault = false;
 			$("#incheck").prop("checked",false);
@@ -27,7 +38,6 @@ $(function(){
 			
 		}
 
-		
 		//获取地址是否默认状态	
 		$("#inDef").click(function(){
 			isDefault = !isDefault;
@@ -35,6 +45,7 @@ $(function(){
 		})
 		//地址更改
 	    $("#save").click(function(){
+
 	    	cneeArea = $("#address_info").text();    
 	    	cneeName = $("#inNa").val();
 	  		detailAddr = $("#addrDe").val();
@@ -43,17 +54,25 @@ $(function(){
 	    	console.log(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList,id);
 	    	changeadr(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList,id)
 	    });
-	}else{
-		$("#inDef").click(function(){
-			isDefault = !isDefault;
-			console.log(isDefault)
+
+
+	}else{//新增地址
+
+		$("#inDef").click(function(e){
+
+			e.stopPropagation();
+
+			isDefault=$(this).find('input').is(':checked');
+
 		})
 		//地址保存提交
 	    $("#save").click(function(){
 
+
+
 	    	//判断详细地址是否为空
 			if($('#addrDe').val() == ''){
-				jfShowTips.toastShow("请您填写详细地址");
+				jfShowTips.toastShow({'text':'请您填写详细地址'});
 				return;
 			}
 	    	cneeArea = $("#address_info").text();    
@@ -62,7 +81,7 @@ $(function(){
 	  		cneeMobile = $("#inPh").val();
             var storeIdList = $('.store_id').attr('data-storeid') || $.cookie('storeIdList');
             var areaAllCode = $('.store_id').attr('data-AdressId').split(',').join('|');
-            console.log($('.store_id').attr('data-storeid'));
+            //console.log($('.store_id').attr('data-storeid'));
             console.log(areaAllCode);
             console.log(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList);
 	    	saveadr(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeIdList,areaAllCode);
@@ -106,15 +125,15 @@ $(function(){
 				//$.cookie("userId", '',{ expires: -1, path: '/' });
 				//$.cookie("storeIdList", '',{ expires: -1 , path: '/'});
 				$.cookie("adrId", '',{ expires: -1 , path: '/'});
-	            location.href = "./choose_address.html"
+	            location.href = "choose_address.html"
 	        },
             error: function() {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
 	    })
 
     }
-    //添加地址
+    //新增地址
     function saveadr(cneeArea,cneeMobile,cneeName,detailAddr,isDefault,userId,storeId,areaAllCode){
 	    $.ajax({
 	    	type:'POST',
@@ -131,11 +150,11 @@ $(function(){
 	        },
 	        success:function(res){
 	            console.log(res);  
-				location.href = "./choose_address.html"
+				location.href = "choose_address.html"
 	           
 	        },
             error: function() {
-                jfShowTips.toastShow('系统繁忙，请稍后再试');
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
 	    })
 
@@ -145,7 +164,7 @@ $(function(){
 	function checkTel(tel){
         var reg = /^1[3|4|5|7|8][0-9]{9}$/;
         if(!reg.test(tel)){
-            jfShowTips.toastShow('手机号有误，请重新输入');
+            jfShowTips.toastShow({'text':'手机号有误，请重新输入'});
             return false;
         }
     }

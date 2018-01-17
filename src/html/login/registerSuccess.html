@@ -62,32 +62,36 @@
 
 			function(){
 			
-			     shoppingCart.run({
-			     api: '../../api/address.json',
-			     type: 'get',
+			     LoginAddressChoose.run({
+
 			     firstTargetDom:document.getElementById('message_address_select1'),
 			     lastTargetDom:document.getElementById('message_address_select2'),
 			     fn:function() {
 			       addressSelect.hide();
 			        console.log(chooseAdressId);//当前选择地址ID
 
-			        $.ajax({
-                    url:url() + '/storeArea',
-                    data:{
-                        areaCode:chooseAdressId[1]
-                    },
-                    success:function(info){
-                        console.log(info);
-                        //将storeId存cookie
-                        $.cookie('storeId',info.data,{path:'/'});
+			        var thisAddressLength=chooseAdressId.length
 
-                        //获取地址
-                        var addressHtml = $('#message_address_select2').text();
-                        //存cookie
-                        $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+        $.ajax({
+            url:url() + '/storeArea',
+            data:{
+                areaCode:chooseAdressId[thisAddressLength-1]
+            },
+            success:function(info){
 
-                    }
-                 })
+              console.log({
+
+                areaCode:chooseAdressId[thisAddressLength-1]
+            })
+                console.log(info);
+                //将storeId存cookie
+                $.cookie('storeId',info.data,{path:'/'});
+                //获取地址
+                var addressHtml = $('#address_info').text();
+                //存cookie
+                $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
+            }
+        })
 			
 			     }
 			
@@ -104,7 +108,7 @@
 
                 </div>
 
-                <div class="message_address_select yao_alignment_center">
+               <div class="message_address_select yao_alignment_center">
 
                     <div>街道</div>
 
@@ -154,12 +158,12 @@
                         <div>请选择</div>
 
                         <div></div>
-                        <!--
-                                                <div></div>
 
-                                                <div></div>
+                        <div></div>
 
-                                                <div></div>-->
+                        <div></div>
+
+                        <div></div>
 
                     </div>
 
@@ -167,11 +171,11 @@
 
                     <div class="address"></div>
 
-                    <!-- <div class="address"></div>
+                    <div class="address"></div>
 
                      <div class="address"></div>
 
-                     <div class="address"></div>-->
+                     <div class="address"></div>
 
                 </div>
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no, email=no">
+
+
+    <meta charset="UTF-8">
+    <title>订单列表</title>
+    <link rel="stylesheet" href="../../css/weuix.min.css">
+
+</head>
+<body>
+
+<table class="weui-table weui-border-tb" >
+    <thead>
+    <tr><th>订单金额</th><th>支付方式</th><th>配送人/状态</th></tr>
+    </thead>
+    <tbody id="orderListMain">
+    <tr><td>订单金额：￥98.99</td><td>微信支付</td><td><a><span>配送中</span></a></td></tr>
+    <tr><td>订单金额：￥48.99</td><td>到付</td><td><a href="order_list_04.html">王小飞 送达</a></td></tr>
+    <tr><td>订单金额：￥48.92</td><td>支付宝支付</td><td><a>李四 送达</a></td></tr>
+    <tr><td>订单金额：￥98.99</td><td>微信支付</td><td><a>王小飞 送达</a></td></tr>
+    <tr><td>订单金额：￥48.99</td><td>到付</td><td><a>李四 送达</a></td></tr>
+    <tr><td>订单金额：￥48.92</td><td>支付宝支付</td><td><a>客户取消订单</a></td></tr>
+    </tbody>
+</table>
+
+
+
+
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/manager_order/order_list.js"></script>
+
+<script type="text/html" id="orderList">
+
+    {{if list}}
+    {{each list as value}}
+    <tr>
+        <td>订单金额：¥<span>{{value.oderAmount}}</span></td>
+        <td>{{value.payMode}}</td>
+        <td><a href="order_details.html?id={{value.id}}"><span>{{value.buName}}</span><span>{{value.status}}</span></a></td>
+    </tr>
+    {{/each}}
+    {{/if}}
+
+</script>
+</body>
+</html>

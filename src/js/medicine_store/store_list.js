@@ -12,7 +12,7 @@ $(function(){
         success:function(res){
             console.log(res);
             if(res.status !== 200){
-                jfShowTips.toastShow(res.msg);
+                jfShowTips.toastShow({'text':res.msg});
                 return;
             };
             var html = template('storeList',{list:res.data});
@@ -25,7 +25,7 @@ $(function(){
         },
         error:function(res){
         	console.log(res);
-        	jfShowTips.toastShow("系统繁忙，请稍后再试");
+        	jfShowTips.toastShow({'text':"系统繁忙，请稍后再试"});
         }
     })
 

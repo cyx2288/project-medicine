@@ -12,9 +12,10 @@
 <body>
 
 <div class="personal_center_page">
+
     <div class="result_page">
         <div class="result_title">
-            <div class="logged_pic"><img src="../../images/userImg.png"></div>
+            <div class="logged_pic"><img src="../../images/icon_personal_logged.png"></div>
             <div class="login_name"></div>
             <div class="show_pic">安康快药</div>
             <div class="login_statu"><span id="loguser">登录</span>/<span id="registration">注册</span></div>
@@ -43,7 +44,7 @@
             <img src="../../images/personal_refund.png">
             <p>已退款</p>
         </a>-->
-        <a class="more oncl" href="my_order.html" >
+        <a class="more oncl" href="my_order.html" data_src="my_order.html">
             <img src="../../images/personal_all.png">
             <p>全部订单></p>
             <span id="ordNumAll"></span>
@@ -58,11 +59,11 @@
         </div>
 
         <div class="yao_alignment_middle lists">
-            <a href="#" data_src="../../html/person_center/my_address.html" class="oncl">
+            <a href="../../html/person_center/my_address.html">
                 <img src="../../images/personal_car.png">
                 <p>收货地址</p>
             </a>
-            <a href="#" data_src="my_coupon.html" class="oncl">
+            <a href="my_coupon.html" data_src="">
                 <img src="../../images/personal_card_coupons.png">
                 <p>我的卡券包</p>
             </a>
@@ -82,20 +83,20 @@
         </div>
 
         <div class="yao_alignment_middle lists">
-            <a href="#" class="addrArea">
+            <a href="javascript:" class="addrArea">
                 <img src="../../images/personal_location.png">
                 <p>配送区域</p>
             </a>
-            <a href="#" data_src="award.html" class="oncl">
+            <a href="award.html" class="oncl">
                 <img src="../../images/personal_boon.png">
                 <p>实惠与奖励</p>
             </a>
-            <a href="#" data_src="message.html" class="oncl" >
+            <a href="message.html" class="oncl" >
                 <img src="../../images/personal_news.png">
                 <p>我的消息</p>
             </a>
 
-            <a href="#" data_src="feedback.html" class="oncl">
+            <a href="feedback.html" class="oncl">
                 <img src="../../images/personal_feedback.png">
                 <p>意见反馈</p>
             </a>
@@ -118,28 +119,32 @@
 <footer class="bottom_tabbar">
     <div class="tab_box"></div>
     <div class="bottom_tabbar_contain yao_alignment_center">
-        <a href="../homepage/main.html">
+        <a class="current_page" href="../homepage/main.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_home_gray.png">
                 <img src="../../icon/icon_mian_home_green.png">
-
             </div>
             <p>首页</p>
         </a>
-        <a href="../active/active_page.html">
+        <a class="current_page" href="../active/active_page.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_active_gray.png">
                 <img src="../../icon/icon_main_active_green.png">
 
             </div>
             <p>活动</p>
         </a>
-        <a href="#" class="oncl" data_src="../shopping_cart/shopping_cart_main.html">
+        <a class="current_page" href="../shopping_cart/shopping_cart_main.html">
             <div class="tabbar_icon">
+                <img src="../../icon/icon_main_shopping_gray.png">
                 <img src="../../icon/icon_main_shopping_green.png">
             </div>
             <p>购物车</p>
         </a>
-        <a class="current_page">
-            <div class="tabbar_icon"><img src="../../icon/icon_main_individual_green.png">
+        <a class="current_page on" href="../person_center/person_main_login.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_mian_individual_gray.png">
+                <img src="../../icon/icon_main_individual_green.png">
                 <p>个人中心</p>
             </div>
         </a>

@@ -19,10 +19,8 @@
 
 function(){
 
-     shoppingCart.run({
-     api: '../../api/address.json',
-     type: 'get',
-     lastTargetDom:document.getElementById('address_info'),
+     addressChoose.run({
+     firstTargetDom:document.getElementById('address_info'),
      fn:function() {
        addressSelect.hide();
         console.log(chooseAdressId);//当前选择地址ID
@@ -58,6 +56,8 @@ function(){
         </a>
     </div>
 </div>
+
+<div class="medicine_box">
 
 <!--banner轮播-->
 
@@ -501,38 +501,41 @@ function(){
 
 function(){
 
-     shoppingCart.run({
-     api: '../../api/address.json',
-     type: 'get',
-     lastTargetDom:document.getElementById('address_info'),
+     addressChoose.run({
+     firstTargetDom:document.getElementById('address_info'),
      fn:function() {
        addressSelect.hide();
         console.log(chooseAdressId);//当前选择地址ID
 
+        var thisAddressLength=chooseAdressId.length
+
         $.ajax({
             url:url() + '/storeArea',
             data:{
-                areaCode:chooseAdressId[1]
+                areaCode:chooseAdressId[thisAddressLength-1]
             },
             success:function(info){
+
+              console.log({
+
+                areaCode:chooseAdressId[thisAddressLength-1]
+            })
                 console.log(info);
                 //将storeId存cookie
                 $.cookie('storeId',info.data,{path:'/'});
-
                 //获取地址
                 var addressHtml = $('#address_info').text();
                 //存cookie
                 $.cookie('addressHtml',addressHtml,{path:'/',expires:30});
-
             }
         })
-
-     }     })
+     }
+  })
 }
 
 })">
     <span>配送至：</span>
-    <span class="address_info" id="address_info"></span>
+    <span class="address_info" id="address_info">请选择地址</span>
 </div>
 
 
@@ -566,8 +569,20 @@ function(){
 
                         <div></div>
 
+                        <div></div>
+
+                        <div></div>
+
+                        <div></div>
+
 
                     </div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
+
+                    <div class="address"></div>
 
                     <div class="address"></div>
 
@@ -592,27 +607,40 @@ function(){
 
 <p class="certificate_tips">互联网药品交易服务资格证书：京C2016888</p>
 
-
+</div>
 <!--底部导航-->
 
 <footer class="bottom_tabbar">
     <div class="tab_box"></div>
     <div class="bottom_tabbar_contain yao_alignment_center">
-        <a href="#" class="current_page">
-            <div class="tabbar_icon"><img src="../../icon/icon_mian_home_green.png"></div>
+        <a class="current_page on">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_home_gray.png">
+                <img src="../../icon/icon_mian_home_green.png">
+            </div>
             <p>首页</p>
         </a>
-        <a href="../active/active_page.html">
-            <div class="tabbar_icon"><img src="../../icon/icon_main_active_green.png"></div>
+        <a class="current_page" href="../active/active_page.html">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_active_gray.png">
+                <img src="../../icon/icon_main_active_green.png">
+
+            </div>
             <p>活动</p>
         </a>
-        <a href="../shopping_cart/shopping_cart_main.html" class="shoppBtn">
-            <div class="tabbar_icon"><img src="../../icon/icon_main_shopping_green.png"></div>
+        <a class="current_page" href="../shopping_cart/shopping_cart_main.html" onclick="commonFn.logOn()">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_main_shopping_gray.png">
+                <img src="../../icon/icon_main_shopping_green.png">
+            </div>
             <p>购物车</p>
         </a>
-        <a href="../person_center/person_main_login.html">
-            <div class="tabbar_icon"><img src='../../icon/icon_main_individual_green.png'></div>
-            <p>个人中心</p>
+        <a class="current_page" href="../person_center/person_main_login.html" onclick="commonFn.logOn()">
+            <div class="tabbar_icon">
+                <img src="../../icon/icon_mian_individual_gray.png">
+                <img src="../../icon/icon_main_individual_green.png">
+                <p>个人中心</p>
+            </div>
         </a>
     </div>
 </footer>
@@ -643,6 +671,9 @@ function(){
 
     //点穿问题
     jfProductDetails.clickThrough('delivery_address','address')
+
+    //兼容ios11 fixed闪现问题
+    AnkangMain.mainCompatibleIOS11();
 
 
 
