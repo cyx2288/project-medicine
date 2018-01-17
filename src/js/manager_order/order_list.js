@@ -3,13 +3,13 @@ $(function() {
 
     var urL = url();
 
-    var orderList = 'backOrder/list';//订单列表
+    var orderList = '/backOrder/list';//订单列表
 
-    var userId = $.cookie("userId");
+    var userId = $.cookie("bUserId");
 
-    var buType = $.cookie("buType");
+    var storeId = $.cookie("bStoreId");
 
-    var storeId = $.cookie("storeId");
+    var buType = $.cookie("bType");
 
     //订单列表
     $.ajax({
@@ -20,6 +20,7 @@ $(function() {
             buType: buType,
             storeId: storeId,
             pageNum: 1
+
         },
         success: function (res) {
 

@@ -18,14 +18,23 @@
     <tr><th>订单金额</th><th>支付方式</th><th>配送人/状态</th></tr>
     </thead>
     <tbody id="orderListMain">
-    <tr><td>订单金额：￥98.99</td><td>微信支付</td><td><a><span>配送中</span></a></td></tr>
-    <tr><td>订单金额：￥48.99</td><td>到付</td><td><a href="order_list_04.html">王小飞 送达</a></td></tr>
-    <tr><td>订单金额：￥48.92</td><td>支付宝支付</td><td><a>李四 送达</a></td></tr>
-    <tr><td>订单金额：￥98.99</td><td>微信支付</td><td><a>王小飞 送达</a></td></tr>
-    <tr><td>订单金额：￥48.99</td><td>到付</td><td><a>李四 送达</a></td></tr>
-    <tr><td>订单金额：￥48.92</td><td>支付宝支付</td><td><a>客户取消订单</a></td></tr>
+    <tr><td>￥98.99</td><td>微信支付</td><td><a><span>配送中</span></a></td></tr>
+    <tr><td>￥48.99</td><td>到付</td><td><a href="order_list_04.html">王小飞 送达</a></td></tr>
+    <tr><td>￥48.92</td><td>支付宝支付</td><td><a>李四 送达</a></td></tr>
+    <tr><td>￥98.99</td><td>微信支付</td><td><a>王小飞 送达</a></td></tr>
+    <tr><td>￥48.99</td><td>到付</td><td><a>李四 送达</a></td></tr>
+    <tr><td>￥48.92</td><td>支付宝支付</td><td><a>客户取消订单</a></td></tr>
     </tbody>
 </table>
+<div class="page__bd">
+    <div class="weui-loadmore">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
+    </div>
+    <div class="weui-loadmore weui-loadmore_line" style="display:none">
+        <span class="weui-loadmore__tips">暂无数据</span>
+    </div>
+</div>
 
 
 
@@ -42,7 +51,7 @@
     {{if list}}
     {{each list as value}}
     <tr>
-        <td>订单金额：¥<span>{{value.oderAmount}}</span></td>
+        <td>¥<span>{{value.oderAmount}}</span></td>
         <td>{{value.payMode}}</td>
         <td><a href="order_details.html?id={{value.id}}"><span>{{value.buName}}</span><span>{{value.status}}</span></a></td>
     </tr>

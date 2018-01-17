@@ -491,6 +491,9 @@ $(function () {
             orderAux: orderAuxobj
         }
 
+     console.log(orderObj1)
+
+
         //提交订单
         $.ajax({
             url: urL + orderCreate,
@@ -591,9 +594,7 @@ $(function () {
 
                     orderGoodsList = [];
                     for (var i = 0; i < orderGoodData.length; i++) {
-                        if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
-                            $('#product_list_meal' + i).addClass('repertory');
-                        }
+
 
 
                         orderGoodsList.push(
@@ -660,10 +661,6 @@ $(function () {
 
                     orderGoodsList = [];
                     for (var i = 0; i < orderGoodData.length; i++) {
-                        if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
-                            $('#product_list_meal' + i).addClass('repertory');
-                        }
-
 
                         orderGoodsList.push(
                             {
@@ -754,72 +751,6 @@ $(function () {
                             ticketsListInfo();//优惠券
 
                             RedPackageInfo();//红包信息
-                            /*
-                            * TODO
-                            * 两位小数
-                            * */
-                            /*$('.fixed_price span:eq(1)').html('￥' + totalPrices);
-                            $('.fixed_order span:eq(1)').html('￥' + totalPrices);
-                            amountPayable = totalPrices;
-
-                            //优惠券:condition:满足条件,couponId:优惠券ID,couponType:优惠券类型（1:立减；2：满减）,"deduction": 抵扣金额,"usableDate": "优惠券过期时间",
-                            var couponId, condition, usableDate, deduction;
-
-                            redPackmoney = parseFloat($('.RedPackage input').val());
-                            //优惠券
-                            $.ajax({
-                                url: urL + availableList,
-                                data: {
-                                    userId: userId,
-                                    orderTotal: totalPrices
-                                },
-                                success: function (info) {
-                                    console.log(info);
-                                    var html = template('tickets_option', {list: info.data});
-                                    $('.tickets select').append(html);
-
-                                    //获取当前减去红包的金额
-                                    amountPayable = parseFloat($('.fixed_order span:eq(1)').text().substring(1));
-                                    console.log(amountPayable);
-                                    //优惠券选择
-                                    $('#tickets_select').bind('change', function () {
-                                        couponId = $('#tickets_select option:selected').attr('data-couponId');
-                                        condition = parseFloat($('#tickets_select option:selected').attr('data-conditions')) || 0;
-                                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                                        usableDate = $('#tickets_select option:selected').attr('data-usableDate');
-
-                                        //判断是否小于当前的支付金额
-                                        //获取当前
-                                        console.log((amountPayable - deduction));
-                                        console.log(deduction);
-                                        console.log(amountPayable);
-                                        console.log((deduction > amountPayable));
-
-                                        //获取红包钱数
-                                        var RedPackage = parseFloat($('.RedPackage input').val());
-
-                                        if (deduction > (totalPrices - RedPackage)) {
-                                            jfShowTips.toastShow({'text':'优惠券的价值超过实际价格，请重新选择优惠券'});
-                                            $('#tickets_select option:eq(0)').attr('selected', true);
-                                            inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
-
-                                            inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                                            $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
-                                            return;
-                                        }
-                                        //设置价格
-                                        inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
-
-                                        inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction - inputValueOne - inputValueTwo));
-                                    })
-
-                                    redpage();
-                                },
-                                error: function () {
-                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
-                                }
-                            })*/
                         }
                     })
 
@@ -910,6 +841,8 @@ $(function () {
 
                 var allTickets=res.data;
 
+                console.log(allTickets)
+
                 var allDeduction=[];//满足条件的优惠券金额
 
                 var thisDeduction;//当前优惠券减去金额
@@ -924,10 +857,12 @@ $(function () {
 
                 var totalPackageCash=inputValueOne+inputValueTwo;
 
+
+
                 //选择最优的优惠券
                 for(var i=0;i<allTickets.length;i++){
 
-                    if(allTickets[i].couponType.indexOf('1')>-1){//立减类型
+                    if(allTickets[i].couponType.toString().indexOf('1')>-1){//立减类型
 
                         var allConditions=allTickets[i].conditions;
 
@@ -951,11 +886,15 @@ $(function () {
 
                 var thisRightIndex=getTicketsIndex();
 
+                console.log(allTickets.length)
+
+
                 function getTicketsIndex() {
 
                     for(var j=0;j<allTickets.length;j++){
 
-                        if(allTickets[i].deduction.indexOf(lastDeduction)>-1){
+
+                        if(allTickets[j].deduction.toString().indexOf(lastDeduction)>-1){
 
                             return j
 
@@ -968,7 +907,9 @@ $(function () {
 
                 $('#tickets_select option:eq('+thisTrueIndex+')').attr('selected', true);
 
-                $('.shouldPay_money').html('¥' + parseFloat(totalPrices - lastDeduction - totalPackageCash));
+                var thisPayMoney=parseFloat(totalPrices - lastDeduction - totalPackageCash)
+
+                $('.shouldPay_money').html('¥'+thisPayMoney.toFixed(2));
 
 
                 //优惠券点击选择
@@ -994,12 +935,12 @@ $(function () {
 
                             $('#tickets_select option:eq(0)').attr('selected', true);
 
-                            $('.shouldPay_money').html('¥' + (totalPrices - totalPackageCash));
+                            $('.shouldPay_money').html('¥' + (totalPrices - totalPackageCash).toFixed(2));
 
                             return;
                         }else {
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction - totalPackageCash));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction - totalPackageCash).toFixed(2));
                         }
 
 
@@ -1076,7 +1017,7 @@ $(function () {
 
                 thisShouldPay=thisShouldPay-cashAndRed;//减去红包之后应付的金额
 
-                $('.shouldPay_money').html('￥'+thisShouldPay);
+                $('.shouldPay_money').html('￥'+thisShouldPay.toFixed(2));
 
 
                 //输入购物红包
@@ -1094,7 +1035,7 @@ $(function () {
 
                         $('.RedPackage input').val(''); //置空
 
-                        $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash));
+                        $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
 
                     }else {
 
@@ -1104,7 +1045,7 @@ $(function () {
                             //置空
                             $('.RedPackage input').val('');
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
 
                             return;
 
@@ -1114,13 +1055,13 @@ $(function () {
                             //置空
                             $('.RedPackage input').val('');
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction).toFixed(2));
 
                             return;
 
                         }else if((inputValue+inputValueCash + deduction) < totalPrices){//正常输入
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices-inputValue+inputValueCash + deduction));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices-inputValue+inputValueCash + deduction).toFixed(2));
                         }
 
                     }
@@ -1145,7 +1086,7 @@ $(function () {
 
                         $('.cashAmount input').val(''); //置空
 
-                        $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash));
+                        $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
 
                     }else {
 
@@ -1155,7 +1096,7 @@ $(function () {
                             //置空
                             $('.cashAmount input').val('');
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
 
                             return;
 
@@ -1165,13 +1106,13 @@ $(function () {
                             //置空
                             $('.cashAmount input').val('');
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction).toFixed(2));
 
                             return;
 
                         }else if((inputValue+inputValueCash + deduction) < totalPrices){//正常输入
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices-inputValue+inputValueCash + deduction));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices-inputValue+inputValueCash + deduction).toFixed(2));
                         }
 
                     }
