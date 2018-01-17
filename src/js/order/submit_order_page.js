@@ -589,7 +589,24 @@ $(function () {
 
                     orderGoodData = info.data;
 
-                    inventoryInfo(cartGoodIdList);//多个商品库存判断，参数为商品ID数组
+                    orderGoodsList = [];
+                    for (var i = 0; i < orderGoodData.length; i++) {
+                        if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
+                            $('#product_list_meal' + i).addClass('repertory');
+                        }
+
+
+                        orderGoodsList.push(
+                            {
+                                goodId: orderGoodData[i].goodId,
+                                goodCount: orderGoodData[i].buyNum
+                            }
+                        )
+                    }
+
+
+
+                   // inventoryInfo(cartGoodIdList);//多个商品库存判断，参数为商品ID数组
 
 
                     ticketsListInfo();//优惠券
@@ -641,9 +658,22 @@ $(function () {
 
                     storeId = $('.yao_alignment_center').attr('data-storeid');  //获取一下当前地址的门店ID
 
+                    orderGoodsList = [];
+                    for (var i = 0; i < orderGoodData.length; i++) {
+                        if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
+                            $('#product_list_meal' + i).addClass('repertory');
+                        }
 
+
+                        orderGoodsList.push(
+                            {
+                                goodId: orderGoodData[i].goodId,
+                                goodCount: orderGoodData[i].buyNum
+                            }
+                        )
+                    }
                     //库存信息
-                    inventoryInfo(packageGoodIdList)//多个商品库存判断，参数为商品ID数组
+                   // inventoryInfo(packageGoodIdList)//多个商品库存判断，参数为商品ID数组
 
 
                     ticketsListInfo();//优惠券
@@ -828,18 +858,13 @@ $(function () {
                 console.log(stockGoodData);
 
 
-                //库存判断
-                orderGoodsList = [];
 
+                orderGoodsList = [];
                 for (var i = 0; i < orderGoodData.length; i++) {
                     if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
                         $('#product_list_meal' + i).addClass('repertory');
                     }
-                   // console.log(parseInt(objdata1[i].sellingPrice));
-                    //console.log(parseInt(objdata1[i].buyNum));
-                    //totalPrices += (parseInt(objdata1[i].sellingPrice) * parseInt(objdata1[i].buyNum));
 
-                    //获取orderGoodsList
 
                     orderGoodsList.push(
                         {
@@ -870,7 +895,7 @@ $(function () {
 
                 console.log(res);
 
-                if (info.status !== 200) {
+                if (res.status !== 200) {
 
                     $('#tickets_select option:eq(0)').html('暂无优惠券').attr('selected', true);
 
