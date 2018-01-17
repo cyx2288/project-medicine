@@ -2,6 +2,8 @@ $(function(){
     var urL = url();
  	var goodsUrl = "/rank/goods";
 
+    commonFn.cookieAddress();
+
     //地址初始化
     if($.cookie('addressHtml')){
         console.log($.cookie('addressHtml'));

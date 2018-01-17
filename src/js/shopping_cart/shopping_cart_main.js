@@ -1,5 +1,7 @@
 $(function () {
 
+    commonFn.cookieAddress();
+
     //地址初始化
     if($.cookie('addressHtml')){
         console.log($.cookie('addressHtml'));
@@ -179,7 +181,9 @@ $(function () {
 					var allBoxss=document.getElementsByClassName('aui-radio');
                     for(var b=0; b<allBoxss.length; b++){
                         allBoxss[b].checked = false;
-                        $("#allMoney").text(0);
+                        $("#allMoney").text(0.00);
+
+                        $('#totalMoney').text(0.00)
                         sum = 0
                     }
                     
@@ -287,9 +291,9 @@ $(function () {
 
             };
 
-            var sumMoney=$('#allMoney').text();
+            var sumMoney=$('#allMoney').text().toString().substr(1);
 
-            var totalMoney=$('#totalMoney').text();
+            var totalMoney=$('#totalMoney').text().toString().substr(1);
 
             $.cookie('cartGoodIdList', goodIdList, {expires:1,path: '/'});//存入商品数组list
 

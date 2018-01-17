@@ -32,10 +32,16 @@ $(function(){
     //轮播图 静态
 
     //地址初始化
-    if($.cookie('addressHtml')){
-        console.log($.cookie('addressHtml'));
-        $('#address_info').text($.cookie('addressHtml'));
-    };
+
+    commonFn.cookieAddress();
+
+    setTimeout(function () {
+        if($.cookie('addressHtml')){
+            console.log($.cookie('addressHtml'));
+            $('#address_info').text($.cookie('addressHtml'));
+        };
+    },1000)
+
 
     //1. 活动特价部分（初始化）
     goodsList(21,1001,'sale_box',$('.sale_box'),4);
@@ -80,14 +86,18 @@ $(function(){
 
 
             //套餐立即购买
-            $('.normal_box').on('click','.gobuy',function(){
-                jfShowTips.toastShow({'text':1});
+            $('.normal_box').on('click','.normal_box_a',function(){
+               // jfShowTips.toastShow({'text':1});
                 var packageId = $('.gobuy').attr('data-id');
                 //$.cookie('packageId',packageId);
                 //console.log($.cookie('packageId'));
-                //跳页面
-                console.log(packageId);
-                location.href = "../../html/order/submit_order_page.html?packageId=" + packageId;
+
+                commonFn.logOn();
+
+                if($.cookie('userId')){
+                    location.href = "../../html/order/submit_order_page.html?packageId=" + packageId;
+                }
+
 
             })
             $('.normal_box_a').click(function(){

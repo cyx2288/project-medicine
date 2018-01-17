@@ -11,13 +11,15 @@ $(function(){
 	var isDefault = true;//默认选择
 	var id
 
-	console.log($.cookie("cneeArea").length>0)
+	console.log($.cookie("cneeArea"))
 
 	console.log($.cookie("cneeArea"))
 
 
 	
-	if($.cookie("cneeArea").length>0){//当前属于修改地址
+	if($.cookie("cneeArea")){//当前属于修改地址
+
+		console.log($.cookie("cneeArea"))
 		$("#address_info").text($.cookie("cneeArea"));
 		id = $.cookie("adrId");
 		$("#inPh").val($.cookie("cneeMobile"));

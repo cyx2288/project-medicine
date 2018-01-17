@@ -40,36 +40,19 @@ $(function () {
     }
 
     console.log('goodIdList='+goodIdList);
-    //$.cookie('goodIdList',goodIdList);
-    //goodIdList = $.cookie('goodList');
-    //$.cookie('goodIdList', '', {expires: -1});
 
     var packageId = getParam('packageId') || $.cookie('packageId') || '';
 
-    jfShowTips.toastShow({text:packageId})
-
     console.log('packageId='+packageId)
-
-    //$.cookie('packageId',packageId);
-    //packageId = $.cookie('packageId');
-    //$.cookie('packageId', '', {expires: -1});
 
 
     var goodId = getParam('goodId') || $.cookie('goodId') || '';
 
     console.log('goodId='+goodId)
-    //$.cookie('goodId',goodId);
-    //goodId = $.cookie('goodId');
-    //$.cookie('goodId', '', {expires: -1}, { path :'/' } );
 
     var buyGoodNum = getParam('buyGoodNum') || $.cookie('buyGoodNum') || '';
 
     console.log('buyGoodNum='+buyGoodNum)
-
-
-    //$.cookie('buyGoodNum',buyGoodNum);
-    //buyGoodNum = $.cookie('buyGoodNum');
-    //$.cookie('buyGoodNum', '', {expires: -1});
 
     //地址ID
     var addressId = $.cookie('addressId');
@@ -118,11 +101,6 @@ $(function () {
     var stocksigle = '/stock';
 
 
-
-
-
-
-
     //总价,实付
     var totalPrices = 0;
     var amountPayable = 0;
@@ -132,6 +110,8 @@ $(function () {
     //优惠券:condition:满足条件,couponId:优惠券ID,couponType:优惠券类型（1:立减；2：满减）,"deduction": 抵扣金额,"usableDate": "优惠券过期时间",
     var couponId, condition, usableDate, deduction;
     var objdata1, objdata2;
+
+    var orderGoodData,stockGoodData;//加入订单的商品信息数组以及目前库存的信息数组
 
     //商品id和数量,orderSource订单来源
     var orderGoodsList, orderSource;
@@ -157,33 +137,123 @@ $(function () {
             console.log(info.data)
 
             if (!info.data) {
-                var suggest = confirm("请新增地址");
-                if (suggest == true) {
-
-                    //存cookie,
-                    // 付款方式，优惠券，红包金额，发票信息，抬头，备注，应付金额，
-                    $.cookie('pay', $('.pay_choose input:checked').attr('data-payid'));
-                    $.cookie('voucherId', $('.tickets select').find("option:selected").attr('data-voucherId'));
-                    $.cookie('shopRedPackage', $('.RedPackage input').val());
-                    $.cookie('moneyRedPackage', $('.cashAmount input').val());
-                    $.cookie('invoiceId', $('.invoice_input input:checked').attr('data-invoiceId'));
-                    $.cookie('invoiceMsg', $('.invoice_msg textarea').val());
-                    $.cookie('remark', $('.remark_msg textarea').val());
-                    $.cookie('amountPayable1', $('.fixed_order span:eq(1)').text());
-                    $.cookie('couponId', $('#tickets_select option:selected').attr('data-couponId'))
 
 
-                    $.cookie('goodIdList', goodIdList);
-                    $.cookie('packageId', packageId);
-                    $.cookie('goodId', goodId);
-                    $.cookie('buyGoodNum', buyGoodNum);
+                jfShowTips.dialogShow({
+                    'mainText': '请先去新增地址！',
+                    'minText': ' ',
+                    'noCancel':true,
+                    'checkFn': function () {
 
-                    location.href = "../../html/order/edit_adress.html"
-                }
+                        //存cookie,
+                        // 付款方式，优惠券，红包金额，发票信息，抬头，备注，应付金额，
+                        $.cookie('pay', $('.pay_choose input:checked').attr('data-payid'));
+                        $.cookie('voucherId', $('.tickets select').find("option:selected").attr('data-voucherId'));
+                        $.cookie('shopRedPackage', $('.RedPackage input').val());
+                        $.cookie('moneyRedPackage', $('.cashAmount input').val());
+                        $.cookie('invoiceId', $('.invoice_input input:checked').attr('data-invoiceId'));
+                        $.cookie('invoiceMsg', $('.invoice_msg textarea').val());
+                        $.cookie('remark', $('.remark_msg textarea').val());
+                        $.cookie('amountPayable1', $('.fixed_order span:eq(1)').text());
+                        $.cookie('couponId', $('#tickets_select option:selected').attr('data-couponId'))
+
+
+                        $.cookie('goodIdList', goodIdList);
+                        $.cookie('packageId', packageId);
+                        $.cookie('goodId', goodId);
+                        $.cookie('buyGoodNum', buyGoodNum);
+
+                        location.href = "../../html/order/edit_adress.html"
+
+                    }
+                })
+
             }else{
                 //地址(初始化)
 
-                console.log('addressId='+addressId)
+                $.ajax({
+                    url: urL + userAddrDefault + userId,
+                    data: {
+                        userId: userId
+                    },
+                    success: function (info) {
+
+                        console.log('默认地址：'+info)
+                        console.log(info);
+                        /*if (info.status !== 200) {
+                            jfShowTips.toastShow({'text':info.data});
+                            return;
+                        };*/
+
+                        if(info.data){
+                            storeId = info.data.storeId;
+                            var html = template('address_tem', {list: info.data});
+                            $('.check_address').html(html);
+                            cneeInfo = info.data.cneeName + ',' + info.data.cneeMobile + ',' + info.data.cneeArea + info.data.detailAddr;
+                        }else {
+                            //如果没有默认地址，取地址列表
+                            $.ajax({
+
+                                type:'get',
+
+                                url:urL+'/userAddr/list/'+userId,
+
+                                data:{
+
+                                    userId: userId
+
+                                },
+
+                                success:function (res) {
+
+                                    if(res.data) {
+
+                                        console.log('地址列表')
+
+                                        console.log(res.data[0]);
+
+                                        storeId = res.data[0].storeId;
+
+                                        var thisDefaultList=res.data[0]
+
+                                        console.log('storeID='+storeId)
+
+                                        var html = template('address_tem', {list: thisDefaultList});
+                                        $('.check_address').html(html);
+                                        cneeInfo = thisDefaultList.cneeName + ',' + thisDefaultList.cneeMobile + ',' + thisDefaultList.cneeArea + thisDefaultList.detailAddr;
+
+                                        $.cookie('addressHtml', res.data[0].cneeArea, {path: '/', expires: 30});
+
+
+                                    }
+
+                                },
+
+                                error:function(res){
+
+                                    console.log(res);
+
+                                    jfShowTips.toastShow({'text':"读取地址失败"})
+
+                                }
+
+
+                            })
+                        }
+
+
+                        clickBtn();
+
+                        goodsList();
+
+
+                    },
+                    error: function () {
+                        jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
+                    }
+                })
+
+               /* console.log('addressId='+addressId)
 
                 if (addressId) {
                     $.ajax({
@@ -217,15 +287,73 @@ $(function () {
                             userId: userId
                         },
                         success: function (info) {
+
+                            console.log('默认地址：'+info)
                             console.log(info);
-                            if (info.status !== 200) {
-                                jfShowTips.toastShow({'text':info.msg});
+                            /!*if (info.status !== 200) {
+                                jfShowTips.toastShow({'text':info.data});
                                 return;
-                            };
-                            storeId = info.data.storeId;
-                            var html = template('address_tem', {list: info.data});
-                            $('.check_address').html(html);
-                            cneeInfo = info.data.cneeName + ',' + info.data.cneeMobile + ',' + info.data.cneeArea + info.data.detailAddr;
+                            };*!/
+
+                            if(info.data){
+                                storeId = info.data.storeId;
+                                var html = template('address_tem', {list: info.data});
+                                $('.check_address').html(html);
+                                cneeInfo = info.data.cneeName + ',' + info.data.cneeMobile + ',' + info.data.cneeArea + info.data.detailAddr;
+                            }else {
+                                //如果没有默认地址，取地址列表
+                                $.ajax({
+
+                                    type:'get',
+
+                                    url:urL+'/userAddr/list/'+userId,
+
+                                    data:{
+
+                                        userId: userId
+
+                                    },
+
+                                    success:function (res) {
+
+                                        if(res.data) {
+
+                                            console.log('地址列表')
+
+                                            console.log(res.data[0]);
+
+                                            storeId = res.data[0].storeId;
+
+                                            var thisDefaultList=res.data[0]
+
+                                            console.log('storeID='+storeId)
+
+                                            var html = template('address_tem', {list: thisDefaultList});
+                                            $('.check_address').html(html);
+                                            cneeInfo = thisDefaultList.cneeName + ',' + thisDefaultList.cneeMobile + ',' + thisDefaultList.cneeArea + thisDefaultList.detailAddr;
+
+                                            $.cookie('addressHtml', res.data[0].cneeArea, {path: '/', expires: 30});
+
+
+                                        }
+
+                                    },
+
+                                    error:function(res){
+
+                                        console.log(res);
+
+                                        jfShowTips.toastShow({'text':"读取地址失败"})
+
+                                    }
+
+
+                                })
+                            }
+
+
+
+
                             clickBtn();
 
                             goodsList();
@@ -236,14 +364,10 @@ $(function () {
                             jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
                     })
-                }
+                }*/
             }
         }
     });
-
-
-
-
 
 
 
@@ -401,11 +525,6 @@ $(function () {
         })
     })
 
-    console.log('packageId='+packageId)
-
-    jfShowTips.toastShow({'text':packageId})
-
-
     //商品列表(初始化)
     function goodsList(){
 
@@ -429,7 +548,7 @@ $(function () {
 
             cartGoodNum=cartGoodNum.split(',');
 
-            orderGoodsList = [];
+           /* orderGoodsList = [];
 
             for(var i=0;i<cartGoodIdList.length;i++){
 
@@ -440,7 +559,9 @@ $(function () {
                     }
                 )
 
-            }
+            }*/
+
+            //加载商品信息
             $.ajax({
                 url: urL + cartList,
                 anysc: false,
@@ -456,20 +577,22 @@ $(function () {
                         jfShowTips.toastShow({'text':'购物车'+info.msg});
                         return;
                     }
-                    ;
+
                     var html = template('product_html', {list: info.data});
                     $('.order_main_html').html(html);
 
-                    $('.orderAmount_money').text(sumMoney);
+                    $('.orderAmount_money').text('¥'+sumMoney);
 
-                    $('.shouldPay_money').text(totalMoney);
+                    $('.shouldPay_money').text('¥'+totalMoney);
 
-                    objdata1 = info.data;
+                    totalPrices=sumMoney;//订单总金额
 
+                    orderGoodData = info.data;
 
+                   // inventoryInfo(cartGoodIdList);//多个商品库存判断，参数为商品ID数组
 
                     //库存
-                    $.ajax({
+                  /*  $.ajax({
                         url: urL + stockList,
                         data: {
                             goodIdList: cartGoodIdList,
@@ -498,7 +621,7 @@ $(function () {
                         error: function () {
                             jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
-                    })
+                    })*/
                 },
                 error: function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
@@ -508,6 +631,7 @@ $(function () {
 
             console.log('套餐购买-packageId='+packageId)
             orderSource = 3;
+            //套餐商品信息
             $.ajax({
                 url: urL + goodPackageDetail,
                 anysc: false,
@@ -523,21 +647,31 @@ $(function () {
                     };
                     var html = template('product_html_meal', {list: info.data});
                     $('.order_main_html').html(html);
-                    objdata1 = info.data;
+                    orderGoodData = info.data;
                     //获取goodIdList
-                    var mainGoodIdList = [];
-                    for (var i = 0; i < info.data.length; i++) {
-                        mainGoodIdList.push(info.data[i].goodId);
-                    }
-                    console.log(mainGoodIdList);
-                    //库存
+                    var packageGoodIdList = [];
 
-                    //获取一下当前地址的门店ID
-                    storeId = $('.yao_alignment_center').attr('data-storeid');
-                    console.log(storeId);
+                    for (var i = 0; i < info.data.length; i++) {
+
+                        packageGoodIdList.push(info.data[i].goodId);
+
+                        totalPrices += (parseInt(orderGoodData[i].sellingPrice) * parseInt(orderGoodData[i].buyNum));
+
+                    }
+
+                    $('.orderAmount_money').text('¥'+totalPrices);
+
+
+                    console.log('套餐购买ID组='+packageGoodIdList);
+
+                    storeId = $('.yao_alignment_center').attr('data-storeid');  //获取一下当前地址的门店ID
+
 
                     //库存信息
-                    $.ajax({
+                   // inventoryInfo(packageGoodIdList)//多个商品库存判断，参数为商品ID数组
+
+
+                   /* $.ajax({
                         url: urL + stockList,
                         data: {
                             goodIdList: mainGoodIdList,
@@ -573,10 +707,10 @@ $(function () {
                                 )
                             }
                             console.log(totalPrices);
-                            /*
+                            /!*
                             * TODO
                             * 两位小数
-                            * */
+                            * *!/
                             //totalPrices = parseFloat(totalPrices.tofixed(2));
                             $('.fixed_price span:eq(1)').html('￥' + totalPrices);
                             $('.fixed_order span:eq(1)').html('￥' + totalPrices);
@@ -647,7 +781,7 @@ $(function () {
                         error: function () {
                             jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
-                    })
+                    })*/
                 },
                 error: function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
@@ -674,12 +808,14 @@ $(function () {
                     ;
                     var html = template('product_html', {list: info.data});
                     $('.order_main_html').html(html);
-                    objdata1 = info.data;
+                    orderGoodData = info.data;
                     $('span[data-buycount]').text('X' + buyGoodNum);
                     //库存
                     //获取一下当前地址的门店ID
                     storeId = $('.yao_alignment_center').attr('data-storeid');
+
                     console.log('storeId='+storeId);
+
                     $.ajax({
                         url: urL + stocksigle,
                         data: {
@@ -693,17 +829,17 @@ $(function () {
                                 jfShowTips.toastShow(info1.msg);
                                 return;
                             };*/
-                            objdata2 = info1.data;
+                            stockGoodData = info1.data;
 
                             if(info1.data == null){
                                 //info1.data = objdata2 = {};
-                                objdata2 = {};
-                                objdata2['stock'] = 0;
-                                console.log(objdata2);
+                                stockGoodData = {};
+                                stockGoodData['stock'] = 0;
+                                console.log(stockGoodData);
                             };
 
                             //库存判断
-                            if (buyGoodNum > objdata2.stock) {
+                            if (buyGoodNum > stockGoodData.stock) {
                                 $('#product_list0').addClass('repertory');
                             }
                             totalPrices = parseFloat(buyGoodNum) * parseFloat(info.data[0].sellingPrice);
@@ -711,7 +847,7 @@ $(function () {
                             orderGoodsList = [];
                             orderGoodsList.push(
                                 {
-                                    goodId: objdata1[0].id,
+                                    goodId: orderGoodData[0].id,
                                     goodCount: buyGoodNum
                                 }
                             )
@@ -739,13 +875,14 @@ $(function () {
                                     var html = template('tickets_option', {list: info.data});
                                     $('.tickets select').append(html);
 
+
                                     //获取当前减去红包的金额
                                     amountPayable = parseFloat($('.fixed_order span:eq(1)').text().substring(1));
                                     console.log(amountPayable);
                                     //优惠券选择
                                     $('#tickets_select').bind('change', function () {
                                         couponId = $('#tickets_select option:selected').attr('data-couponId');
-                                        condition = parseFloat($('#tickets_select option:selected').attr('data-condition')) || 0;
+                                        condition = parseFloat($('#tickets_select option:selected').attr('data-conditions')) || 0;
                                         deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
                                         usableDate = $('#tickets_select option:selected').attr('data-usableDate');
 
@@ -774,6 +911,7 @@ $(function () {
                                         inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
                                         $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction - inputValueOne - inputValueTwo));
                                     })
+
                                     redpage();
                                 },
                                 error: function () {
@@ -791,72 +929,80 @@ $(function () {
         }
     }
 
+    //多个商品的库存信息
+    function inventoryInfo(goodIdListDemo){
 
+        $.ajax({
+            url: urL + stockList,
+            data: {
+                goodIdList: goodIdListDemo,
+                storeId: storeId
+            },
+            traditional: true,
 
-    function stock2() {
-        //库存判断
-        orderGoodsList = [];
+            success:function (res) {
 
-        console.log('objdata1.length='+objdata1.length)
-
-        console.log('objdata2.length='+objdata2.length)
-
-
-        for (var i = 0; i < objdata1.length; i++) {
-            if (objdata1[i].buyCount > objdata2[i].stock) {
-                $('#product_list' + i).addClass('repertory');
-            }
-            ;
-
-            console.log(parseInt(objdata1[i].sellingPrice));
-            console.log(parseInt(objdata1[i].buyCount));
-            totalPrices += (parseInt(objdata1[i].sellingPrice) * parseInt(objdata1[i].buyCount));
-
-            //获取orderGoodsList
-            orderGoodsList.push(
-                {
-                    goodId: objdata1[i].id,
-                    goodCount: objdata1[i].buyCount
+                console.log(res);
+                if (res.status !== 200) {
+                    jfShowTips.toastShow({'text':res.msg});
+                    return;
                 }
-            )
-        }
-        console.log(orderGoodsList);
-        console.log(totalPrices);
+
+                stockGoodData = res.data;//返回的商品库存数据信息
+
+                console.log(stockGoodData);
+
+                console.log(orderGoodData);//
+
+                //库存判断
+                orderGoodsList = [];
+
+                for (var i = 0; i < orderGoodData.length; i++) {
+                    if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
+                        $('#product_list_meal' + i).addClass('repertory');
+                    }
+                   // console.log(parseInt(objdata1[i].sellingPrice));
+                    //console.log(parseInt(objdata1[i].buyNum));
+                    //totalPrices += (parseInt(objdata1[i].sellingPrice) * parseInt(objdata1[i].buyNum));
+
+                    //获取orderGoodsList
+
+                    orderGoodsList.push(
+                        {
+                            goodId: orderGoodData[i].goodId,
+                            goodCount: orderGoodData[i].buyNum
+                        }
+                    )
+                }
+
+            }
+        })
 
 
-        /*
-        * TODO
-        * 两位小数
-        * */
-        //totalPrices = parseFloat(totalPrices.tofixed(2));
-        $('.fixed_price span:eq(1)').html('￥' + totalPrices);
-        $('.fixed_order span:eq(1)').html('￥' + totalPrices);
-        amountPayable = totalPrices;
 
-        //优惠券:condition:满足条件,couponId:优惠券ID,couponType:优惠券类型（1:立减；2：满减）,"deduction": 抵扣金额,"usableDate": "优惠券过期时间",
-        var couponId, condition, usableDate, deduction;
+    }
 
-        redPackmoney = parseFloat($('.RedPackage input').val());
-        //优惠券
+
+    //优惠券信息
+
+    function ticketsListInfo() {
+
         $.ajax({
             url: urL + availableList,
             data: {
                 userId: userId,
                 orderTotal: totalPrices
             },
-            success: function (info) {
-                console.log(info);
-                var html = template('tickets_option', {list: info.data});
+            success:function (res) {
+                console.log(res);
+                var html = template('tickets_option', {list: res.data});
                 $('.tickets select').append(html);
 
-                //获取当前减去红包的金额
-                amountPayable = parseFloat($('.fixed_order span:eq(1)').text().substring(1));
-                console.log(amountPayable);
                 //优惠券选择
                 $('#tickets_select').bind('change', function () {
                     couponId = $('#tickets_select option:selected').attr('data-couponId');
-                    condition = parseFloat($('#tickets_select option:selected').attr('data-condition')) || 0;
-                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                    condition = parseFloat($('#tickets_select option:selected').attr('data-conditions')) || 0;//条件
+                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;//减去金额
                     usableDate = $('#tickets_select option:selected').attr('data-usableDate');
 
                     //判断是否小于当前的支付金额
@@ -867,37 +1013,51 @@ $(function () {
                     console.log((deduction > amountPayable));
 
                     //获取红包钱数
-                    var RedPackage = parseFloat($('.RedPackage input').val());
+                    inputValueOne = parseFloat($('.RedPackage input').val()) || 0;//现金红包
 
-                    if (deduction > (totalPrices - RedPackage)) {
-                        jfShowTips.toastShow({'text':'优惠券的价值超过实际价格，请重新选择优惠券'});
-                        $('#tickets_select option:eq(0)').attr('selected', true);
-                        inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
+                    inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;//购物红包
 
-                        inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                        $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
-                        return;
+                    var totalPackageCash=inputValueOne+inputValueTwo;
+
+                    if(parseFloat(totalPrices)>parseFloat(condition)){
+
+                        console.log('达到满级条件');
+
+                        if (deduction > (totalPrices - totalPackageCash)) {
+                            jfShowTips.toastShow({'text':'优惠券的价值超过实际价格，请重新选择优惠券'});
+
+                            $('#tickets_select option:eq(0)').attr('selected', true);
+
+                            $('.shouldPay_money').html('¥' + (totalPrices - totalPackageCash));
+
+                            return;
+                        }else {
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction - totalPackageCash));
+                        }
+
+
+                    }else {
+
+                        jfShowTips.toastShow({'text':'当前订单总额没有达到满减金额'});
                     }
-                    //设置价格
-                    inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
 
-                    inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                    $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction - inputValueOne - inputValueTwo));
+                    
                 })
-                redpage();
+                
             },
-            error: function () {
-                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
+            error:function (res) {
+                console.log(res);
+                jfShowTips.toastShow({'text':'优惠券加载失败'})
+
             }
         })
+
     }
-
-    function redpage() {
-        //红包(初始化)
-        var RedPackageNum = 0;
-
-        var cashNum=0;
-
+    
+    //红包信息
+    
+    function RedPackageInfo() {
         $.ajax({
             url: urL + userDetailRedPackage,
             anysc: false,
@@ -999,7 +1159,221 @@ $(function () {
             }
         })
     }
+    
+   
+    
+    function stock2() {
+        //库存判断
+        orderGoodsList = [];
 
+        console.log('orderGoodData.length='+orderGoodData.length)
+
+        console.log('orderGoodData.length='+orderGoodData.length)
+
+
+        for (var i = 0; i < orderGoodData.length; i++) {
+            if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
+                $('#product_list' + i).addClass('repertory');
+            }
+            ;
+
+            console.log(parseInt(orderGoodData[i].sellingPrice));
+            console.log(parseInt(orderGoodData[i].buyCount));
+            totalPrices += (parseInt(orderGoodData[i].sellingPrice) * parseInt(orderGoodData[i].buyCount));
+
+            //获取orderGoodsList
+            orderGoodsList.push(
+                {
+                    goodId: orderGoodData[i].id,
+                    goodCount: orderGoodData[i].buyCount
+                }
+            )
+        }
+        console.log(orderGoodsList);
+        console.log(totalPrices);
+
+
+        /*
+        * TODO
+        * 两位小数
+        * */
+        //totalPrices = parseFloat(totalPrices.tofixed(2));
+        $('.fixed_price span:eq(1)').html('￥' + totalPrices);
+        $('.fixed_order span:eq(1)').html('￥' + totalPrices);
+        amountPayable = totalPrices;
+
+        //优惠券:condition:满足条件,couponId:优惠券ID,couponType:优惠券类型（1:立减；2：满减）,"deduction": 抵扣金额,"usableDate": "优惠券过期时间",
+        var couponId, condition, usableDate, deduction;
+
+        redPackmoney = parseFloat($('.RedPackage input').val());
+        //优惠券
+        $.ajax({
+            url: urL + availableList,
+            data: {
+                userId: userId,
+                orderTotal: totalPrices
+            },
+            success: function (info) {
+                console.log(info);
+                var html = template('tickets_option', {list: info.data});
+                $('.tickets select').append(html);
+
+                //获取当前减去红包的金额
+                amountPayable = parseFloat($('.fixed_order span:eq(1)').text().substring(1));
+                console.log(amountPayable);
+                //优惠券选择
+                $('#tickets_select').bind('change', function () {
+                    couponId = $('#tickets_select option:selected').attr('data-couponId');
+                    condition = parseFloat($('#tickets_select option:selected').attr('data-condition')) || 0;
+                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                    usableDate = $('#tickets_select option:selected').attr('data-usableDate');
+
+                    //判断是否小于当前的支付金额
+                    //获取当前
+                    console.log((amountPayable - deduction));
+                    console.log(deduction);
+                    console.log(amountPayable);
+                    console.log((deduction > amountPayable));
+
+                    //获取红包钱数
+                    var RedPackage = parseFloat($('.RedPackage input').val());
+
+                    if (deduction > (totalPrices - RedPackage)) {
+                        jfShowTips.toastShow({'text':'优惠券的价值超过实际价格，请重新选择优惠券'});
+                        $('#tickets_select option:eq(0)').attr('selected', true);
+                        inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
+
+                        inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
+                        $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
+                        return;
+                    }
+                    //设置价格
+                    inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
+
+                    inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
+                    $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction - inputValueOne - inputValueTwo));
+                })
+
+                redpage();
+            },
+            error: function () {
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
+            }
+        })
+    }
+
+    function redpage() {
+        //红包(初始化)
+        var RedPackageNum = 0;
+
+        var cashNum=0;
+
+        $.ajax({
+            url: urL + userDetailRedPackage,
+            anysc: false,
+            data: {
+                userId: userId
+            },
+            success: function (info) {
+                console.log(info);
+                if (info.status !== 200) {
+
+                    $('.RedPackage input').attr('placeholder','当前没有可用购物红包');
+                    $('.RedPackage input').attr('disabled', true);
+
+                    $('.cashAmount input').attr('placeholder','当前没有可用购物红包');
+
+                    $('.cashAmount input').attr('disabled', true);
+
+                    return;
+                }
+                ;
+                var redhtml = template('RedPackage_html', {list: info.data});
+                $('.RedPackage').append(redhtml);
+
+                var cashHtml=template('cash_html', {list: info.data});
+                $('.cashAmount').append(cashHtml);
+
+                RedPackageNum = info.data.shopRedPackage;
+
+                cashNum=info.data.moneyRedPackag;
+
+                //输入购物红包
+                $('.RedPackage input').change(function () {
+
+                    //输入的红包金额
+                    var inputValue = parseFloat($('.RedPackage input').val())
+                    if ((inputValue + deduction) > RedPackageNum) {
+                        jfShowTips.toastShow({'text':'您的金额超了哦，请重新输入'});
+                        //置空
+                        $('.RedPackage input').val('');
+                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
+                        return;
+                    }
+                    //判断是否有超总金额
+                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                    console.log(typeof(deduction));
+                    console.log((inputValue + deduction));
+
+                    var inputValueCash=parseFloat($('.cashAmount input').val());
+
+                    if ((inputValue+inputValueCash + deduction) > totalPrices) {
+                        //plus.ui.jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
+                        jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
+                        //置空
+                        $('.RedPackage input').val('');
+                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
+                        return;
+                    }
+                    ;
+                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                    //计算应付金额
+                    amountPayable = (totalPrices * 100 - inputValue * 100 -inputValueCash*100 - deduction * 100) / 100;
+                    $('.fixed_order span:eq(1)').html('￥' + amountPayable);
+                })
+
+
+                //输入现金红包
+                $('.RedPackage input').change(function () {
+
+                    //输入的红包金额
+                    var inputValue = parseFloat($('.cashAmount input').val())
+                    if ((inputValue + deduction) > cashNum) {
+                        jfShowTips.toastShow({'text':'您的金额超了哦，请重新输入'});
+                        //置空
+                        $('.RedPackage input').val('');
+                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
+                        return;
+                    }
+                    //判断是否有超总金额
+                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                    console.log(typeof(deduction));
+                    console.log((inputValue + deduction));
+                    var inputValueRed=parseFloat($('.cashAmount input').val());
+                    if ((inputValue + inputValueRed+ deduction) > totalPrices) {
+                        //plus.ui.jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
+                        jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
+                        //置空
+                        $('.RedPackage input').val('');
+                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
+                        return;
+                    }
+                    ;
+                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+                    //计算应付金额
+                    amountPayable = (totalPrices * 100 - inputValue * 100 - -inputValueRed*100 - deduction * 100) / 100;
+                    $('.fixed_order span:eq(1)').html('￥' + amountPayable);
+                })
+            },
+            error: function () {
+                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
+            }
+        })
+    }
 
     //
     function clickBtn() {
@@ -1045,7 +1419,7 @@ $(function () {
 
 
     function chooseAddress() {//选择地址
-        //点击地址
+
     $('.order_page').on('click', '.address_change', function () {
         //存cookie,
         // 付款方式，优惠券，红包金额，发票信息，抬头，备注，应付金额，
