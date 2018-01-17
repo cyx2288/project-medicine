@@ -111,13 +111,13 @@ $(function(){
     })
     //5. 分类部分
     //5.1 药品（初始化）
-    categoryList(101,'category_list1',$('.category_list1'));
+    categoryList(51,'category_list1',$('.category_list1'));
     //5.2 医疗保健器械（初始化）
-    categoryList(102,'category_list2',$('.category_list2'));
+    categoryList(52,'category_list2',$('.category_list2'));
     //5.2 保健品（初始化）
     categoryList(53,'category_list3',$('.category_list3'));
     //5.2 计生用品（初始化）
-    categoryList(104,'category_list4',$('.category_list4'));
+    categoryList(54,'category_list4',$('.category_list4'));
     //门店信息
     $('.store_list').click(function(){
         location.href = '../medicine_store/store_list.html';
