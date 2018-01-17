@@ -5,9 +5,9 @@ $(function() {
 
     var orderCancle = 'backOrder/cancel';//取消订单
 
-    var userId = $.cookie("userId");
+    var userId = $.cookie("bUserId");
 
-    var storeId = $.cookie("storeId");
+    var storeId = $.cookie("bStoreId");
 
     var orderId=$.cookie("orderId");
 
