@@ -44,9 +44,9 @@ $(function(){
 
 
     //1. 活动特价部分（初始化）
-    goodsList(21,1001,'sale_box',$('.sale_box'),4);
+    goodsList(22,1001,'sale_box',$('.sale_box'),4);
     //2. 近期热卖部分（初始化）
-    goodsList(21,1001,'hot_list',$('.hot_list'),4);
+    goodsList(22,1001,'hot_list',$('.hot_list'),4);
     //3. 品牌广场部分（初始化）
     $.ajax({
         url:urL + urlBrand,
