@@ -327,7 +327,7 @@
 <script type="text/html" id="tickets_option">
     {{if list}}
     {{each list as value}}
-    <option data-couponId="{{value.couponId}}" data-condition="{{value.condition}}" data-deduction="{{value.deduction}}" data-usableDate="{{value.usableDate}}">满{{value.condition}}元减{{value.deduction}}元，{{value.usableDate | dateFormat:'yyyy年MM月dd日'}}前有效</option>
+    <option data-couponId="{{value.couponId}}" data-condition="{{value.conditions}}" data-deduction="{{value.deduction}}" data-usableDate="{{value.usableDate}}">满{{value.conditions}}元减{{value.deduction}}元，{{value.usableDate | dateFormat:'yyyy年MM月dd日'}}前有效</option>
     {{/each}}
     {{/if}}
 </script>

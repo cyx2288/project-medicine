@@ -14,7 +14,9 @@ var commonFn={
 
         if(userId){//判断登录
 
-            if(!$.cookie('addressHtml')){//判断是否没有地址cookie
+            console.log($.cookie('addressHtml'))
+
+            if(!$.cookie('addressHtml')){//没有地址cookie
 
                 $.ajax({
 
@@ -30,9 +32,17 @@ var commonFn={
 
                     success:function(res){
 
+                        console.log('默认地址：'+res.data)
+
                         if(res.data) {//如果为空。说明没有默认地址
 
+                            console.log(res.data)
+
                             $.cookie('addressHtml', res.data.cneeArea, {path: '/', expires: 30})
+
+                            $.cookie('storeId',res.data.storeId,{path:'/'});
+
+                            console.log($.cookie('storeId'))
 
                         }
 
@@ -55,7 +65,13 @@ var commonFn={
 
                                     if(res.data) {
 
-                                        $.cookie('addressHtml', res.data[0].cneeArea, {path: '/', expires: 30})
+                                        console.log(res.data)
+
+                                        $.cookie('addressHtml', res.data[0].cneeArea, {path: '/', expires: 30});
+
+                                        $.cookie('storeId',res.data[0].storeId,{path:'/'});
+
+                                        console.log($.cookie('storeId'))
 
                                     }
 
@@ -98,7 +114,17 @@ var commonFn={
 
             event.preventDefault();
 
-            window.location.href='../login/login_system.html'
+            jfShowTips.dialogShow({
+                'mainText': '您还未登陆，请先登陆！',
+                'minText': ' ',
+                'noCancel':true,
+                'checkFn': function () {
+                    window.location.href='../login/login_system.html'
+
+                }
+            })
+
+
 
         }
 
@@ -106,4 +132,3 @@ var commonFn={
     
 }
 
-commonFn.cookieAddress();
