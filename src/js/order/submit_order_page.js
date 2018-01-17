@@ -591,6 +591,12 @@ $(function () {
 
                     inventoryInfo(cartGoodIdList);//多个商品库存判断，参数为商品ID数组
 
+
+                    ticketsListInfo();//优惠券
+
+                    RedPackageInfo();//红包信息
+
+
                 },
                 error: function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
@@ -638,6 +644,11 @@ $(function () {
 
                     //库存信息
                     inventoryInfo(packageGoodIdList)//多个商品库存判断，参数为商品ID数组
+
+
+                    ticketsListInfo();//优惠券
+
+                    RedPackageInfo();//红包信息
 
                 },
                 error: function () {
@@ -707,12 +718,17 @@ $(function () {
                                     goodId: orderGoodData[0].id,
                                     goodCount: buyGoodNum
                                 }
-                            )
+                            );
+
+
+                            ticketsListInfo();//优惠券
+
+                            RedPackageInfo();//红包信息
                             /*
                             * TODO
                             * 两位小数
                             * */
-                            $('.fixed_price span:eq(1)').html('￥' + totalPrices);
+                            /*$('.fixed_price span:eq(1)').html('￥' + totalPrices);
                             $('.fixed_order span:eq(1)').html('￥' + totalPrices);
                             amountPayable = totalPrices;
 
@@ -773,7 +789,7 @@ $(function () {
                                 error: function () {
                                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                                 }
-                            })
+                            })*/
                         }
                     })
 
@@ -839,7 +855,6 @@ $(function () {
 
 
     }
-
 
     //优惠券信息
 
