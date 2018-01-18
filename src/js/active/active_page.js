@@ -11,7 +11,7 @@ $(function(){
     var storeId = $.cookie('storeId') || 1001;
 	var userId = $.cookie('userId') ;
     //特价药品
-    rankList(22,4,'active_page_html',$('#active_page_list'));
+    rankList(24,4,'active_page_html',$('#active_page_list'));
     rankList(25,4,'active_page_html2',$('#active_page_list2'));
 
 

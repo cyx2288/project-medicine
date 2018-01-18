@@ -491,6 +491,9 @@ $(function () {
             orderAux: orderAuxobj
         }
 
+     console.log(orderObj1)
+
+
         //提交订单
         $.ajax({
             url: urL + orderCreate,
@@ -589,39 +592,29 @@ $(function () {
 
                     orderGoodData = info.data;
 
+                    orderGoodsList = [];
+                    for (var i = 0; i < orderGoodData.length; i++) {
+
+
+
+                        orderGoodsList.push(
+                            {
+                                goodId: orderGoodData[i].goodId,
+                                goodCount: orderGoodData[i].buyNum
+                            }
+                        )
+                    }
+
+
+
                    // inventoryInfo(cartGoodIdList);//多个商品库存判断，参数为商品ID数组
 
-                    //库存
-                  /*  $.ajax({
-                        url: urL + stockList,
-                        data: {
-                            goodIdList: cartGoodIdList,
-                            storeId: storeId
-                        },
-                        traditional: true,
-                        success: function (info1) {
 
-                            console.log({
-                                goodIdList: cartGoodIdList,
-                                storeId: storeId
-                            })
-                            console.log('多个商品列表库存信息')
-                            console.log(info1);
-                            if (info1.status !== 200) {
-                                jfShowTips.toastShow({'text':'库存'+info1.msg});
-                                return;
-                            }
+                    ticketsListInfo();//优惠券
 
-                            objdata2 = info1.data;
+                    RedPackageInfo();//红包信息
 
-                            console.log('库存信息='+info1)
 
-                            stock2();
-                        },
-                        error: function () {
-                            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
-                        }
-                    })*/
                 },
                 error: function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
@@ -666,122 +659,24 @@ $(function () {
 
                     storeId = $('.yao_alignment_center').attr('data-storeid');  //获取一下当前地址的门店ID
 
+                    orderGoodsList = [];
+                    for (var i = 0; i < orderGoodData.length; i++) {
 
+                        orderGoodsList.push(
+                            {
+                                goodId: orderGoodData[i].goodId,
+                                goodCount: orderGoodData[i].buyNum
+                            }
+                        )
+                    }
                     //库存信息
                    // inventoryInfo(packageGoodIdList)//多个商品库存判断，参数为商品ID数组
 
 
-                   /* $.ajax({
-                        url: urL + stockList,
-                        data: {
-                            goodIdList: mainGoodIdList,
-                            storeId: storeId
-                        },
-                        traditional: true,
-                        success: function (info1) {
-                            console.log(info1);
-                            if (info1.status !== 200) {
-                                jfShowTips.toastShow({'text':info1.msg});
-                                return;
-                            }
-                            ;
-                            objdata2 = info1.data;
-                            //库存判断
-                            orderGoodsList = [];
-                            for (var i = 0; i < objdata1.length; i++) {
-                                if (objdata1[i].buyCount > objdata2[i].stock) {
-                                    $('#product_list_meal' + i).addClass('repertory');
-                                }
-                                ;
-                                console.log(parseInt(objdata1[i].sellingPrice));
-                                console.log(parseInt(objdata1[i].buyNum));
-                                totalPrices += (parseInt(objdata1[i].sellingPrice) * parseInt(objdata1[i].buyNum));
+                    ticketsListInfo();//优惠券
 
-                                //获取orderGoodsList
+                    RedPackageInfo();//红包信息
 
-                                orderGoodsList.push(
-                                    {
-                                        goodId: objdata1[i].goodId,
-                                        goodCount: objdata1[i].buyNum
-                                    }
-                                )
-                            }
-                            console.log(totalPrices);
-                            /!*
-                            * TODO
-                            * 两位小数
-                            * *!/
-                            //totalPrices = parseFloat(totalPrices.tofixed(2));
-                            $('.fixed_price span:eq(1)').html('￥' + totalPrices);
-                            $('.fixed_order span:eq(1)').html('￥' + totalPrices);
-                            amountPayable = totalPrices;
-
-                            //优惠券:condition:满足条件,couponId:优惠券ID,couponType:优惠券类型（1:立减；2：满减）,"deduction": 抵扣金额,"usableDate": "优惠券过期时间",
-                            var couponId, condition, usableDate, deduction;
-
-                            redPackmoney = parseFloat($('.RedPackage input').val());
-                            //优惠券
-                            $.ajax({
-                                url: urL + availableList,
-                                data: {
-                                    userId: userId,
-                                    orderTotal: totalPrices
-                                },
-                                success: function (info) {
-                                    console.log(info);
-                                    var html = template('tickets_option', {list: info.data});
-                                    $('.tickets select').append(html);
-
-                                    //获取当前减去红包的金额
-                                    amountPayable = parseFloat($('.fixed_order span:eq(1)').text().substring(1));
-                                    console.log(amountPayable);
-                                    //优惠券选择
-                                    $('#tickets_select').bind('change', function () {
-                                        couponId = $('#tickets_select option:selected').attr('data-couponId');
-                                        condition = parseFloat($('#tickets_select option:selected').attr('data-condition')) || 0;
-                                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                                        usableDate = $('#tickets_select option:selected').attr('data-usableDate');
-
-                                        //判断是否小于当前的支付金额
-                                        //获取当前
-                                        console.log((amountPayable - deduction));
-                                        console.log(deduction);
-                                        console.log(amountPayable);
-                                        console.log((deduction > amountPayable));
-
-                                        //获取红包钱数
-                                        var ShopPackage = parseFloat($('.RedPackage input').val());
-
-                                        var cashPackage=parseFloat($('. cashAmount input').val());
-
-
-                                        if (deduction > (totalPrices - ShopPackage-cashPackage)) {
-                                            jfShowTips.toastShow({'text':'优惠券的价值超过实际价格，请重新选择优惠券'});
-                                            $('#tickets_select option:eq(0)').attr('selected', true);
-                                            inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
-
-                                            inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                                            $('.fixed_order span:eq(1)').html('￥' + (totalPrices - ShopPackage-cashPackage));
-                                            return;
-                                        }
-                                        //设置价格
-                                        inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
-
-                                        inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-
-                                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction - inputValueOne-inputValueTwo));
-                                    })
-                                    redpage();
-                                },
-                                error: function () {
-                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
-                                }
-                            })
-                        },
-                        error: function () {
-                            jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
-                        }
-                    })*/
                 },
                 error: function () {
                     jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
@@ -850,74 +745,12 @@ $(function () {
                                     goodId: orderGoodData[0].id,
                                     goodCount: buyGoodNum
                                 }
-                            )
-                            /*
-                            * TODO
-                            * 两位小数
-                            * */
-                            $('.fixed_price span:eq(1)').html('￥' + totalPrices);
-                            $('.fixed_order span:eq(1)').html('￥' + totalPrices);
-                            amountPayable = totalPrices;
-
-                            //优惠券:condition:满足条件,couponId:优惠券ID,couponType:优惠券类型（1:立减；2：满减）,"deduction": 抵扣金额,"usableDate": "优惠券过期时间",
-                            var couponId, condition, usableDate, deduction;
-
-                            redPackmoney = parseFloat($('.RedPackage input').val());
-                            //优惠券
-                            $.ajax({
-                                url: urL + availableList,
-                                data: {
-                                    userId: userId,
-                                    orderTotal: totalPrices
-                                },
-                                success: function (info) {
-                                    console.log(info);
-                                    var html = template('tickets_option', {list: info.data});
-                                    $('.tickets select').append(html);
+                            );
 
 
-                                    //获取当前减去红包的金额
-                                    amountPayable = parseFloat($('.fixed_order span:eq(1)').text().substring(1));
-                                    console.log(amountPayable);
-                                    //优惠券选择
-                                    $('#tickets_select').bind('change', function () {
-                                        couponId = $('#tickets_select option:selected').attr('data-couponId');
-                                        condition = parseFloat($('#tickets_select option:selected').attr('data-conditions')) || 0;
-                                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                                        usableDate = $('#tickets_select option:selected').attr('data-usableDate');
+                            ticketsListInfo();//优惠券
 
-                                        //判断是否小于当前的支付金额
-                                        //获取当前
-                                        console.log((amountPayable - deduction));
-                                        console.log(deduction);
-                                        console.log(amountPayable);
-                                        console.log((deduction > amountPayable));
-
-                                        //获取红包钱数
-                                        var RedPackage = parseFloat($('.RedPackage input').val());
-
-                                        if (deduction > (totalPrices - RedPackage)) {
-                                            jfShowTips.toastShow({'text':'优惠券的价值超过实际价格，请重新选择优惠券'});
-                                            $('#tickets_select option:eq(0)').attr('selected', true);
-                                            inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
-
-                                            inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                                            $('.fixed_order span:eq(1)').html('￥' + (totalPrices - RedPackage));
-                                            return;
-                                        }
-                                        //设置价格
-                                        inputValueOne = parseFloat($('.RedPackage input').val()) || 0;
-
-                                        inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;
-                                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction - inputValueOne - inputValueTwo));
-                                    })
-
-                                    redpage();
-                                },
-                                error: function () {
-                                    jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
-                                }
-                            })
+                            RedPackageInfo();//红包信息
                         }
                     })
 
@@ -950,22 +783,19 @@ $(function () {
 
                 stockGoodData = res.data;//返回的商品库存数据信息
 
-                console.log(stockGoodData);
-
                 console.log(orderGoodData);//
 
-                //库存判断
-                orderGoodsList = [];
 
+                console.log(stockGoodData);
+
+
+
+                orderGoodsList = [];
                 for (var i = 0; i < orderGoodData.length; i++) {
                     if (orderGoodData[i].buyCount > stockGoodData[i].stock) {
                         $('#product_list_meal' + i).addClass('repertory');
                     }
-                   // console.log(parseInt(objdata1[i].sellingPrice));
-                    //console.log(parseInt(objdata1[i].buyNum));
-                    //totalPrices += (parseInt(objdata1[i].sellingPrice) * parseInt(objdata1[i].buyNum));
 
-                    //获取orderGoodsList
 
                     orderGoodsList.push(
                         {
@@ -982,7 +812,6 @@ $(function () {
 
     }
 
-
     //优惠券信息
 
     function ticketsListInfo() {
@@ -994,23 +823,101 @@ $(function () {
                 orderTotal: totalPrices
             },
             success:function (res) {
+
                 console.log(res);
+
+                if (res.status !== 200) {
+
+                    $('#tickets_select option:eq(0)').html('暂无优惠券').attr('selected', true);
+
+                    $('#tickets_select').attr('disabled',true);
+
+                    return;
+                }
+
                 var html = template('tickets_option', {list: res.data});
+
                 $('.tickets select').append(html);
 
-                //优惠券选择
+                var allTickets=res.data;
+
+                console.log(allTickets)
+
+                var allDeduction=[];//满足条件的优惠券金额
+
+                var thisDeduction;//当前优惠券减去金额
+
+                var lastDeduction;//最终使用优惠券减去金额
+
+
+                //获取红包钱数
+                inputValueOne = parseFloat($('.RedPackage input').val()) || 0;//现金红包
+
+                inputValueTwo = parseFloat($('.cashAmount input').val()) || 0;//购物红包
+
+                var totalPackageCash=inputValueOne+inputValueTwo;
+
+
+
+                //选择最优的优惠券
+                for(var i=0;i<allTickets.length;i++){
+
+                    if(allTickets[i].couponType.toString().indexOf('1')>-1){//立减类型
+
+                        var allConditions=allTickets[i].conditions;
+
+                        if(totalPrices>allConditions){//满足立减条件
+
+                            thisDeduction=parseFloat(allTickets[i].deduction);
+
+                            allDeduction.push(thisDeduction)
+                        }
+
+                    }else {//满减类型
+
+                        thisDeduction=parseFloat(allTickets[i].deduction);
+
+                        allDeduction.push(thisDeduction)
+
+                    }
+                }
+
+                lastDeduction=Math.max.apply(null, allDeduction);//当前立减最大值；
+
+                var thisRightIndex=getTicketsIndex();
+
+                console.log(allTickets.length)
+
+
+                function getTicketsIndex() {
+
+                    for(var j=0;j<allTickets.length;j++){
+
+
+                        if(allTickets[j].deduction.toString().indexOf(lastDeduction)>-1){
+
+                            return j
+
+                        }
+
+                    }
+                }
+
+                var thisTrueIndex=thisRightIndex+1;
+
+                $('#tickets_select option:eq('+thisTrueIndex+')').attr('selected', true);
+
+                var thisPayMoney=parseFloat(totalPrices - lastDeduction - totalPackageCash)
+
+                $('.shouldPay_money').html('¥'+thisPayMoney.toFixed(2));
+
+
+                //优惠券点击选择
                 $('#tickets_select').bind('change', function () {
                     couponId = $('#tickets_select option:selected').attr('data-couponId');
                     condition = parseFloat($('#tickets_select option:selected').attr('data-conditions')) || 0;//条件
                     deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;//减去金额
                     usableDate = $('#tickets_select option:selected').attr('data-usableDate');
-
-                    //判断是否小于当前的支付金额
-                    //获取当前
-                    console.log((amountPayable - deduction));
-                    console.log(deduction);
-                    console.log(amountPayable);
-                    console.log((deduction > amountPayable));
 
                     //获取红包钱数
                     inputValueOne = parseFloat($('.RedPackage input').val()) || 0;//现金红包
@@ -1028,12 +935,12 @@ $(function () {
 
                             $('#tickets_select option:eq(0)').attr('selected', true);
 
-                            $('.shouldPay_money').html('¥' + (totalPrices - totalPackageCash));
+                            $('.shouldPay_money').html('¥' + (totalPrices - totalPackageCash).toFixed(2));
 
                             return;
                         }else {
 
-                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction - totalPackageCash));
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction - totalPackageCash).toFixed(2));
                         }
 
 
@@ -1058,6 +965,12 @@ $(function () {
     //红包信息
     
     function RedPackageInfo() {
+
+        //红包(初始化)
+        var RedPackageNum = 0;
+
+        var cashNum=0;
+
         $.ajax({
             url: urL + userDetailRedPackage,
             anysc: false,
@@ -1067,91 +980,147 @@ $(function () {
             success: function (info) {
                 console.log(info);
                 if (info.status !== 200) {
-                    $('.RedPackage input').attr('disabled', true);
+                    $('.RedPackage input').attr({placeholder:'当前没有可用购物红包',disabled:true});
 
-                    $('.cashAmount input').attr('disabled', true);
+                    $('.cashAmount input').attr({placeholder:'当前没有可用现金红包',disabled:true});
                     return;
                 }
-                ;
                 var redhtml = template('RedPackage_html', {list: info.data});
+
                 $('.RedPackage').append(redhtml);
 
                 var cashHtml=template('cash_html', {list: info.data});
+
                 $('.cashAmount').append(cashHtml);
 
                 RedPackageNum = info.data.shopRedPackage;
 
                 cashNum=info.data.moneyRedPackag;
 
+                var cashAndRed=parseFloat(RedPackageNum)+parseFloat(cashNum);
+
+                var thisShouldPay=$('.shouldPay_money').html().toString().substr(1);//优惠券之后应该支付的金额
+
+                if(thisShouldPay>cashAndRed){//分别填充红包的最大值
+
+                    $('.RedPackage input').val(RedPackageNum);
+
+                    $('.cashAmount input').val(cashNum);
+
+                }else if(thisShouldPay<RedPackageNum){//金额小于其中购物红包
+
+                    $('.RedPackage input').val(thisShouldPay);
+
+                    $('.cashAmount input').val(0);//现金红包默认为0
+
+                }
+
+                thisShouldPay=thisShouldPay-cashAndRed;//减去红包之后应付的金额
+
+                $('.shouldPay_money').html('￥'+thisShouldPay.toFixed(2));
+
+
                 //输入购物红包
                 $('.RedPackage input').change(function () {
 
-                    //输入的红包金额
-                    var inputValue = parseFloat($('.RedPackage input').val())
-                    if ((inputValue + deduction) > RedPackageNum) {
+
+                    var inputValue = parseFloat($('.RedPackage input').val()); //输入的红包金额
+
+                    var inputValueCash=parseFloat($('.cashAmount input').val());//现金红包金额
+
+
+                    if(inputValue>parseFloat(RedPackageNum)){//输入金额大雨红包金额,输入错误
+
                         jfShowTips.toastShow({'text':'您的金额超了哦，请重新输入'});
-                        //置空
-                        $('.RedPackage input').val('');
-                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
-                        return;
-                    }
-                    //判断是否有超总金额
-                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                    console.log(typeof(deduction));
-                    console.log((inputValue + deduction));
 
-                    var inputValueCash=parseFloat($('.cashAmount input').val());
+                        $('.RedPackage input').val(''); //置空
 
-                    if ((inputValue+inputValueCash + deduction) > totalPrices) {
-                        //plus.ui.jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
-                        jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
-                        //置空
-                        $('.RedPackage input').val('');
-                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
-                        return;
+                        $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
+
+                    }else {
+
+                        if((inputValue + deduction) > totalPrices){//购物红包+优惠券的金额>订单总金额
+
+                            jfShowTips.toastShow({'text':'您的红包抵扣金额大于订单金额，请重新输入！'});
+                            //置空
+                            $('.RedPackage input').val('');
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
+
+                            return;
+
+                        }else if((inputValue+inputValueCash + deduction) > totalPrices){////现金红包+优惠券的金额>订单总金额
+
+                            jfShowTips.toastShow({'text':'您的红包抵扣金额大于订单金额，请重新输入！'});
+                            //置空
+                            $('.RedPackage input').val('');
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction).toFixed(2));
+
+                            return;
+
+                        }else if((inputValue+inputValueCash + deduction) < totalPrices){//正常输入
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices-inputValue+inputValueCash + deduction).toFixed(2));
+                        }
+
                     }
-                    ;
+
                     deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
                     //计算应付金额
-                    amountPayable = (totalPrices * 100 - inputValue * 100 -inputValueCash*100 - deduction * 100) / 100;
-                    $('.fixed_order span:eq(1)').html('￥' + amountPayable);
+                   // amountPayable = (totalPrices * 100 - inputValue * 100 -inputValueCash*100 - deduction * 100) / 100;
+
                 })
 
 
                 //输入现金红包
-                $('.RedPackage input').change(function () {
+                $('.cashAmount input').change(function () {
 
-                    //输入的红包金额
-                    var inputValue = parseFloat($('.cashAmount input').val())
-                    if ((inputValue + deduction) > cashNum) {
+                    var inputValue = parseFloat($('.cashAmount input').val()); //输入的红包金额
+
+                    var inputValueCash=parseFloat($('.RedPackage input').val());//购物红包金额
+
+                    if(inputValue>parseFloat(cashNum)){//输入金额大雨红包金额,输入错误
+
                         jfShowTips.toastShow({'text':'您的金额超了哦，请重新输入'});
-                        //置空
-                        $('.RedPackage input').val('');
-                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
-                        return;
+
+                        $('.cashAmount input').val(''); //置空
+
+                        $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
+
+                    }else {
+
+                        if((inputValue + deduction) > totalPrices){//购物红包+优惠券的金额>订单总金额
+
+                            jfShowTips.toastShow({'text':'您的红包抵扣金额大于订单金额，请重新输入！'});
+                            //置空
+                            $('.cashAmount input').val('');
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction-inputValueCash).toFixed(2));
+
+                            return;
+
+                        }else if((inputValue+inputValueCash + deduction) > totalPrices){////现金红包+优惠券的金额>订单总金额
+
+                            jfShowTips.toastShow({'text':'您的红包抵扣金额大于订单金额，请重新输入！'});
+                            //置空
+                            $('.cashAmount input').val('');
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices - deduction).toFixed(2));
+
+                            return;
+
+                        }else if((inputValue+inputValueCash + deduction) < totalPrices){//正常输入
+
+                            $('.shouldPay_money').html('¥' + parseFloat(totalPrices-inputValue+inputValueCash + deduction).toFixed(2));
+                        }
+
                     }
-                    //判断是否有超总金额
-                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                    console.log(typeof(deduction));
-                    console.log((inputValue + deduction));
-                    var inputValueRed=parseFloat($('.cashAmount input').val());
-                    if ((inputValue + inputValueRed+ deduction) > totalPrices) {
-                        //plus.ui.jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
-                        jfShowTips.toastShow('您的红包抵扣金额大于订单金额，请重新输入！');
-                        //置空
-                        $('.RedPackage input').val('');
-                        deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
-                        $('.fixed_order span:eq(1)').html('￥' + parseFloat(totalPrices - deduction));
-                        return;
-                    }
-                    ;
-                    deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+
+                   // deduction = parseFloat($('#tickets_select option:selected').attr('data-deduction')) || 0;
+
                     //计算应付金额
-                    amountPayable = (totalPrices * 100 - inputValue * 100 - -inputValueRed*100 - deduction * 100) / 100;
-                    $('.fixed_order span:eq(1)').html('￥' + amountPayable);
+                    // amountPayable = (totalPrices * 100 - inputValue * 100 -inputValueCash*100 - deduction * 100) / 100;
                 })
             },
             error: function () {
@@ -1278,12 +1247,9 @@ $(function () {
                 console.log(info);
                 if (info.status !== 200) {
 
-                    $('.RedPackage input').attr('placeholder','当前没有可用购物红包');
-                    $('.RedPackage input').attr('disabled', true);
+                    $('.RedPackage input').attr({placeholder:'当前没有可用购物红包',disabled:true});
 
-                    $('.cashAmount input').attr('placeholder','当前没有可用购物红包');
-
-                    $('.cashAmount input').attr('disabled', true);
+                    $('.cashAmount input').attr({placeholder:'当前没有可用现金红包',disabled:true});
 
                     return;
                 }
