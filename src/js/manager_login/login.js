@@ -4,11 +4,6 @@ $(function() {
     var urL = url();
     var loginUrl = '/backUser/login';
     var mobileNum;
-    var psw;
-    var userIds;
-    var buType;
-
-    var storeId;
 
     //验证手机号码
     $("#telNum").blur(function () {
@@ -20,21 +15,11 @@ $(function() {
         return;
     });
 
-    //验证密码
-    $("#pswNum").blur(function () {
-        psw = $("#pswNum").val();
-        if (psw == '') {
-            return;
-        }
-        return;
-    });
 
     //登陆系统
     $("#logSystem").on('click', function lonIn() {
         mobileNum = $("#telNum").val();
         var psw1 = $('#pswNum').val();
-        psw = $.md5($('#pswNum').val() + 'zbkj');
-        console.log(psw);
         if (mobileNum == '') {
             jfShowTips.toastShow({'text':'账号不能为空'});
             return;
@@ -45,10 +30,7 @@ $(function() {
             return;
         }
         ;
-        if (psw == '') {
-            jfShowTips.toastShow({'text':'密码不能为空'});
-            return;
-        }
+
 
 
         $.ajax({
@@ -69,12 +51,24 @@ $(function() {
 
                     $.cookie('bType',res.data.buType , { expires: 30 ,path: '/'});
 
+                    setTimeout(function(){
+
+                        document.location.href='../manager_order/order_list.html'
+
+                    },50)
+
                 }
+
+                jfShowTips.toastShow({'text': res.msg });
+
 
             },
             error: function (res) {
+
                 console.log(res)
+
                 jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
+
             }
         });
 

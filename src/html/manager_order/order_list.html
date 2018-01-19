@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no, email=no">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
 
 
     <meta charset="UTF-8">
@@ -13,19 +14,50 @@
 </head>
 <body>
 
-<table class="weui-table weui-border-tb" >
+<!--<table class="weui-table weui-border-tb" >
     <thead>
     <tr><th>订单金额</th><th>支付方式</th><th>配送人/状态</th></tr>
     </thead>
     <tbody id="orderListMain">
-    <tr><td>￥98.99</td><td>微信支付</td><td><a><span>配送中</span></a></td></tr>
+&lt;!&ndash;    <tr><td>￥98.99</td><td>微信支付</td><td><a><span>配送中</span></a></td></tr>
     <tr><td>￥48.99</td><td>到付</td><td><a href="order_list_04.html">王小飞 送达</a></td></tr>
     <tr><td>￥48.92</td><td>支付宝支付</td><td><a>李四 送达</a></td></tr>
     <tr><td>￥98.99</td><td>微信支付</td><td><a>王小飞 送达</a></td></tr>
     <tr><td>￥48.99</td><td>到付</td><td><a>李四 送达</a></td></tr>
-    <tr><td>￥48.92</td><td>支付宝支付</td><td><a>客户取消订单</a></td></tr>
+    <tr><td>￥48.92</td><td>支付宝支付</td><td><a>客户取消订单</a></td></tr>&ndash;&gt;
     </tbody>
-</table>
+</table>-->
+
+<div class="page__bd" id="orderListMain">
+    <!--<div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">付款金额</label>
+                <em class="weui-form-preview__value">¥2400.00</em>
+            </div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">商品</label>
+                <span class="weui-form-preview__value">电动打蛋机</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">标题标题</label>
+                <span class="weui-form-preview__value">名字名字名字</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">标题标题</label>
+                <span class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
+            </div>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">操作</a>
+        </div>
+    </div>
+    <br>-->
+
+</div>
+
 <div class="page__bd">
     <div class="weui-loadmore">
         <i class="weui-loading"></i>
@@ -37,8 +69,6 @@
 </div>
 
 
-
-
 <script src="../../js/ak_medicine.min.js"></script>
 <script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
 <script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
@@ -46,7 +76,8 @@
 <script src="../../js/common.js"></script>
 <script src="../../js/manager_order/order_list.js"></script>
 
-<script type="text/html" id="orderList">
+
+</body><!--<script type="text/html" id="orderList">
 
     {{if list}}
     {{each list as value}}
@@ -58,6 +89,66 @@
     {{/each}}
     {{/if}}
 
+</script>-->
+<script type="text/html" id="orderList">
+
+    {{if list}}
+    {{each list as value}}
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">付款金额</label>
+                <em class="weui-form-preview__value">¥<span>{{value.oderAmount}}</span></em>
+            </div>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">支付方式</label>
+                <span class="weui-form-preview__value">{{value.payMode}}</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">配送人</label>
+                <span class="weui-form-preview__value">{{value.buName}}</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">配送状态</label>
+                <span class="weui-form-preview__value">
+                    {{if value.status==11}}
+                    分拣完成
+                    {{else if value.status==1}}
+                    代付款
+                    {{else if value.status==7}}
+                    已付款
+                    {{else if value.status==21}}
+                    送达
+                    {{else if value.status==31}}
+                    已完成（无退款）
+                    {{else if value.status==24}}
+                    部分退
+                    {{else if value.status==27}}
+                    全退
+                    {{else if value.status==4}}
+                    已取消
+                    {{else if value.status==0}}
+                    失败单
+                    {{else if value.status==-1}}
+                    过程单
+                    {{else}}
+                     其他
+                    {{/if}}
+                </span>
+            </div>
+        </div>
+        <div class="weui-form-preview__ft">
+            <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">更多</a>
+        </div>
+    </div>
+    <br>
+
+    {{/each}}
+    {{/if}}
+
+
 </script>
-</body>
+
 </html>
