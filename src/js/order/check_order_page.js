@@ -139,7 +139,7 @@ $(function(){
                         return;
                     }
                     console.log(info1);
-                    $('.couponMsg').html('满<i>'+info1.data.condition+'元</i>减<i>'+info1.data.deduction+'元</i>')
+                    $('.couponMsg').html('满<i>'+info1.data.conditions+'元</i>减<i>'+info1.data.deduction+'元</i>')
 
                 }
             })
@@ -157,7 +157,10 @@ $(function(){
             }else if(info.data.couponsAmount){
                 $('.couponsPrices').html('用券抵扣<span>'+info.data.couponsAmount+'元</span>')
             }else if(info.data.redpacketAmount){
-                $('.couponsPrices').html('用红包抵扣<span>'+info.data.redpacketAmount+'元</span>')
+                $('.couponsPrices').html('用购物红包抵扣<span>'+info.data.redpacketAmount+'元</span>')
+            }else if(info.data.cashAmount){
+
+                $('.couponsPrices').html('用购物红包抵扣<span>'+info.data.cashAmount+'元</span>')
             }
 
             //应付金额
@@ -171,9 +174,9 @@ $(function(){
 
                 var orderFee= $('.amountPayable').text().toString().substr(1);//订单金额
 
-                if(info.data.payMode == '1'){//微信支付
+               if(info.data.payMode == '1'){//微信支付
 
-                    var  wxPayObj={
+             /*       var  wxPayObj={
                         orderId:orderId,
                         bodyInfo:orderNote,
                         subject: '订单标题测试',
@@ -260,13 +263,13 @@ $(function(){
                                jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                            }
                        })
-                   }
+                   }*/
 
 
-                  //  location.href = '../../html/order/shopping_order_pay.html';
+                    location.href = '../../html/order/shopping_order_pay.html';
                 }else if(info.data.payMode == '2'){ //支付宝
 
-                    var zfbAppObject={
+                   /* var zfbAppObject={
                         orderId:orderId,
                         subject:'订单标题测试',
                         deviceInfo:'订单信息测试',
@@ -298,10 +301,10 @@ $(function(){
                             console.log(info)
                             jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
                         }
-                    });
+                    });*/
 
 
-                   // location.href = '../../html/order/shopping_order_pay.html';
+                    location.href = '../../html/order/shopping_order_pay.html';
                 }else if(info.data.payMode == '3'){
                     //货到付款
                     location.href = '../../html/order/shopping_cart_order.html';

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <link rel="stylesheet" href="../../css/ak_medicine.min.css">
+    <title>我的红包</title>
+</head>
+<body>
+
+
+<div class="list_plate">
+    <p>
+        <span>类型</span>
+        <span>数量</span>
+        <span>备注</span>
+    </p>
+
+    <div class="details_list">
+  <!--
+    <p>
+        <span>购物红包<br><span>2017-03-11 12:27:22</span></span>
+        <span>+1.00</span>
+        <span>购物消费退款购物消费退款购物消费退款</span>
+    </p>
+    <p>
+        <span>现金红包<br><span>2017-03-11 12:27:22</span></span>
+        <span>+77.95</span>
+        <span>客户9931下单</span>
+    </p>
+    <p>
+        <span>现金红包<br><span>2017-03-11 12:27:22</span></span>
+        <span>-6.5</span>
+        <span>提现</span>
+    </p>
+    <p>
+        <span>购物红包<br><span>2017-03-11 12:27:22</span></span>
+        <span>-2.55</span>
+        <span>购物消费</span>
+    </p>
+    <p>
+        <span>现金红包<br><span>2017-03-11 12:27:22</span></span>
+        <span>+21.55</span>
+        <span>客户2193下单</span>
+    </p>
+    <p>
+        <span>购物红包<br><span>2017-03-11 12:27:22</span></span>
+        <span>+5.00</span>
+        <span>扫码关注送</span>
+    </p>-->
+    </div>
+</div>
+<script src="../../js/libs/jquery/jquery-3.2.1.min.js"></script>
+<script src="../../js/libs/jquery.cookie/jquery.cookie.js"></script>
+<script src="../../js/libs/art-template/template.js"></script>
+<script src="../../js/libs/art-template/template-web.js"></script>
+<script src="../../js/ak_medicine.min.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/person_center/my_redPackage.js"></script>
+
+<script type="text/html" id="redPackList">
+    {{if list}}
+    {{each list as value}}
+    <p>
+        <span>{{if value.mType==3}}购物红包{{else}}现金红包{{/if}}<br><span>{{value.createTime}}</span></span>
+        <span>{{if value.inoutTag==11}}+{{else}}-{{/if}} {{value.amount}}</span>
+        <span>{{value.remark}}</span>
+    </p>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+</html>

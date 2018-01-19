@@ -756,7 +756,7 @@ function(){
 <script type="text/html" id="normal_box">
     {{if list}}
     {{each list as value}}
-    <a class="normal_box_a" data-goodId="{{value.id}}">
+    <a class="normal_box_a" data-goodId="{{value.id}}" onclick="commonFn.logOn()">
         <div class="function yao_alignment_middle">
             <span>No{{value.businessIndex}}</span>
             <span>{{value.motif}}</span>

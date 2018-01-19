@@ -31,6 +31,8 @@ $(function () {
     var buyCount = '';
     var goodId = '';
 
+    console.log('userId='+userId)
+
 
 
 
@@ -141,6 +143,7 @@ $(function () {
         success: function (info) {
 
             console.log(info);
+
             if (info.status !== 200) {
                 jfShowTips.toastShow({'text':info.msg});
                 return;

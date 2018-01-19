@@ -183,28 +183,32 @@ $(function(){
         })
     }
 
-    //2. 分类
-    function categoryList(parentId,temId,dom){
+    //2. 分类排名
+    function categoryList(categoryId,temId,dom) {
         $.ajax({
-            url:urL + urlList,
-            data:{
-                parentId:parentId,
+            url: urL + rankCategory,
+            data: {
+                categoryId: categoryId,
                 total:4
             },
-            success:function(info){
-                console.log(info);
-                if(info.status !== 200){
-                    jfShowTips.toastShow({'text':info.msg});
+            success:function(res){
+                console.log(res);
+                if(res.status !== 200){
+                    jfShowTips.toastShow({'text':res.msg});
                     return;
                 };
-                var html = template(temId,{list:info.data});
+                var html = template(temId,{list:res.data});
                 dom.html(html);
             },
             error: function() {
                 jfShowTips.toastShow({'text':'系统繁忙，请稍后再试'});
             }
+
         })
     }
+
+
+
 
     //商品图片轮播图
     $.ajax({

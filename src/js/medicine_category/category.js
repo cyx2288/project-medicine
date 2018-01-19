@@ -257,13 +257,19 @@ $(function(){
                                 },
                                 success:function(info){
                                     console.log(info);
-                                    if(info.data == null ){
+
+                                    var thisLastList=$('.search_result_list a:last-child')[0];
+
+
+
+                                    if(thisLastList.getBoundingClientRect().top<$(window).height()){
                                         $(".load").remove();
-                                        $('.search_result_list').append('<div class="no-data">没有更多数据</div>');
-                                        $('.no-data').css('text-align','center')
+                                        $('.search_result_list').append('<div class="no-data">没有更多数据啦啦啦~~~</div>');
+                                        $('.no-data').css({'text-align':'center','padding':'10px 0'})
                                         $(window).unbind('scroll');
                                         return;
-                                    };
+                                    }
+
                                     $(".load").remove();
                                     var html = template('goodlistSearch_html',{list:info.data});
                                     $('.search_result_list').append(html);
