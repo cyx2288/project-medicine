@@ -291,25 +291,13 @@ $(function () {
 
             };
 
-            var sumMoney=$('#allMoney').text().toString().substr(1);
 
-            var totalMoney=$('#totalMoney').text().toString().substr(1);
+           // $.cookie('cartGoodIdList', goodIdList);//存入商品数组list
 
-            $.cookie('cartGoodIdList', goodIdList, {expires:1,path: '/'});//存入商品数组list
-
-            $.cookie('cartGoodNum', goodNum, {expires:1,path: '/'});//存入商品数量list
-
-            $.cookie('sumMoney', sumMoney, {expires:1,path: '/'});//合计
-
-            $.cookie('totalMoney', totalMoney, {expires:1,path: '/'});//总额
+           // console.log( $.cookie('cartGoodIdList'));
 
 
-            console.log( $.cookie('cartGoodIdList'));
-
-
-           // document.getElementById('checkAll').checked=false;
-
-            window.location.href = '../order/submit_order_page.html';
+            window.location.href = '../order/submit_order_page.html?cartGoodIdList='+goodIdList;
 
         }else {
 

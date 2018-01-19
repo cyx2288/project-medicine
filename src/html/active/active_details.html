@@ -79,7 +79,7 @@
 <script type="text/html" id="active_details">
     {{if list}}
     {{each list as value}}
-	<a href="../product_details_page/product_details_page.html?id{{value.id}}" class="hot">
+	<a href="../product_details_page/product_details_page.html?id={{value.id}}" class="hot">
         <div class="pro_img"><img src="{{#value.goodImg}}"></div>
         <p>{{value.applySymptom}}</p>
         <div class="price">

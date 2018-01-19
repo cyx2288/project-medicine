@@ -123,7 +123,7 @@ function(){
 
 })">
     <p>送至：</p>
-    <p><img src="../../images/icon_AK_address1.png"><span id="address_info">请选择地址</span></p>
+    <p class="address_content"><img src="../../images/icon_AK_address1.png"><span id="address_info">请选择地址</span></p>
 </div>
 
 
@@ -567,7 +567,7 @@ function(){
 <script type="text/html" id="goodDesc_htmlstock">
     {{if list}}
         <span>市场价：<span data-storePrice="{{list.storePrice}}" style="margin-right: 0px">¥{{list.storePrice}}</span></span>
-        <span>已省<span id="provincePrice" style="margin-right: 0px"></span></span>
+
         <span style="margin-right: 0px">库存<span>{{list.stock > 0 ? '有货' : '没货'}}</span></span>
         <span style="margin-right: 0px;color:#49c999" class="share">分享</span>
     {{/if}}

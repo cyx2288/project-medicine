@@ -128,8 +128,37 @@ $(function(){
            		$(this).click(function(){
                     var addressId = $(this).attr("data_id");
            			$.cookie('addressId','',{expires: -1} );
+
            			$.cookie('addressId',addressId, {path:'/'});
-                    location.href= "submit_order_page.html?addressId=" + addressId;
+
+                    var packageId =$.cookie('packageId') || '';//套餐ID
+
+                    var goodId =$.cookie('goodId') || '';//商品ID
+
+                    var buyGoodNum = $.cookie('buyGoodNum') || '';//单个商品购买的数量
+
+                    var cartGoodIdList =$.cookie('cartGoodIdList') || '';//购物车商品ID数组
+
+					if(packageId){
+
+                        location.href= "submit_order_page.html?packageId=" + packageId;//套餐购买
+
+					}else if(goodId){
+
+                        location.href= "submit_order_page.html?goodId=" + goodId+"&buyGoodNum="+buyGoodNum;//单个商品购买
+
+					}else {
+                        location.href= "submit_order_page.html?cartGoodIdList="+cartGoodIdList;//购物车购买
+					}
+
+                    $.cookie('packageId', '', {expires: -1});
+                    $.cookie('goodId', '', {expires: -1});
+                    $.cookie('buyGoodNum', '', {expires: -1});
+                    $.cookie('cartGoodIdList','',{expires: -1});//清空
+
+
+
+
            		})
            	})
             

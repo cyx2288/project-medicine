@@ -173,7 +173,7 @@ $(function(){
 		            jfShowTips.toastShow({'text':res.msg});
 		            return;
 		        };
-		     	$(".yuan").text(res.data.condition + '元');
+		     	$(".yuan").text(res.data.conditions + '元');
 		      	$(".ya").text(res.data.deduction + '元');	     		      
 		    },
             error: function () {

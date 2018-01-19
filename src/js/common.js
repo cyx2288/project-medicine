@@ -114,17 +114,7 @@ var commonFn={
 
             event.preventDefault();
 
-            jfShowTips.dialogShow({
-                'mainText': '您还未登陆，请先登陆！',
-                'minText': ' ',
-                'noCancel':true,
-                'checkFn': function () {
-                    window.location.href='../login/login_system.html'
-
-                }
-            })
-
-
+            window.location.href='../login/login_system.html'
 
         }
 
