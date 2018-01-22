@@ -77,8 +77,8 @@ $(function () {
 
 
                         $.confirm({
-                            title: '标题',
-                            text: '内容文案',
+                            title: '提示',
+                            text: '是否确认收货',
                             onOK: function () {
                                 $.ajax({
                                     type: 'post',
