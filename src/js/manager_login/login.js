@@ -53,7 +53,14 @@ $(function() {
 
                     setTimeout(function(){
 
-                        document.location.href='../manager_order/order_list.html'
+                        if(res.data.buType==11) {
+                            document.location.href = '../manager_order/order_list.html'
+                        }
+                        else if(res.data.buType==21){
+
+
+                        }
+
 
                     },50)
 
